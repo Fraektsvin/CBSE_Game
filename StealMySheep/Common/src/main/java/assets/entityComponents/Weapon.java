@@ -15,10 +15,9 @@ public abstract class Weapon implements Component {
     private int damage;
     private boolean isAttacking;
 
-    public Weapon(String entityId, int damage, boolean isAttacking) {
+    public Weapon(String entityId, int damage) {
         this.entityId = entityId;
         this.damage = damage;
-        this.isAttacking = isAttacking;
     }
 
     public String getEntityId() {

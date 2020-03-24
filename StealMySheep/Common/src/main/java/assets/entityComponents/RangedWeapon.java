@@ -5,6 +5,9 @@
  */
 package assets.entityComponents;
 
+import assets.Entity;
+import game.GameData;
+
 /**
  *
  * @author oscar
@@ -15,8 +18,8 @@ public class RangedWeapon extends Weapon {
     private float reloadTime, reloadTimer;
     private float shotCooldown, shotTimer;
 
-    public RangedWeapon(int magazineSize, float reloadTime, float shotCooldown, String entityId, int damage, boolean isAttacking) {
-        super(entityId, damage, isAttacking);
+    public RangedWeapon(int magazineSize, float reloadTime, float shotCooldown, String entityId, int damage) {
+        super(entityId, damage);
         this.magazineSize = magazineSize;
         this.reloadTime = reloadTime;
         this.shotCooldown = shotCooldown;
@@ -63,7 +66,7 @@ public class RangedWeapon extends Weapon {
     }
 
     @Override
-    public void update() {
+    public void update(Entity entity, GameData gameData) {
     }
 
 }

@@ -5,6 +5,9 @@
  */
 package assets.entityComponents;
 
+import assets.Entity;
+import game.GameData;
+
 /**
  *
  * @author oscar
@@ -45,8 +48,7 @@ public class Position implements Component {
     }
 
     @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Entity entity, GameData gameData) {
     }
 
 }

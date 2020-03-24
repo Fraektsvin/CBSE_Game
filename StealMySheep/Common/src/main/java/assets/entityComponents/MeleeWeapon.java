@@ -16,8 +16,8 @@ public class MeleeWeapon extends Weapon {
 
     private float swingTime, swingTimer, range;
 
-    public MeleeWeapon(float swingTime, float range, String entityId, int damage, boolean isAttacking) {
-        super(entityId, damage, isAttacking);
+    public MeleeWeapon(float swingTime, float range, String entityId, int damage) {
+        super(entityId, damage);
         this.swingTime = swingTime;
         this.range = range;
     }
