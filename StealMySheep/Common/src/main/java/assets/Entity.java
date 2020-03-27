@@ -5,9 +5,9 @@
  */
 package assets;
 
+import assets.entityComponents.Component;
 import java.util.HashMap;
 import java.util.UUID;
-import assets.entityComponents.Component;
 
 /**
  *
@@ -15,6 +15,9 @@ import assets.entityComponents.Component;
  */
 public class Entity {
 
+    private float[] shapeX = new float[4];
+    private float[] shapeY = new float[4];
+    private float radius;
     private UUID id = UUID.randomUUID();
     private HashMap<Class, Component> components;
 
@@ -41,6 +44,34 @@ public class Entity {
 
     public boolean hasComponent(Class componentClass) {
         return this.components.containsKey(componentClass);
+    }
+
+    public void addComponent(float deacceleration, float acceleration, float maxSpeed, float rotationSpeed) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setRadius(float r) {
+        this.radius = r;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public float[] getShapeX() {
+        return shapeX;
+    }
+
+    public void setShapeX(float[] shapeX) {
+        this.shapeX = shapeX;
+    }
+
+    public float[] getShapeY() {
+        return shapeY;
+    }
+
+    public void setShapeY(float[] shapeY) {
+        this.shapeY = shapeY;
     }
 
 }

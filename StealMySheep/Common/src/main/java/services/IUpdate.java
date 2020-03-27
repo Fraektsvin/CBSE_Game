@@ -15,4 +15,5 @@ import game.World;
 public interface IUpdate {
 
     public void update(GameData gameData, World world);
+
 }
