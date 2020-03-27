@@ -14,9 +14,10 @@ public class GameData {
     private float deltaTime;
     private int sceneHeight, sceneWidth;
     private Input input;
+    private final Input keys = new Input();
 
-    public GameData(Input input) {
-        this.input = input;
+    public Input getKeys() {
+        return keys;
     }
 
     public float getDeltaTime() {

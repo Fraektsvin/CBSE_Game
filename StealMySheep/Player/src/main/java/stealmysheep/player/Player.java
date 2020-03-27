@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package stealmysheep.player;
 
-import game.GameData;
-import game.World;
+import assets.Entity;
 
 /**
  *
- * @author oscar
+ * @author nadinfariss
  */
-public interface IPlugin {
+public class Player extends Entity {
 
-    void start(GameData gameData, World world);
-
-    void stop(GameData gameData, World world);
 }
