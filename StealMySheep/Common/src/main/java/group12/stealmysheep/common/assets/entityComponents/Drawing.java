@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assets.entityComponents;
+package group12.stealmysheep.common.assets.entityComponents;
 
-import assets.Entity;
+import group12.stealmysheep.common.assets.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import game.GameData;
+import group12.stealmysheep.common.game.GameData;
 
 /**
  *

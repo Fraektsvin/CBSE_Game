@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assets;
+package group12.stealmysheep.common.assets;
 
 import java.util.HashMap;
 import java.util.UUID;
-import assets.entityComponents.Component;
+import group12.stealmysheep.common.assets.entityComponents.Component;
 
 /**
  *

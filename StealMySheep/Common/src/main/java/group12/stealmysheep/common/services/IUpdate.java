@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package group12.stealmysheep.common.services;
 
-import game.GameData;
-import game.World;
+import group12.stealmysheep.common.game.GameData;
+import group12.stealmysheep.common.game.World;
 
 /**
  *
  * @author oscar
  */
-public interface IPostUpdate {
+public interface IUpdate {
 
     public void update(GameData gameData, World world);
 }
