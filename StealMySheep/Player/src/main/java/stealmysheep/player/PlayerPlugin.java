@@ -6,6 +6,7 @@
 package stealmysheep.player;
 
 import assets.Entity;
+import assets.Player;
 import assets.entityComponents.Movement;
 import assets.entityComponents.Position;
 import game.GameData;
@@ -43,17 +44,15 @@ public class PlayerPlugin implements IPlugin {
 
     private Entity createPlayer(GameData gameData) {
 
-        float deacceleration = 10;
         float acceleration = 200;
         float maxSpeed = 300;
-        float rotationSpeed = 5;
         float x = gameData.getSceneWidth() / 2;
         float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
         float radius = 8;
 
         Entity playerShip = new Player();
-        playerShip.addComponent(new Movement(deacceleration, acceleration, maxSpeed, rotationSpeed));
+        playerShip.addComponent(new Movement(acceleration, maxSpeed));
         playerShip.addComponent(new Position(x, y, radians));
         playerShip.setRadius(radius);
 

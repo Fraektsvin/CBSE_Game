@@ -6,6 +6,7 @@
 package stealmysheep.player;
 
 import assets.Entity;
+import assets.Player;
 import assets.entityComponents.Movement;
 import assets.entityComponents.Position;
 import game.GameData;
@@ -32,6 +33,7 @@ public class PlayerControlSystem implements IUpdate {
             Position position = player.getComponent(Position.class);
             Movement movement = player.getComponent(Movement.class);
 
+            // movement(WASD)
             movement.setLeft(gameData.getKeys().isDown(LEFT));
             movement.setRight(gameData.getKeys().isDown(RIGHT));
             movement.setUp(gameData.getKeys().isDown(UP));
@@ -45,6 +47,8 @@ public class PlayerControlSystem implements IUpdate {
     }
 
     private void updateShape(Entity entity) {
+
+        //inset images
         float[] shapex = entity.getShapeX();
         float[] shapey = entity.getShapeY();
         Position position = entity.getComponent(Position.class);

@@ -17,14 +17,14 @@ import static java.lang.Math.sqrt;
  */
 public class Movement implements Component {
 
-    private float dx, dy, acceleration, speed, deceleration, rotationSpeed;
+    private float dx, dy, acceleration, speed;
     private boolean left, right, up;
+    //A(LEFT), D(RIGHT); W(UP),S(DOWN)
 
-    public Movement(float acceleration, float speed, float deceleration, float rotationSpeed) {
+    public Movement(float acceleration, float speed) {
         this.acceleration = acceleration;
         this.speed = speed;
-        this.deceleration = deceleration;
-        this.rotationSpeed = rotationSpeed;
+
     }
 
     public float getDx() {
@@ -59,22 +59,6 @@ public class Movement implements Component {
         this.speed = speed;
     }
 
-    public float getDeceleration() {
-        return deceleration;
-    }
-
-    public void setDeceleration(float deceleration) {
-        this.deceleration = deceleration;
-    }
-
-    public float getRotationSpeed() {
-        return rotationSpeed;
-    }
-
-    public void setRotationSpeed(float rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-    }
-
     public void setLeft(boolean left) {
         this.left = left;
     }
@@ -95,27 +79,12 @@ public class Movement implements Component {
         float radians = position.getRadians();
         float dt = gameData.getDeltaTime();
 
-        // turning
-        if (left) {
-            radians += rotationSpeed * dt;
-        }
-
-        if (right) {
-            radians -= rotationSpeed * dt;
-        }
-
-        // accelerating
         if (up) {
             dx += cos(radians) * acceleration * dt;
             dy += sin(radians) * acceleration * dt;
         }
 
-        // deccelerating
         float vec = (float) sqrt(dx * dx + dy * dy);
-        if (vec > 0) {
-            dx -= (dx / vec) * deceleration * dt;
-            dy -= (dy / vec) * deceleration * dt;
-        }
         if (vec > speed) {
             dx = (dx / vec) * speed;
             dy = (dy / vec) * speed;

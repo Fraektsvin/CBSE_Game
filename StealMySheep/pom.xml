@@ -63,7 +63,6 @@
         <module>application</module>
         <module>Common</module>
         <module>Player</module>
-        <module>Core</module>
     </modules>
 
     <properties>
