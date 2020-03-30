@@ -14,5 +14,5 @@ import group12.stealmysheep.common.game.World;
  */
 public interface IPostUpdate {
 
-    public void update(GameData gameData, World world);
+    public void postUpdate(GameData gameData, World world);
 }
