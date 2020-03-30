@@ -8,7 +8,9 @@ package stealmysheep.common.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.UUID;
 import stealmysheep.common.assets.entityComponents.Component;
@@ -19,68 +21,75 @@ import stealmysheep.common.assets.entityComponents.Position;
  * @author oscar
  */
 public class Entity {
-    
+
     private AssetManager assetManager;
-    
+
     private UUID id = UUID.randomUUID();
     private HashMap<Class, Component> components;
-    
+
     private Texture texture;
-    
+    private Sprite sprite;
+
     public Entity() {
         this.components = new HashMap<>();
     }
-    
+
     public Entity(String imagePath) {
         this.components = new HashMap<>();
         this.assetManager = new AssetManager();
-        this.texture = new Texture(Gdx.files.internal("./bin/player.png"));
+        String path = Paths.get("").toAbsolutePath().toString();
+        String newpath = path.substring(0, path.length() - 32);
+        this.texture = new Texture(Gdx.files.absolute(newpath + "\\Common\\src\\images\\" + imagePath));
+        this.sprite = new Sprite(texture);
 
-        //Gdx.files.internal(imagePath);
-        //this.texture = assetManager.get(imagePath, Texture.class);
     }
-    
+
     public String getId() {
         return id.toString();
     }
-    
+
     public void addComponent(Component component) {
         this.components.put(component.getClass(), component);
     }
-    
+
     public void removeComponent(Class componentClass) {
         if (this.components.containsKey(componentClass)) {
             this.components.remove(componentClass);
         }
     }
-    
+
     public <O extends Component> O getComponent(Class componentClass) {
         return (O) this.components.get(componentClass);
     }
-    
+
     public boolean hasComponent(Class componentClass) {
         return this.components.containsKey(componentClass);
     }
-    
+
     public void render(SpriteBatch batch) {
-        
+
         Position position = getComponent(Position.class);
         if (position != null) {
-            float x = position.getX() - texture.getWidth() / 2;
-            float y = position.getY() - texture.getHeight() / 2;
-            
-            float radiansTop = (float) (Math.PI / 2);
-            float radiansBottom = (float) ((3 * Math.PI) / 2);
-            
+            float x = position.getX();
+            float y = position.getY();
+            float radians = position.getRadians();
+
+            float radiansTop = 3.141592f / 2;
+            float radiansBottom = (3 * 3.141592f) / 2;
+
             boolean flip = false;
-            if (radiansTop < radiansBottom) {
+            if (radiansTop < radians && radians < radiansBottom) {
                 flip = true;
+                x = x + this.texture.getWidth() / 2;
+                y = y - this.texture.getHeight() / 2;
+            } else {
+                x = x - this.texture.getWidth() / 2;
+                y = y - this.texture.getHeight() / 2;
             }
-            
-            batch.draw(this.texture, flip ? x + this.texture.getWidth() : x, y, flip ? -this.texture.getWidth() : this.texture.getWidth(), this.texture.getHeight());
-            
+
+            batch.draw(this.texture, x, y, flip ? -this.texture.getWidth() : this.texture.getWidth(), this.texture.getHeight());
         }
-        
+
     }
-    
+
 }
