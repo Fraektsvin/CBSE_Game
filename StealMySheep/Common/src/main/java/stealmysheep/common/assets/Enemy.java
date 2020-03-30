@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.common.assets;
+package stealmysheep.common.assets;
 
 /**
  *
@@ -19,6 +19,13 @@ public class Enemy extends Entity {
     }
 
     public Enemy(boolean targetPlayer, boolean targetSheep, float targetRadius) {
+        this.targetPlayer = targetPlayer;
+        this.targetSheep = targetSheep;
+        this.targetRadius = targetRadius;
+    }
+
+    public Enemy(boolean targetPlayer, boolean targetSheep, float targetRadius, String imagePath) {
+        super(imagePath);
         this.targetPlayer = targetPlayer;
         this.targetSheep = targetSheep;
         this.targetRadius = targetRadius;

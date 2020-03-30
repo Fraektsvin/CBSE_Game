@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.common.services;
+package stealmysheep.common.assets;
 
 /**
  *
  * @author oscar
  */
-public interface IPlugin {
+public class Sheep extends Entity {
 
-    public void start();
+    public Sheep() {
+    }
 
-    public void stop();
+    public Sheep(String imagePath) {
+        super(imagePath);
+    }
 }

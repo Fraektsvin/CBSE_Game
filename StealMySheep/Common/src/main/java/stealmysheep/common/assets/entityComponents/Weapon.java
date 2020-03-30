@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.common.assets.entityComponents;
+package stealmysheep.common.assets.entityComponents;
 
 /**
  *

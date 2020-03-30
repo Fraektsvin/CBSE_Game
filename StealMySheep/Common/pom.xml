@@ -2,13 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>group12.stealmysheep</groupId>
+        <groupId>stealmysheep</groupId>
         <artifactId>StealMySheep-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>Common</artifactId>
     <packaging>nbm</packaging>
-    <groupId>group12.stealmysheep</groupId>
+    <groupId>stealmysheep</groupId>
+    
     <build>
         <plugins>
             <plugin>
@@ -17,10 +18,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <publicPackages>
-                        <publicPackage>group12.stealmysheep.common.assets</publicPackage>
-                        <publicPackage>group12.stealmysheep.common.assets.entityComponents</publicPackage>
-                        <publicPackage>group12.stealmysheep.common.game</publicPackage>
-                        <publicPackage>group12.stealmysheep.common.services</publicPackage>
+                        <publicPackage>stealmysheep.common.assets</publicPackage>
+                        <publicPackage>stealmysheep.common.assets.entityComponents</publicPackage>
+                        <publicPackage>stealmysheep.common.game</publicPackage>
+                        <publicPackage>stealmysheep.common.services</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
@@ -35,6 +36,7 @@
             </plugin>
         </plugins>
     </build>
+    
     <dependencies>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -44,11 +46,60 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
-            <version>1.9.10</version>
+            <version>${libGDX.version}</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-modules</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-ui</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
+            <version>${libGDX.version}</version>
+            <type>jar</type>
+        </dependency>
+        
+        
+        
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-platform</artifactId>
+            <version>${libGDX.version}</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d</artifactId>
+            <version>${libGDX.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d-platform</artifactId>
+            <classifier>natives-desktop</classifier>
+            <version>${libGDX.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype</artifactId>
+            <version>${libGDX.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype-platform</artifactId>
+            <classifier>natives-desktop</classifier>
+            <version>${libGDX.version}</version>
         </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <libGDX.version>1.9.10</libGDX.version>
     </properties>
 </project>
