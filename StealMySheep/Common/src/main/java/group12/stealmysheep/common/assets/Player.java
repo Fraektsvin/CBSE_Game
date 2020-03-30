@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assets;
+package group12.stealmysheep.common.assets;
 
 /**
  *
  * @author oscar
  */
-public class Sheep extends Entity {
+public class Player extends Entity {
 
 }

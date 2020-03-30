@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assets.entityComponents;
+package group12.stealmysheep.common.assets.entityComponents;
 
-import assets.Entity;
-import game.GameData;
+import group12.stealmysheep.common.assets.Entity;
+import group12.stealmysheep.common.game.GameData;
 
 /**
  *
