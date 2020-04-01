@@ -51,12 +51,12 @@ public class PlayerPlugin implements IPlugin {
         float radians = 3.1415f / 2;
         float radius = 8;
 
-        Entity playerShip = new Player();
-        playerShip.addComponent(new Movement(acceleration, maxSpeed));
-        playerShip.addComponent(new Position(x, y, radians));
-        playerShip.setRadius(radius);
+        Entity player = new Player();
+        player.addComponent(new Movement(acceleration, maxSpeed));
+        player.addComponent(new Position(x, y, radians));
+        player.setRadius(radius);
 
-        return playerShip;
+        return player;
     }
 
 }
