@@ -1,4 +1,3 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Install: test/Installer.class
 OpenIDE-Module-Localizing-Bundle: stealmysheep/common/Bundle.properties
 
