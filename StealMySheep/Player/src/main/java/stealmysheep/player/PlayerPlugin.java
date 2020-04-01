@@ -45,14 +45,14 @@ public class PlayerPlugin implements IPlugin {
     private Entity createPlayer(GameData gameData) {
 
         float acceleration = 200;
-        float maxSpeed = 300;
+        float speed = 300;
         float x = gameData.getSceneWidth() / 2;
         float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
         float radius = 8;
 
         Entity player = new Player();
-        player.addComponent(new Movement(acceleration, maxSpeed));
+        player.addComponent(new Movement(acceleration, speed));
         player.addComponent(new Position(x, y, radians));
         player.setRadius(radius);
 

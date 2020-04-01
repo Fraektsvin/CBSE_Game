@@ -18,13 +18,12 @@ import static java.lang.Math.sqrt;
 public class Movement implements Component {
 
     private float dx, dy, acceleration, speed;
-    private boolean left, right, up;
+    private boolean left, right, up, down;
     //A(LEFT), D(RIGHT); W(UP),S(DOWN)
 
     public Movement(float acceleration, float speed) {
         this.acceleration = acceleration;
         this.speed = speed;
-
     }
 
     public float getDx() {
@@ -69,6 +68,26 @@ public class Movement implements Component {
 
     public void setUp(boolean up) {
         this.up = up;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public boolean isDown() {
+        return down;
     }
 
     @Override
