@@ -7,6 +7,7 @@ package stealmysheep.player;
 
 import assets.Entity;
 import assets.Player;
+import assets.entityComponents.Health;
 import assets.entityComponents.Movement;
 import assets.entityComponents.Position;
 import game.GameData;
@@ -34,6 +35,7 @@ public class PlayerPlugin implements IPlugin {
         // Add entities to the world
         player = createPlayer(gameData);
         world.addEntity(player);
+        
     }
 
     @Override
@@ -50,13 +52,15 @@ public class PlayerPlugin implements IPlugin {
         float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
         float radius = 8;
+        
 
-        Entity playerShip = new Player();
-        playerShip.addComponent(new Movement(acceleration, maxSpeed));
-        playerShip.addComponent(new Position(x, y, radians));
-        playerShip.setRadius(radius);
-
-        return playerShip;
+        Entity player = new Player();
+        player.addComponent(new Movement(acceleration, maxSpeed));
+        player.addComponent(new Position(x, y, radians));
+        player.setRadius(radius);
+        player.addComponent(new Health(100));
+        
+        return player;
     }
 
 }
