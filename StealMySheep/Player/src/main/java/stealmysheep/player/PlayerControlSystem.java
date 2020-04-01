@@ -10,9 +10,10 @@ import assets.Player;
 import assets.entityComponents.Movement;
 import assets.entityComponents.Position;
 import game.GameData;
-import static game.Input.LEFT;
-import static game.Input.RIGHT;
-import static game.Input.UP;
+import static game.Input.A;
+import static game.Input.D;
+import static game.Input.S;
+import static game.Input.W;
 import game.World;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -34,9 +35,10 @@ public class PlayerControlSystem implements IUpdate {
             Movement movement = player.getComponent(Movement.class);
 
             // movement(WASD)
-            movement.setLeft(gameData.getKeys().isDown(LEFT));
-            movement.setRight(gameData.getKeys().isDown(RIGHT));
-            movement.setUp(gameData.getKeys().isDown(UP));
+            movement.setUp(gameData.getKeys().isDown(W));
+            movement.setLeft(gameData.getKeys().isDown(A));
+            movement.setDown(gameData.getKeys().isDown(S));
+            movement.setRight(gameData.getKeys().isDown(D));
 
             movement.update(player, gameData);
 
