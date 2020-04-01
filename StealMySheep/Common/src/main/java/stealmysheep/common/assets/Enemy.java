@@ -16,9 +16,11 @@ public class Enemy extends Entity {
     private float targetRadius;
 
     public Enemy() {
+        super();
     }
 
     public Enemy(boolean targetPlayer, boolean targetSheep, float targetRadius) {
+        super();
         this.targetPlayer = targetPlayer;
         this.targetSheep = targetSheep;
         this.targetRadius = targetRadius;

@@ -12,6 +12,7 @@ package stealmysheep.common.assets;
 public class Player extends Entity {
 
     public Player() {
+        super();
     }
 
     public Player(String imagePath) {

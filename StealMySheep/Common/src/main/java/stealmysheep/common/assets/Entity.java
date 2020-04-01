@@ -22,25 +22,22 @@ import stealmysheep.common.assets.entityComponents.Position;
  */
 public class Entity {
 
-    private AssetManager assetManager;
-
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     private HashMap<Class, Component> components;
 
     private Texture texture;
-    private Sprite sprite;
 
     public Entity() {
+        this.id = UUID.randomUUID();
         this.components = new HashMap<>();
     }
 
     public Entity(String imagePath) {
-        this.components = new HashMap<>();
-        this.assetManager = new AssetManager();
+        this();
+
         String path = Paths.get("").toAbsolutePath().toString();
         String newpath = path.substring(0, path.length() - 32);
         this.texture = new Texture(Gdx.files.absolute(newpath + "\\Common\\src\\images\\" + imagePath));
-        this.sprite = new Sprite(texture);
 
     }
 
@@ -69,7 +66,7 @@ public class Entity {
     public void render(SpriteBatch batch) {
 
         Position position = getComponent(Position.class);
-        if (position != null) {
+        if (position != null && this.texture != null) {
             float x = position.getX();
             float y = position.getY();
             float radians = position.getRadians();
