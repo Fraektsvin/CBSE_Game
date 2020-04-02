@@ -54,7 +54,7 @@ public class PlayerPlugin implements IPlugin {
         float radians = 3.1415f / 2;
         float radius = 8;
 
-        Entity player = new Player();
+        Entity player = new Player("player.png");
         player.addComponent(new Movement(acceleration, speed));
         player.addComponent(new Position(x, y, radians));
         player.addComponent(new Health(100));
