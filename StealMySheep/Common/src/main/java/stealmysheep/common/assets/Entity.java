@@ -5,16 +5,9 @@
  */
 package stealmysheep.common.assets;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.UUID;
 import stealmysheep.common.assets.entityComponents.Component;
-import stealmysheep.common.assets.entityComponents.Position;
 
 /**
  *
