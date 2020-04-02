@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assets.entityComponents;
-
-import assets.Entity;
-import game.GameData;
+package stealmysheep.common.assets;
 
 /**
  *
  * @author oscar
  */
-public class Drawing implements Component {
+public class Sheep extends Entity {
 
-    @Override
-    public void update(Entity entity, GameData gameData) {
+    public Sheep() {
+        super();
     }
 
+    public Sheep(String imagePath) {
+        super(imagePath);
+    }
 }

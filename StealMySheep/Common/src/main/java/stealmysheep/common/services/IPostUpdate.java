@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assets;
+package stealmysheep.common.services;
+
+import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.World;
 
 /**
  *
  * @author oscar
  */
-public class Sheep extends Entity {
+public interface IPostUpdate {
 
+    public void postUpdate(GameData gameData, World world);
 }
