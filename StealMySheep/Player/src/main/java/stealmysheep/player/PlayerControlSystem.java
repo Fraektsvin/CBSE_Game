@@ -12,10 +12,10 @@ import stealmysheep.common.assets.Player;
 import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
-import static stealmysheep.common.game.Input.a;
-import static stealmysheep.common.game.Input.d;
-import static stealmysheep.common.game.Input.s;
-import static stealmysheep.common.game.Input.w;
+import static stealmysheep.common.game.Input.DOWN;
+import static stealmysheep.common.game.Input.LEFT;
+import static stealmysheep.common.game.Input.RIGHT;
+import static stealmysheep.common.game.Input.UP;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IUpdate;
 
@@ -35,10 +35,10 @@ public class PlayerControlSystem implements IUpdate {
             Movement movement = player.getComponent(Movement.class);
 
             // movement(WASD)
-            movement.setUp(gameData.getInput().isDown(w));
-            movement.setLeft(gameData.getInput().isDown(a));
-            movement.setDown(gameData.getInput().isDown(s));
-            movement.setRight(gameData.getInput().isDown(d));
+            movement.setUp(gameData.getInput().isDown(UP));
+            movement.setLeft(gameData.getInput().isDown(LEFT));
+            movement.setDown(gameData.getInput().isDown(DOWN));
+            movement.setRight(gameData.getInput().isDown(RIGHT));
 
             movement.update(player, gameData);
 
