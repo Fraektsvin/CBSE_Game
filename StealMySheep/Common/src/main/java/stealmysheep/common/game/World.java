@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class World {
 
-    private final HashMap<String, Entity> entities = new HashMap<>();
+    private final Map<String, Entity> entities = new ConcurrentHashMap<>();
 
     public String addEntity(Entity entity) {
         this.entities.put(entity.getId(), entity);

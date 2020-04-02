@@ -15,7 +15,7 @@ public class Sheep extends Entity {
         super();
     }
 
-    public Sheep(String imagePath) {
-        super(imagePath);
+    public Sheep(String image) {
+        super(image);
     }
 }
