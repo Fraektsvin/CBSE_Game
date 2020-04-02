@@ -62,6 +62,7 @@
         <module>branding</module>
         <module>application</module>
         <module>Common</module>
+        <module>Island</module>
     </modules>
 
     <properties>
