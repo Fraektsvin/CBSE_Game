@@ -5,13 +5,16 @@
  */
 package stealmysheep.common.services;
 
+import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.World;
+
 /**
  *
  * @author oscar
  */
 public interface IPlugin {
 
-    public void start();
+    public void start(GameData gameData, World world);
 
-    public void stop();
+    public void stop(GameData gameData, World world);
 }
