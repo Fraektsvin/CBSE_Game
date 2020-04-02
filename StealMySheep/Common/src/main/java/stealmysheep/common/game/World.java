@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.common.game;
+package stealmysheep.common.game;
 
-import group12.stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

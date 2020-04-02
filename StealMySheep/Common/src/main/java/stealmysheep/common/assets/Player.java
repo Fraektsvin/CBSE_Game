@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.common.services;
+package stealmysheep.common.assets;
 
 /**
  *
  * @author oscar
  */
-public interface IPlugin {
+public class Player extends Entity {
 
-    public void start();
+    public Player() {
+        super();
+    }
 
-    public void stop();
+    public Player(String imagePath) {
+        super(imagePath);
+    }
+
 }

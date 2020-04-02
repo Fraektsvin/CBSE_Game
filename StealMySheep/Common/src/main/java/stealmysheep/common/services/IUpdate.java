@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.common.services;
+package stealmysheep.common.services;
 
-import group12.stealmysheep.common.game.GameData;
-import group12.stealmysheep.common.game.World;
+import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.World;
 
 /**
  *
