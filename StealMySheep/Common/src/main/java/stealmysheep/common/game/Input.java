@@ -47,4 +47,5 @@ public class Input {
     public boolean isPressed(int key) {
         return keys[key] && !pressedKeys[key];
     }
+
 }
