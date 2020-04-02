@@ -25,24 +25,28 @@ public class Entity {
     private UUID id;
     private HashMap<Class, Component> components;
 
-    private Texture texture;
+    private String image;
 
     public Entity() {
         this.id = UUID.randomUUID();
         this.components = new HashMap<>();
     }
 
-    public Entity(String imagePath) {
+    public Entity(String image) {
         this();
-
-        String path = Paths.get("").toAbsolutePath().toString();
-        String newpath = path.substring(0, path.length() - 32);
-        this.texture = new Texture(Gdx.files.absolute(newpath + "\\Common\\src\\images\\" + imagePath));
-
+        this.image = image;
     }
 
     public String getId() {
         return id.toString();
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void addComponent(Component component) {
@@ -61,32 +65,6 @@ public class Entity {
 
     public boolean hasComponent(Class componentClass) {
         return this.components.containsKey(componentClass);
-    }
-
-    public void render(SpriteBatch batch) {
-
-        Position position = getComponent(Position.class);
-        if (position != null && this.texture != null) {
-            float x = position.getX();
-            float y = position.getY();
-            float radians = position.getRadians();
-
-            float radiansTop = 3.141592f / 2;
-            float radiansBottom = (3 * 3.141592f) / 2;
-
-            boolean flip = false;
-            if (radiansTop < radians && radians < radiansBottom) {
-                flip = true;
-                x = x + this.texture.getWidth() / 2;
-                y = y - this.texture.getHeight() / 2;
-            } else {
-                x = x - this.texture.getWidth() / 2;
-                y = y - this.texture.getHeight() / 2;
-            }
-
-            batch.draw(this.texture, x, y, flip ? -this.texture.getWidth() : this.texture.getWidth(), this.texture.getHeight());
-        }
-
     }
 
 }

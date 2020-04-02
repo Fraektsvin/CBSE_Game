@@ -15,8 +15,8 @@ public class Player extends Entity {
         super();
     }
 
-    public Player(String imagePath) {
-        super(imagePath);
+    public Player(String image) {
+        super(image);
     }
 
 }

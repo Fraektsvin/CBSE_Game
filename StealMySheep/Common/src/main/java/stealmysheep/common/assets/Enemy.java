@@ -26,8 +26,8 @@ public class Enemy extends Entity {
         this.targetRadius = targetRadius;
     }
 
-    public Enemy(boolean targetPlayer, boolean targetSheep, float targetRadius, String imagePath) {
-        super(imagePath);
+    public Enemy(boolean targetPlayer, boolean targetSheep, float targetRadius, String image) {
+        super(image);
         this.targetPlayer = targetPlayer;
         this.targetSheep = targetSheep;
         this.targetRadius = targetRadius;
