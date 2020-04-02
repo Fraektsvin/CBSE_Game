@@ -14,7 +14,7 @@ import com.badlogic.gdx.Gdx;
 public class Input {
 
     private boolean[] keys, pressedKeys;
-    private static final int NUMPADKEYS = 8;
+    private static final int NUMPADKEYS = 9;
     public static final int UP = 0;
     public static final int LEFT = 1;
     public static final int DOWN = 2;
@@ -23,6 +23,7 @@ public class Input {
     public static final int ESCAPE = 5;
     public static final int SPACE = 6;
     public static final int SHIFT = 7;
+    public static final int R = 8;
 
     public static float mouseX;
     public static float mouseY;
