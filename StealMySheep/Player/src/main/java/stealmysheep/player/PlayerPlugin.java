@@ -10,6 +10,7 @@ import assets.Player;
 import assets.entityComponents.Health;
 import assets.entityComponents.Movement;
 import assets.entityComponents.Position;
+import assets.entityComponents.RangedWeapon;
 import game.GameData;
 import game.World;
 import org.openide.util.lookup.ServiceProvider;
@@ -35,7 +36,7 @@ public class PlayerPlugin implements IPlugin {
         // Add entities to the world
         player = createPlayer(gameData);
         world.addEntity(player);
-        
+
     }
 
     @Override
@@ -52,14 +53,19 @@ public class PlayerPlugin implements IPlugin {
         float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
         float radius = 8;
-        
 
         Entity player = new Player();
         player.addComponent(new Movement(acceleration, speed));
         player.addComponent(new Position(x, y, radians));
-        player.setRadius(radius);
         player.addComponent(new Health(100));
-        
+        //add Range wepon
+        int magazineSize = 5;
+        float reloadTime = 3;
+        float shotCooldown = 1;
+        String entityId = player.getId();
+        int damage = 50;
+        player.addComponent(new RangedWeapon(magazineSize, reloadTime, shotCooldown, entityId, damage));
+
         return player;
     }
 
