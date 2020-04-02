@@ -17,7 +17,6 @@ public class Entity {
 
     private float[] shapeX = new float[4];
     private float[] shapeY = new float[4];
-    private float radius;
     private UUID id = UUID.randomUUID();
     private HashMap<Class, Component> components;
 
@@ -48,14 +47,6 @@ public class Entity {
 
     public void addComponent(float deacceleration, float acceleration, float maxSpeed, float rotationSpeed) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setRadius(float r) {
-        this.radius = r;
-    }
-
-    public float getRadius() {
-        return radius;
     }
 
     public float[] getShapeX() {
