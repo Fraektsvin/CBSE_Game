@@ -5,8 +5,6 @@
  */
 package stealmysheep.common.assets.entityComponents;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.game.GameData;
@@ -99,8 +97,21 @@ public class Movement implements Component {
         float dt = gameData.getDeltaTime();
 
         if (up) {
-            dx += cos(radians) * acceleration * dt;
-            dy += sin(radians) * acceleration * dt;
+            dx = x;
+            dy += acceleration * dt;
+        }
+        if (down) {
+            dx = x;
+            dy -= acceleration * dt;
+
+        }
+        if (left) {
+            dx += acceleration * dt;
+            dy = y;
+        }
+        if (right) {
+            dx -= acceleration * dt;
+            dy = y;
         }
 
         float vec = (float) sqrt(dx * dx + dy * dy);
