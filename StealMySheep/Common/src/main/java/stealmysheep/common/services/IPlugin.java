@@ -5,8 +5,8 @@
  */
 package stealmysheep.common.services;
 
-import game.GameData;
-import game.World;
+import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.World;
 
 /**
  *

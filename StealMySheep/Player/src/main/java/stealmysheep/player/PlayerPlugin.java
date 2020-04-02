@@ -5,17 +5,17 @@
  */
 package stealmysheep.player;
 
-import assets.Entity;
-import assets.Player;
-import assets.entityComponents.Health;
-import assets.entityComponents.Movement;
-import assets.entityComponents.Position;
-import assets.entityComponents.RangedWeapon;
-import game.GameData;
-import game.World;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
-import services.IPlugin;
+import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.Player;
+import stealmysheep.common.assets.entityComponents.Health;
+import stealmysheep.common.assets.entityComponents.Movement;
+import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.assets.entityComponents.RangedWeapon;
+import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.World;
+import stealmysheep.common.services.IPlugin;
 
 /**
  *

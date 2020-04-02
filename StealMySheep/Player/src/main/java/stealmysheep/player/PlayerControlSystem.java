@@ -5,19 +5,19 @@
  */
 package stealmysheep.player;
 
-import assets.Entity;
-import assets.Player;
-import assets.entityComponents.Movement;
-import assets.entityComponents.Position;
-import game.GameData;
-import static game.Input.a;
-import static game.Input.d;
-import static game.Input.s;
-import static game.Input.w;
-import game.World;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
-import services.IUpdate;
+import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.Player;
+import stealmysheep.common.assets.entityComponents.Movement;
+import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.game.GameData;
+import static stealmysheep.common.game.Input.a;
+import static stealmysheep.common.game.Input.d;
+import static stealmysheep.common.game.Input.s;
+import static stealmysheep.common.game.Input.w;
+import stealmysheep.common.game.World;
+import stealmysheep.common.services.IUpdate;
 
 /**
  *
@@ -35,43 +35,16 @@ public class PlayerControlSystem implements IUpdate {
             Movement movement = player.getComponent(Movement.class);
 
             // movement(WASD)
-            movement.setUp(gameData.getKeys().isDown(w));
-            movement.setLeft(gameData.getKeys().isDown(a));
-            movement.setDown(gameData.getKeys().isDown(s));
-            movement.setRight(gameData.getKeys().isDown(d));
+            movement.setUp(gameData.getInput().isDown(w));
+            movement.setLeft(gameData.getInput().isDown(a));
+            movement.setDown(gameData.getInput().isDown(s));
+            movement.setRight(gameData.getInput().isDown(d));
 
             movement.update(player, gameData);
 
             position.update(player, gameData);
 
-            updateShape(player);
         }
-    }
-
-    private void updateShape(Entity entity) {
-
-        //inset images
-        float[] shapex = entity.getShapeX();
-        float[] shapey = entity.getShapeY();
-        Position position = entity.getComponent(Position.class);
-        float x = position.getX();
-        float y = position.getY();
-        float radians = position.getRadians();
-
-        shapex[0] = (float) (x + Math.cos(radians) * 8);
-        shapey[0] = (float) (y + Math.sin(radians) * 8);
-
-        shapex[1] = (float) (x + Math.cos(radians - 4 * 3.1415f / 5) * 8);
-        shapey[1] = (float) (y + Math.sin(radians - 4 * 3.1145f / 5) * 8);
-
-        shapex[2] = (float) (x + Math.cos(radians + 3.1415f) * 5);
-        shapey[2] = (float) (y + Math.sin(radians + 3.1415f) * 5);
-
-        shapex[3] = (float) (x + Math.cos(radians + 4 * 3.1415f / 5) * 8);
-        shapey[3] = (float) (y + Math.sin(radians + 4 * 3.1415f / 5) * 8);
-
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
     }
 
 }

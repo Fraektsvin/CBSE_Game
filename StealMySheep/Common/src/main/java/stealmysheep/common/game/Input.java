@@ -17,10 +17,6 @@ public class Input {
     public static final int a = 1;
     public static final int s = 2;
     public static final int d = 3;
-//    public static final int UP = 0;
-//    public static final int LEFT = 1;
-//    public static final int DOWN = 2;
-//    public static final int RIGHT = 3;
     public static final int ENTER = 4;
     public static final int ESCAPE = 5;
     public static final int SPACE = 6;
