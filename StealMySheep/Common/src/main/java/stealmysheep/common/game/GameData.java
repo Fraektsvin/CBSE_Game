@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
+package stealmysheep.common.game;
 
 /**
  *
@@ -16,8 +16,8 @@ public class GameData {
     private Input input;
     private final Input keys = new Input();
 
-    public Input getKeys() {
-        return keys;
+    public GameData() {
+        this.input = new Input();
     }
 
     public float getDeltaTime() {
