@@ -5,6 +5,8 @@
  */
 package stealmysheep.common.game;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  *
  * @author oscar
@@ -22,10 +24,16 @@ public class Input {
     public static final int SPACE = 6;
     public static final int SHIFT = 7;
 
+    public static float mouseX;
+    public static float mouseY;
+
     public void update() {
         for (int i = 0; i < NUMPADKEYS; i++) {
             pressedKeys[i] = keys[i];
         }
+
+        mouseX = Gdx.input.getX();
+        mouseY = Gdx.input.getY();
     }
 
     public void setKeyStatus(int key, boolean pressed) {
@@ -39,4 +47,5 @@ public class Input {
     public boolean isPressed(int key) {
         return keys[key] && !pressedKeys[key];
     }
+
 }
