@@ -16,6 +16,8 @@ import static stealmysheep.common.game.Input.DOWN;
 import static stealmysheep.common.game.Input.LEFT;
 import static stealmysheep.common.game.Input.RIGHT;
 import static stealmysheep.common.game.Input.UP;
+import static stealmysheep.common.game.Input.mouseX;
+import static stealmysheep.common.game.Input.mouseY;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IUpdate;
 
@@ -34,17 +36,23 @@ public class PlayerControlSystem implements IUpdate {
             Position position = player.getComponent(Position.class);
             Movement movement = player.getComponent(Movement.class);
 
-            // movement(WASD)
             movement.setUp(gameData.getInput().isDown(UP));
             movement.setLeft(gameData.getInput().isDown(LEFT));
             movement.setDown(gameData.getInput().isDown(DOWN));
             movement.setRight(gameData.getInput().isDown(RIGHT));
+
+            // added the mouse location 
+            float deltaX = mouseX - position.getX();
+            float deltaY = mouseY - position.getY();
+
+            position.setRadians((float) Math.atan2(deltaX, deltaY));
 
             movement.update(player, gameData);
 
             position.update(player, gameData);
 
         }
+
     }
 
 }
