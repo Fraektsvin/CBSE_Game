@@ -7,6 +7,7 @@ package stealmysheep.common.assets.entityComponents;
 
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.Point;
 
 /**
  *
@@ -39,6 +40,16 @@ public class Position implements Component {
         this.y = y;
     }
 
+    public void plus(Point p) {
+        x = x + p.x;
+        y = y + p.y;
+    }
+
+    public void set(Point p) {
+        x = p.x;
+        y = p.y;
+    }
+
     public float getRadians() {
         return radians;
     }
@@ -50,5 +61,4 @@ public class Position implements Component {
     @Override
     public void update(Entity entity, GameData gameData) {
     }
-
 }
