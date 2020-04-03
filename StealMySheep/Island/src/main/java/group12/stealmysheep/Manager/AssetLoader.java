@@ -13,13 +13,11 @@ import com.badlogic.gdx.graphics.Texture;
  *
  * @author oscar
  */
-public class AssetMan {
+public class AssetLoader {
 
     public static final AssetManager assetManager = new AssetManager();
-    public static final AssetDescriptor<Texture> characterUp = new AssetDescriptor<Texture>("assetsthief.png", Texture.class);
 
     public static void loadAssets() {
-        assetManager.load(characterUp);
     }
 
 }
