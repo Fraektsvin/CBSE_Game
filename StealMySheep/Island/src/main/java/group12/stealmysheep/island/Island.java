@@ -17,7 +17,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import group12.stealmysheep.Manager.GameInputProcessor;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -55,7 +54,7 @@ public class Island implements ApplicationListener {
         cam.translate(gameData.getSceneWidth() / 2, gameData.getSceneHeight() / 2);
         cam.update();
 
-        Gdx.input.setInputProcessor(new GameInputProcessor());
+        Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
 
         result = lookup.lookupResult(IPlugin.class);
         result.addLookupListener(lookupListener);
@@ -70,7 +69,7 @@ public class Island implements ApplicationListener {
 
     @Override
     public void render() {
-
+        gameData.setDeltaTime(Gdx.graphics.getDeltaTime());
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -96,7 +95,6 @@ public class Island implements ApplicationListener {
     }
 
     private void update() {
-
         gameData.getInput().update();
         gameData.getInput().updateMouse(Gdx.input.getX(), Gdx.input.getY());
 
@@ -114,6 +112,7 @@ public class Island implements ApplicationListener {
     private AssetManager assetManager = new AssetManager();
 
     private void draw() {
+
         spriteBatch.begin();
         for (Entity entity : world.getEntities()) {
             Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
