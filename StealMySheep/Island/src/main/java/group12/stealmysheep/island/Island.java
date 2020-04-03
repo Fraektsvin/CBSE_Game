@@ -12,7 +12,6 @@ package group12.stealmysheep.island;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -70,9 +69,6 @@ public class Island implements ApplicationListener {
     @Override
     public void render() {
         gameData.setDeltaTime(Gdx.graphics.getDeltaTime());
-        // clear screen to black
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update();
         draw();
@@ -108,8 +104,6 @@ public class Island implements ApplicationListener {
             postUpdate.postUpdate(gameData, world);
         }
     }
-
-    private AssetManager assetManager = new AssetManager();
 
     private void draw() {
 
