@@ -11,6 +11,7 @@ package group12.stealmysheep.island;
  */
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -110,12 +111,12 @@ public class Island implements ApplicationListener {
         }
     }
 
+    private AssetManager assetManager = new AssetManager();
+
     private void draw() {
         spriteBatch.begin();
         for (Entity entity : world.getEntities()) {
-            String targetPath = Gdx.files.getLocalStoragePath();
-            String newTarget = targetPath.substring(0, targetPath.length() - 32);
-            Texture texture = new Texture(Gdx.files.absolute(targetPath + "\\Common\\src\\image\\" + entity.getImage()));
+            Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
 
             Position position = entity.getComponent(Position.class);
             if (position != null && texture != null) {
