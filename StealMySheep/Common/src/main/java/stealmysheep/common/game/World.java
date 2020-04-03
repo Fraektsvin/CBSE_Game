@@ -43,12 +43,13 @@ public class World {
         });
     }
 
-    public <T extends Entity> List<Entity> getEntities(Class<T> entityClass) {
-        List<Entity> entityList = new ArrayList<>();
+    public <T extends Entity> List<T> getEntities(Class<T> entityClass) {
+        List<T> entityList = new ArrayList<>();
 
         for (Entity entity : this.entities.values()) {
-            if (entity.getClass().equals(entityClass)) {
-                entityList.add(entity);
+            if (entityClass.isInstance(entity)) {
+                //noinspection unchecked
+                entityList.add((T) entity);
             }
         }
         return entityList;
