@@ -15,11 +15,11 @@ import stealmysheep.common.game.Input;
 
 public class GameInputProcessor extends InputAdapter {
 
-    private Input inputs;
+    private Input inputs = new Input();
 
     public boolean keyDown(int k) {
         if (k == Keys.UP) {
-            inputs.setKeyStatus(Input.UP, true);;
+            inputs.setKeyStatus(inputs.UP, true);;
         }
         if (k == Keys.LEFT) {
             inputs.setKeyStatus(inputs.LEFT, true);

@@ -113,10 +113,9 @@ public class Island implements ApplicationListener {
     private void draw() {
         spriteBatch.begin();
         for (Entity entity : world.getEntities()) {
-            String path = Paths.get("").toAbsolutePath().toString();
-
-            String newpath = path.substring(0, path.length() - 32);
-            Texture texture = new Texture(Gdx.files.absolute(newpath + "\\Common\\src\\images\\" + entity.getImage()));
+            String targetPath = Gdx.files.getLocalStoragePath();
+            String newTarget = targetPath.substring(0, targetPath.length() - 32);
+            Texture texture = new Texture(Gdx.files.absolute(newTarget + "\\Common\\src\\image\\" + entity.getImage()));
 
             Position position = entity.getComponent(Position.class);
             if (position != null && texture != null) {
