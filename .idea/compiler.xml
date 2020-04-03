@@ -20,7 +20,7 @@
       <module name="Player" target="1.8" />
       <module name="StealMySheep-app" target="1.8" />
       <module name="StealMySheep-branding" target="1.8" />
-      <module name="StealMySheep-parent" target="13" />
+      <module name="StealMySheep-parent" target="1.5" />
       <module name="weapons" target="1.8" />
     </bytecodeTargetLevel>
   </component>

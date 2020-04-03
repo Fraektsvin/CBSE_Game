@@ -10,10 +10,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.netbeans.api:org-netbeans-api-annotations-common:RELEASE90" level="project" />
-    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-modules:RELEASE90" level="project" />
-    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util:RELEASE90" level="project" />
-    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-lookup:RELEASE90" level="project" />
-    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-ui:RELEASE90" level="project" />
+    <orderEntry type="library" name="Maven: org.netbeans.api:org-netbeans-api-annotations-common:RELEASE112" level="project" />
+    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-modules:RELEASE112" level="project" />
+    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util:RELEASE112" level="project" />
+    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-lookup:RELEASE112" level="project" />
+    <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-ui:RELEASE112" level="project" />
   </component>
 </module>
