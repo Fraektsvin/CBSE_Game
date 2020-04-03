@@ -19,56 +19,56 @@ public class GameInputProcessor extends InputAdapter {
 
     public boolean keyDown(int k) {
         if (k == Keys.UP) {
-            inputs.setKeyStatus(Input.UP, true);;
+            inputs.setKeyStatus(Input.UP, true);
         }
         if (k == Keys.LEFT) {
-            inputs.setKeyStatus(inputs.LEFT, true);
+            inputs.setKeyStatus(Input.LEFT, true);
         }
         if (k == Keys.DOWN) {
-            inputs.setKeyStatus(inputs.DOWN, true);
+            inputs.setKeyStatus(Input.DOWN, true);
         }
         if (k == Keys.RIGHT) {
-            inputs.setKeyStatus(inputs.RIGHT, true);
+            inputs.setKeyStatus(Input.RIGHT, true);
         }
         if (k == Keys.ENTER) {
-            inputs.setKeyStatus(inputs.ENTER, true);
+            inputs.setKeyStatus(Input.ENTER, true);
         }
         if (k == Keys.ESCAPE) {
-            inputs.setKeyStatus(inputs.ESCAPE, true);
+            inputs.setKeyStatus(Input.ESCAPE, true);
         }
         if (k == Keys.SPACE) {
-            inputs.setKeyStatus(inputs.SPACE, true);
+            inputs.setKeyStatus(Input.SPACE, true);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            inputs.setKeyStatus(inputs.SHIFT, true);
+            inputs.setKeyStatus(Input.SHIFT, true);
         }
         return true;
     }
 
     public boolean keyUp(int k) {
         if (k == Keys.UP) {
-            inputs.setKeyStatus(inputs.UP, false);
+            inputs.setKeyStatus(Input.UP, false);
         }
         if (k == Keys.LEFT) {
-            inputs.setKeyStatus(inputs.LEFT, false);
+            inputs.setKeyStatus(Input.LEFT, false);
         }
         if (k == Keys.DOWN) {
-            inputs.setKeyStatus(inputs.DOWN, false);
+            inputs.setKeyStatus(Input.DOWN, false);
         }
         if (k == Keys.RIGHT) {
-            inputs.setKeyStatus(inputs.RIGHT, false);
+            inputs.setKeyStatus(Input.RIGHT, false);
         }
         if (k == Keys.ENTER) {
-            inputs.setKeyStatus(inputs.ENTER, false);
+            inputs.setKeyStatus(Input.ENTER, false);
         }
         if (k == Keys.ESCAPE) {
-            inputs.setKeyStatus(inputs.ESCAPE, false);
+            inputs.setKeyStatus(Input.ESCAPE, false);
         }
         if (k == Keys.SPACE) {
-            inputs.setKeyStatus(inputs.SPACE, false);
+            inputs.setKeyStatus(Input.SPACE, false);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            inputs.setKeyStatus(inputs.SHIFT, false);
+            inputs.setKeyStatus(Input.SHIFT, false);
         }
         return true;
     }
