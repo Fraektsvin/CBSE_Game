@@ -13,10 +13,10 @@ import stealmysheep.common.assets.entityComponents.Component;
  *
  * @author oscar
  */
-public class Entity<C> {
+public class Entity {
 
     private UUID id;
-    private HashMap<Class<C>, Component> components;
+    private HashMap<Class<? extends Component>, Component> components;
 
     private String image;
 
@@ -42,21 +42,20 @@ public class Entity<C> {
         this.image = image;
     }
 
-    public void addComponent(Component component) {
-        //noinspection unchecked
-        this.components.put((Class<C>) component.getClass(), component);
+    public <C extends Component> void addComponent(Component component) {
+        this.components.put(component.getClass(), component);
     }
 
-    public void removeComponent(Class<C> componentClass) {
+    public <C extends Component>void removeComponent(Class<C> componentClass) {
         this.components.remove(componentClass);
     }
 
-    public C getComponent(Class<C> componentClass) {
+    public <C extends Component> C getComponent(Class<C> componentClass) {
         //noinspection unchecked
         return (C) this.components.get(componentClass);
     }
 
-    public boolean hasComponent(Class<C> componentClass) {
+    public <C extends Component> boolean hasComponent(Class<C> componentClass) {
         return this.components.containsKey(componentClass);
     }
 
