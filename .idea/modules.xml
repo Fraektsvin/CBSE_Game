@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/Common/Common.iml" filepath="$PROJECT_DIR$/StealMySheep/Common/Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/Island/Island.iml" filepath="$PROJECT_DIR$/StealMySheep/Island/Island.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/Player/Player.iml" filepath="$PROJECT_DIR$/StealMySheep/Player/Player.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/application/StealMySheep-app.iml" filepath="$PROJECT_DIR$/StealMySheep/application/StealMySheep-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/branding/StealMySheep-branding.iml" filepath="$PROJECT_DIR$/StealMySheep/branding/StealMySheep-branding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/StealMySheep-parent.iml" filepath="$PROJECT_DIR$/StealMySheep/StealMySheep-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cbse-game.iml" filepath="$PROJECT_DIR$/.idea/cbse-game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StealMySheep/weapons/weapons.iml" filepath="$PROJECT_DIR$/StealMySheep/weapons/weapons.iml" />
+    </modules>
+  </component>
+</project>

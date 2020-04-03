@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/StealMySheep/Common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/Common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/Island/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/Island/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/Player/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/Player/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/branding/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/weapons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StealMySheep/weapons/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

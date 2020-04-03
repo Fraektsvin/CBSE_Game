@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="StealMySheep-app" />
+        <module name="Common" />
+        <module name="Island" />
+        <module name="StealMySheep-branding" />
+        <module name="Player" />
+        <module name="weapons" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Common" target="1.8" />
+      <module name="Island" target="1.8" />
+      <module name="Player" target="1.8" />
+      <module name="StealMySheep-app" target="1.8" />
+      <module name="StealMySheep-branding" target="1.8" />
+      <module name="StealMySheep-parent" target="13" />
+      <module name="weapons" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
