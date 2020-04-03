@@ -47,7 +47,7 @@ public class PlayerPlugin implements IPlugin {
 
     private Entity createPlayer(GameData gameData) {
 
-        float acceleration = 200;
+        float acceleration = 600;
         float speed = 300;
         float x = gameData.getSceneWidth() / 2;
         float y = gameData.getSceneHeight() / 2;

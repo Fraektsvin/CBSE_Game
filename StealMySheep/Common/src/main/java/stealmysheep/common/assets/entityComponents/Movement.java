@@ -5,6 +5,8 @@
  */
 package stealmysheep.common.assets.entityComponents;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.game.GameData;
@@ -93,52 +95,38 @@ public class Movement implements Component {
         Position position = entity.getComponent(Position.class);
         float x = position.getX();
         float y = position.getY();
-        float radians = position.getRadians();
         float dt = gameData.getDeltaTime();
 
         if (up) {
-            dx = x;
             dy += acceleration * dt;
-        }
-        if (down) {
-            dx = x;
+        } else if (down) {
             dy -= acceleration * dt;
-
         }
         if (left) {
-            dx += acceleration * dt;
-            dy = y;
-        }
-        if (right) {
             dx -= acceleration * dt;
-            dy = y;
+        } else if (right) {
+            dx += acceleration * dt;
         }
 
         float vec = (float) sqrt(dx * dx + dy * dy);
+        if (down == false && up == false && vec > 0) {
+            dy -= (dy / vec) * 600 * dt;
+        }
+
+        if (left == false && right == false && vec > 0) {
+            dx -= (dx / vec) * 600 * dt;
+        }
+
         if (vec > speed) {
             dx = (dx / vec) * speed;
             dy = (dy / vec) * speed;
         }
-
         // set position
         x += dx * dt;
-        if (x > gameData.getSceneWidth()) {
-            x = 0;
-        } else if (x < 0) {
-            x = gameData.getSceneWidth();
-        }
-
         y += dy * dt;
-        if (y > gameData.getSceneHeight()) {
-            y = 0;
-        } else if (y < 0) {
-            y = gameData.getSceneHeight();
-        }
 
         position.setX(x);
         position.setY(y);
-
-        position.setRadians(radians);
 
     }
 
