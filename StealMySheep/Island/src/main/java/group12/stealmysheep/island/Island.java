@@ -16,7 +16,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import group12.stealmysheep.Manager.GameInputProcessor;
-import group12.stealmysheep.Manager.Manager;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +26,6 @@ import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
-import stealmysheep.common.game.Input;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
 import stealmysheep.common.services.IPostUpdate;
@@ -35,7 +33,6 @@ import stealmysheep.common.services.IUpdate;
 
 public class Island implements ApplicationListener {
 
-    private Input inputs;
     public static OrthographicCamera cam;
 
     private final GameData gameData = new GameData();
@@ -98,8 +95,9 @@ public class Island implements ApplicationListener {
     }
 
     private void update() {
-        inputs.update();
-        inputs.updateMouse(Gdx.input.getX(), Gdx.input.getY());
+
+        gameData.getInput().update();
+        gameData.getInput().updateMouse(Gdx.input.getX(), Gdx.input.getY());
 
         // Update
         for (IUpdate update : lookup.lookupAll(IUpdate.class)) {
