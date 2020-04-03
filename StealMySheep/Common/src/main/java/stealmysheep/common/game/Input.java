@@ -11,7 +11,8 @@ package stealmysheep.common.game;
  */
 public class Input {
 
-    private boolean[] keys, pressedKeys;
+    private static boolean[] keys;
+    private static boolean[] pressedKeys;
     private static final int NUMBEROFKEYS = 10;
     public static final int UP = 0;
     public static final int LEFT = 1;

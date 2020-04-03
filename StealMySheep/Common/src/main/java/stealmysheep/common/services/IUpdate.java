@@ -15,4 +15,5 @@ import stealmysheep.common.game.World;
 public interface IUpdate {
 
     public void update(GameData gameData, World world);
+
 }
