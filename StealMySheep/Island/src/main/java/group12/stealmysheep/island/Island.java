@@ -115,7 +115,7 @@ public class Island implements ApplicationListener {
         for (Entity entity : world.getEntities()) {
             String targetPath = Gdx.files.getLocalStoragePath();
             String newTarget = targetPath.substring(0, targetPath.length() - 32);
-            Texture texture = new Texture(Gdx.files.absolute(newTarget + "\\Common\\src\\image\\" + entity.getImage()));
+            Texture texture = new Texture(Gdx.files.absolute(targetPath + "\\Common\\src\\image\\" + entity.getImage()));
 
             Position position = entity.getComponent(Position.class);
             if (position != null && texture != null) {
