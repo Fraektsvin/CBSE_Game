@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Install: group12/stealmysheep/island/InstallérKlassen.class
+OpenIDE-Module-Install: group12/stealmysheep/island/InstallerKlassen.class
 OpenIDE-Module-Localizing-Bundle: group12/stealmysheep/island/Bundle.properties
 

@@ -13,34 +13,60 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import group12.stealmysheep.Manager.GameInputProcessor;
 import group12.stealmysheep.Manager.Manager;
-import group12.stealmysheep.common.game.Input;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
+import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.game.GameData;
+import stealmysheep.common.game.Input;
+import stealmysheep.common.game.World;
+import stealmysheep.common.services.IPlugin;
+import stealmysheep.common.services.IPostUpdate;
+import stealmysheep.common.services.IUpdate;
 
 public class Island implements ApplicationListener {
 
-    public static int WIDTH;
-    public static int HEIGHT;
     private Input inputs;
     public static OrthographicCamera cam;
 
-    private Manager gsm;
+    private final GameData gameData = new GameData();
+    private World world = new World();
+    SpriteBatch spriteBatch;
+
+    private final Lookup lookup = Lookup.getDefault();
+    private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
+    private Lookup.Result<IPlugin> result;
 
     @Override
     public void create() {
+        spriteBatch = new SpriteBatch();
 
-        WIDTH = Gdx.graphics.getWidth();
-        HEIGHT = Gdx.graphics.getHeight();
+        gameData.setSceneWidth(Gdx.graphics.getWidth());
+        gameData.setSceneHeight(Gdx.graphics.getHeight());
 
-        cam = new OrthographicCamera(WIDTH, HEIGHT);
-        cam.translate(WIDTH / 2, HEIGHT / 2);
+        cam = new OrthographicCamera(gameData.getSceneWidth(), gameData.getSceneHeight());
+        cam.translate(gameData.getSceneWidth() / 2, gameData.getSceneHeight() / 2);
         cam.update();
 
-        Gdx.input.setInputProcessor(
-                new GameInputProcessor()
-        );
+        Gdx.input.setInputProcessor(new GameInputProcessor());
 
-        gsm = new Manager();
+        result = lookup.lookupResult(IPlugin.class);
+        result.addLookupListener(lookupListener);
+        result.allItems();
+
+        for (IPlugin plugin : result.allInstances()) {
+            plugin.start(gameData, world);
+            gamePlugins.add(plugin);
+        }
 
     }
 
@@ -51,11 +77,8 @@ public class Island implements ApplicationListener {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        gsm.update(Gdx.graphics.getDeltaTime());
-        gsm.draw();
-
-        inputs.update();
-
+        update();
+        draw();
     }
 
     @Override
@@ -73,5 +96,79 @@ public class Island implements ApplicationListener {
     @Override
     public void dispose() {
     }
+
+    private void update() {
+        inputs.update();
+        inputs.updateMouse(Gdx.input.getX(), Gdx.input.getY());
+
+        // Update
+        for (IUpdate update : lookup.lookupAll(IUpdate.class)) {
+            update.update(gameData, world);
+        }
+
+        // Post Update
+        for (IPostUpdate postUpdate : lookup.lookupAll(IPostUpdate.class)) {
+            postUpdate.postUpdate(gameData, world);
+        }
+    }
+
+    private void draw() {
+        spriteBatch.begin();
+        for (Entity entity : world.getEntities()) {
+            String path = Paths.get("").toAbsolutePath().toString();
+
+            String newpath = path.substring(0, path.length() - 32);
+            Texture texture = new Texture(Gdx.files.absolute(newpath + "\\Common\\src\\images\\" + entity.getImage()));
+
+            Position position = entity.getComponent(Position.class);
+            if (position != null && texture != null) {
+                float x = position.getX();
+                float y = position.getY();
+                float radians = position.getRadians();
+
+                float radiansTop = 3.141592f / 2;
+                float radiansBottom = (3 * 3.141592f) / 2;
+
+                boolean flip = false;
+                if (radiansTop < radians && radians < radiansBottom) {
+                    flip = true;
+                    x = x + texture.getWidth() / 2;
+                    y = y - texture.getHeight() / 2;
+                } else {
+                    x = x - texture.getWidth() / 2;
+                    y = y - texture.getHeight() / 2;
+                }
+
+                spriteBatch.draw(texture, x, y, flip ? -texture.getWidth() : texture.getWidth(), texture.getHeight());
+            }
+
+        }
+        spriteBatch.end();
+    }
+
+    private final LookupListener lookupListener = new LookupListener() {
+        @Override
+        public void resultChanged(LookupEvent le) {
+
+            Collection<? extends IPlugin> updated = result.allInstances();
+
+            for (IPlugin plugins : updated) {
+                // Newly installed modules
+                if (!gamePlugins.contains(plugins)) {
+                    plugins.start(gameData, world);
+                    gamePlugins.add(plugins);
+                }
+            }
+
+            // Stop and remove module
+            for (IPlugin plugins : gamePlugins) {
+                if (!updated.contains(plugins)) {
+                    plugins.stop(gameData, world);
+                    gamePlugins.remove(plugins);
+                }
+            }
+        }
+
+    };
 
 }
