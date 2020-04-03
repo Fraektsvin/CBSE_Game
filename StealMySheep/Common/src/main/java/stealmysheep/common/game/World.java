@@ -6,12 +6,15 @@
 package stealmysheep.common.game;
 
 import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.Component;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -51,5 +54,11 @@ public class World {
 
     public Entity getEntity(String ID) {
         return this.entities.get(ID);
+    }
+
+    public Collection<Entity> getEntitiesWithComponent(Class<? extends Component> type) {
+        return this.entities.values().stream()
+                .filter(e -> e.hasComponent(type))
+                .collect(Collectors.toList());
     }
 }
