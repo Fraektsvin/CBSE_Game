@@ -37,7 +37,13 @@ public class World {
         this.entities.remove(entity.getId());
     }
 
-    public <O extends Entity> List<Entity> getEntities(Class<O> entityClass) {
+    public <T extends Entity> void removeEntities(Class<T> type) {
+        this.entities.values().forEach(entity -> {
+            if (type.isInstance(entity)) removeEntity(entity);
+        });
+    }
+
+    public <T extends Entity> List<Entity> getEntities(Class<T> entityClass) {
         List<Entity> entityList = new ArrayList<>();
 
         for (Entity entity : this.entities.values()) {
@@ -56,7 +62,7 @@ public class World {
         return this.entities.get(ID);
     }
 
-    public Collection<Entity> getEntitiesWithComponent(Class<? extends Component> type) {
+    public <C extends Component> Collection<Entity> getEntitiesWithComponent(Class<C> type) {
         return this.entities.values().stream()
                 .filter(e -> e.hasComponent(type))
                 .collect(Collectors.toList());
