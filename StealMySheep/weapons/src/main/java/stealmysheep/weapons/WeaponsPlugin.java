@@ -77,7 +77,7 @@ public class WeaponsPlugin implements IPlugin, IUpdate, IPostUpdate, IWeaponsSer
     }
 
     @Override
-    public void swingWeapon(World world, Entity wielder, Point target) {
+    public void swingWeapon(World world, Entity wielder) {
         MeleeWeapon weapon = wielder.getComponent(MeleeWeapon.class);
         if (weapon == null) {
             throw new IllegalStateException(wielder + " has no MeleeWeapon");
