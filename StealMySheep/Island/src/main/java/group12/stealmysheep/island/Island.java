@@ -12,9 +12,11 @@ package group12.stealmysheep.island;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import group12.stealmysheep.Manager.AssetLoader;
 import group12.stealmysheep.Manager.GameInputProcessor;
 import java.util.Collection;
 import java.util.List;
@@ -36,7 +38,8 @@ public class Island implements ApplicationListener {
 
     private final GameData gameData = new GameData();
     private World world = new World();
-    SpriteBatch spriteBatch;
+    private SpriteBatch spriteBatch;
+//    private AssetLoader assetLoader;
 
     private final Lookup lookup = Lookup.getDefault();
     private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
@@ -45,6 +48,8 @@ public class Island implements ApplicationListener {
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
+//        assetLoader = new AssetLoader();
+//        assetLoader.loadAssets();
 
         gameData.setSceneWidth(Gdx.graphics.getWidth());
         gameData.setSceneHeight(Gdx.graphics.getHeight());
@@ -69,6 +74,8 @@ public class Island implements ApplicationListener {
     @Override
     public void render() {
         gameData.setDeltaTime(Gdx.graphics.getDeltaTime());
+
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update();
         draw();

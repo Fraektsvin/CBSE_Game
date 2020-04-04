@@ -5,9 +5,12 @@
  */
 package group12.stealmysheep.Manager;
 
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,9 +18,45 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class AssetLoader {
 
-    public static final AssetManager assetManager = new AssetManager();
+    public final AssetManager assetManager;
 
-    public static void loadAssets() {
+    public class AssetDescriptor {
+
+        public String folder;
+        public Class<?> assetType;
+
+        public AssetDescriptor(String folder, Class<?> assetType) {
+            this.folder = folder;
+            this.assetType = assetType;
+        }
+    }
+
+    private ArrayList<AssetDescriptor> assets = new ArrayList<AssetDescriptor>();
+    private FileHandleResolver resolver;
+
+    public AssetLoader() {
+        assetManager = new AssetManager();
+        resolver = new ClasspathFileHandleResolver();
+        assets.add(new AssetDescriptor("assets", Texture.class));
+    }
+
+    public Texture getAsset(String name) {
+        return assetManager.get(name, Texture.class);
+    }
+
+    public void loadAssets() {
+        for (AssetDescriptor descriptor : assets) {
+            FileHandle folder = resolver.resolve(descriptor.folder);
+            if (!folder.exists()) {
+                continue;
+            }
+
+            for (FileHandle asset : folder.list()) {
+                assetManager.load(asset.path(), descriptor.assetType);
+            }
+        }
+
+        assetManager.finishLoading();
     }
 
 }
