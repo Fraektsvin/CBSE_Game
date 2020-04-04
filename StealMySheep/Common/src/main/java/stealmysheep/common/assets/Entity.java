@@ -5,15 +5,16 @@
  */
 package stealmysheep.common.assets;
 
+import stealmysheep.common.assets.entityComponents.Component;
+
 import java.util.HashMap;
 import java.util.UUID;
-import stealmysheep.common.assets.entityComponents.Component;
 
 /**
  *
  * @author oscar
  */
-public class Entity {
+public abstract class Entity {
 
     private UUID id;
     private HashMap<Class<? extends Component>, Component> components;
