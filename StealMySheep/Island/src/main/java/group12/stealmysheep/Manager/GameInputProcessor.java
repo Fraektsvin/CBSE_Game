@@ -11,64 +11,69 @@ package group12.stealmysheep.Manager;
  */
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Input.Keys;
+import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.Input;
 
 public class GameInputProcessor extends InputAdapter {
 
-    private Input inputs;
+    private final GameData gameData;
+
+    public GameInputProcessor(GameData gameData) {
+        this.gameData = gameData;
+    }
 
     public boolean keyDown(int k) {
         if (k == Keys.UP) {
-            inputs.setKeyStatus(Input.UP, true);
+            gameData.getInput().setKeyStatus(Input.UP, true);
         }
         if (k == Keys.LEFT) {
-            inputs.setKeyStatus(Input.LEFT, true);
+            gameData.getInput().setKeyStatus(Input.LEFT, true);
         }
         if (k == Keys.DOWN) {
-            inputs.setKeyStatus(Input.DOWN, true);
+            gameData.getInput().setKeyStatus(Input.DOWN, true);
         }
         if (k == Keys.RIGHT) {
-            inputs.setKeyStatus(Input.RIGHT, true);
+            gameData.getInput().setKeyStatus(Input.RIGHT, true);
         }
         if (k == Keys.ENTER) {
-            inputs.setKeyStatus(Input.ENTER, true);
+            gameData.getInput().setKeyStatus(Input.ENTER, true);
         }
         if (k == Keys.ESCAPE) {
-            inputs.setKeyStatus(Input.ESCAPE, true);
+            gameData.getInput().setKeyStatus(Input.ESCAPE, true);
         }
         if (k == Keys.SPACE) {
-            inputs.setKeyStatus(Input.SPACE, true);
+            gameData.getInput().setKeyStatus(Input.SPACE, true);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            inputs.setKeyStatus(Input.SHIFT, true);
+            gameData.getInput().setKeyStatus(Input.SHIFT, true);
         }
         return true;
     }
 
     public boolean keyUp(int k) {
         if (k == Keys.UP) {
-            inputs.setKeyStatus(Input.UP, false);
+            gameData.getInput().setKeyStatus(Input.UP, false);
         }
         if (k == Keys.LEFT) {
-            inputs.setKeyStatus(Input.LEFT, false);
+            gameData.getInput().setKeyStatus(Input.LEFT, false);
         }
         if (k == Keys.DOWN) {
-            inputs.setKeyStatus(Input.DOWN, false);
+            gameData.getInput().setKeyStatus(Input.DOWN, false);
         }
         if (k == Keys.RIGHT) {
-            inputs.setKeyStatus(Input.RIGHT, false);
+            gameData.getInput().setKeyStatus(Input.RIGHT, false);
         }
         if (k == Keys.ENTER) {
-            inputs.setKeyStatus(Input.ENTER, false);
+            gameData.getInput().setKeyStatus(Input.ENTER, false);
         }
         if (k == Keys.ESCAPE) {
-            inputs.setKeyStatus(Input.ESCAPE, false);
+            gameData.getInput().setKeyStatus(Input.ESCAPE, false);
         }
         if (k == Keys.SPACE) {
-            inputs.setKeyStatus(Input.SPACE, false);
+            gameData.getInput().setKeyStatus(Input.SPACE, false);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            inputs.setKeyStatus(Input.SHIFT, false);
+            gameData.getInput().setKeyStatus(Input.SHIFT, false);
         }
         return true;
     }

@@ -11,12 +11,13 @@ package group12.stealmysheep.island;
  */
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import group12.stealmysheep.Manager.AssetLoader;
 import group12.stealmysheep.Manager.GameInputProcessor;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -37,7 +38,8 @@ public class Island implements ApplicationListener {
 
     private final GameData gameData = new GameData();
     private World world = new World();
-    SpriteBatch spriteBatch;
+    private SpriteBatch spriteBatch;
+//    private AssetLoader assetLoader;
 
     private final Lookup lookup = Lookup.getDefault();
     private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
@@ -46,6 +48,8 @@ public class Island implements ApplicationListener {
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
+//        assetLoader = new AssetLoader();
+//        assetLoader.loadAssets();
 
         gameData.setSceneWidth(Gdx.graphics.getWidth());
         gameData.setSceneHeight(Gdx.graphics.getHeight());
@@ -54,7 +58,7 @@ public class Island implements ApplicationListener {
         cam.translate(gameData.getSceneWidth() / 2, gameData.getSceneHeight() / 2);
         cam.update();
 
-        Gdx.input.setInputProcessor(new GameInputProcessor());
+        Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
 
         result = lookup.lookupResult(IPlugin.class);
         result.addLookupListener(lookupListener);
@@ -69,9 +73,8 @@ public class Island implements ApplicationListener {
 
     @Override
     public void render() {
+        gameData.setDeltaTime(Gdx.graphics.getDeltaTime());
 
-        // clear screen to black
-        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update();
@@ -95,7 +98,6 @@ public class Island implements ApplicationListener {
     }
 
     private void update() {
-
         gameData.getInput().update();
         gameData.getInput().updateMouse(Gdx.input.getX(), Gdx.input.getY());
 
@@ -111,12 +113,10 @@ public class Island implements ApplicationListener {
     }
 
     private void draw() {
+
         spriteBatch.begin();
         for (Entity entity : world.getEntities()) {
-            String path = Paths.get("").toAbsolutePath().toString();
-
-            String newpath = path.substring(0, path.length() - 32);
-            Texture texture = new Texture(Gdx.files.absolute(newpath + "\\Common\\src\\images\\" + entity.getImage()));
+            Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
 
             Position position = entity.getComponent(Position.class);
             if (position != null && texture != null) {
