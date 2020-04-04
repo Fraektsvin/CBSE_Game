@@ -5,6 +5,9 @@ import stealmysheep.common.assets.Projectile;
 import stealmysheep.common.game.Point;
 import stealmysheep.common.game.World;
 
+/**
+ * @author frmik18
+ */
 public interface IWeaponsService {
     /**
      * Fires a ranged weapon.
@@ -18,7 +21,7 @@ public interface IWeaponsService {
     /**
      * Swings a weapon in an arc.
      *
-     * @throws IllegalStateException if the wielder does not have a MeleeWeapon
+     * @throws IllegalStateException if the wielder does not have a MeleeWeapon and a Position
      */
     void swingWeapon(World world, Entity wielder);
 }

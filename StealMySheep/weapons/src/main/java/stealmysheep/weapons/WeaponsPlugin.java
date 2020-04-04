@@ -19,6 +19,9 @@ import stealmysheep.common.services.IWeaponsService;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
+/**
+ * @author frmik18
+ */
 @ServiceProviders({
         @ServiceProvider(service = IPlugin.class),
         @ServiceProvider(service = IUpdate.class),
@@ -79,15 +82,18 @@ public class WeaponsPlugin implements IPlugin, IUpdate, IPostUpdate, IWeaponsSer
     @Override
     public void swingWeapon(World world, Entity wielder) {
         MeleeWeapon weapon = wielder.getComponent(MeleeWeapon.class);
+        Position wPosition = wielder.getComponent(Position.class);
         if (weapon == null) {
             throw new IllegalStateException(wielder + " has no MeleeWeapon");
+        } else if (wPosition == null) {
+            throw new IllegalStateException(wielder + " has no Position");
         }
 
         Swing swing = new Swing(
                 weapon.getSwingTime(),
                 weapon.getRadius(),
                 weapon.getSwingArc(),
-                wielder.getComponent(Position.class)
+                wPosition
         );
         swing.addComponent(new Position(0, 0, 0));
         updateSwingPosition(swing);

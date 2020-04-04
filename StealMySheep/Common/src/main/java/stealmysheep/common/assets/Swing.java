@@ -5,6 +5,7 @@ import stealmysheep.common.game.GameData;
 
 /**
  * The swing of a MeleeWeapon
+ *
  * @author frmik18
  */
 public class Swing extends Entity {
