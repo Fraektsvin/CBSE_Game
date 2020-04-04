@@ -50,6 +50,10 @@ public class Position implements Component {
         y = p.y;
     }
 
+    public Point toPoint() {
+        return new Point(x, y);
+    }
+
     public float getRadians() {
         return radians;
     }

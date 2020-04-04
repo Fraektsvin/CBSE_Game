@@ -17,6 +17,10 @@ public class Point {
         this.y = y;
     }
 
+    public Point plus(Point other) {
+        return new Point(x + other.x, y + other.y);
+    }
+
     public Point multiply(float factor) {
         return new Point(x * factor, y * factor);
     }

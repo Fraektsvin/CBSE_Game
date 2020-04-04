@@ -14,12 +14,17 @@ import stealmysheep.common.game.GameData;
  */
 public class MeleeWeapon extends Weapon {
 
-    private float swingTime, swingTimer, range;
+    private final float swingTime;
+    /** How wide to swing, in radians */
+    private double swingArc;
+    private final float radius;
+    private float swingTimer;
 
-    public MeleeWeapon(float swingTime, float range, String entityId, int damage) {
+    public MeleeWeapon(float swingTime, float radius, String entityId, int damage, double swingArc) {
         super(entityId, damage);
         this.swingTime = swingTime;
-        this.range = range;
+        this.radius = radius;
+        this.swingArc = swingArc;
     }
 
     public float getSwingTime() {
@@ -34,16 +39,12 @@ public class MeleeWeapon extends Weapon {
         this.swingTimer = swingTimer;
     }
 
-    public void setSwingTime(float swingTime) {
-        this.swingTime = swingTime;
+    public double getSwingArc() {
+        return swingArc;
     }
 
-    public float getRange() {
-        return range;
-    }
-
-    public void setRange(float range) {
-        this.range = range;
+    public float getRadius() {
+        return radius;
     }
 
     @Override

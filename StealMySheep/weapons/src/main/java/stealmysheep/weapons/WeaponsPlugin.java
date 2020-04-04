@@ -4,6 +4,7 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Projectile;
+import stealmysheep.common.assets.Swing;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.assets.entityComponents.RangedWeapon;
@@ -11,15 +12,20 @@ import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.Point;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
+import stealmysheep.common.services.IPostUpdate;
 import stealmysheep.common.services.IUpdate;
 import stealmysheep.common.services.IWeaponsService;
+
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 @ServiceProviders({
         @ServiceProvider(service = IPlugin.class),
         @ServiceProvider(service = IUpdate.class),
+        @ServiceProvider(service = IPostUpdate.class),
         @ServiceProvider(service = IWeaponsService.class)
 })
-public class ProjectileManager implements IPlugin, IUpdate, IWeaponsService {
+public class WeaponsPlugin implements IPlugin, IUpdate, IPostUpdate, IWeaponsService {
     @Override
     public void start(GameData gameData, World world) {
     }
@@ -45,6 +51,18 @@ public class ProjectileManager implements IPlugin, IUpdate, IWeaponsService {
     }
 
     @Override
+    public void postUpdate(GameData gameData, World world) {
+        world.getEntities(Swing.class).forEach(swing -> {
+            swing.updateSwingTime(gameData);
+            if (swing.getSwingTime() >= swing.getMaxSwingTime()) {
+                updateSwingPosition(swing);
+            } else {
+                world.removeEntity(swing);
+            }
+        });
+    }
+
+    @Override
     public void fireWeapon(World world,
                            Entity wielder,
                            Projectile.Alignment alignment,
@@ -64,5 +82,32 @@ public class ProjectileManager implements IPlugin, IUpdate, IWeaponsService {
         if (weapon == null) {
             throw new IllegalStateException(wielder + " has no MeleeWeapon");
         }
+
+        Swing swing = new Swing(
+                weapon.getSwingTime(),
+                weapon.getRadius(),
+                weapon.getSwingArc(),
+                wielder.getComponent(Position.class)
+        );
+        swing.addComponent(new Position(0, 0, 0));
+        updateSwingPosition(swing);
+        world.addEntity(swing);
+    }
+
+    private void updateSwingPosition(Swing swing) {
+        Position position = swing.getComponent(Position.class);
+
+        // Calculate the new rotation relative to the origin and world
+        double swingFactor = swing.getSwingTime() / swing.getMaxSwingTime();
+        double relRot = swingFactor * swing.getArc() - swing.getArc()/2;
+        double actualRot = swing.getOrigin().getRadians() + relRot;
+
+        // Calculate the new position relative to the world
+        Point rotationUnit = new Point((float) cos(actualRot), (float) sin(actualRot));
+        Point newPos = rotationUnit.multiply((float) swing.getRadius())
+                .plus(swing.getOrigin().toPoint());
+
+        position.set(newPos);
+        position.setRadians((float) actualRot);
     }
 }
