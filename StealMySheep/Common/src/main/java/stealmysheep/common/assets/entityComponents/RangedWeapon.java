@@ -17,12 +17,14 @@ public class RangedWeapon extends Weapon {
     private int magazineSize;
     private float reloadTime, reloadTimer;
     private float shotCooldown, shotTimer;
+    private float velocity;
 
-    public RangedWeapon(int magazineSize, float reloadTime, float shotCooldown, String entityId, int damage) {
+    public RangedWeapon(int magazineSize, float reloadTime, float shotCooldown, String entityId, int damage, float velocity) {
         super(entityId, damage);
         this.magazineSize = magazineSize;
         this.reloadTime = reloadTime;
         this.shotCooldown = shotCooldown;
+        this.velocity = velocity;
     }
 
     public int getMagazineSize() {
@@ -63,6 +65,10 @@ public class RangedWeapon extends Weapon {
 
     public void setShotTimer(float shotTimer) {
         this.shotTimer = shotTimer;
+    }
+
+    public float getVelocity() {
+        return velocity;
     }
 
     @Override

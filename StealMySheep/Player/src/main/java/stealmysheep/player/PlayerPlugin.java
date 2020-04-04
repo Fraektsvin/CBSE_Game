@@ -64,7 +64,7 @@ public class PlayerPlugin implements IPlugin {
         float shotCooldown = 1;
         String entityId = player.getId();
         int damage = 50;
-        player.addComponent(new RangedWeapon(magazineSize, reloadTime, shotCooldown, entityId, damage));
+        player.addComponent(new RangedWeapon(magazineSize, reloadTime, shotCooldown, entityId, damage, velocity));
 
         return player;
     }

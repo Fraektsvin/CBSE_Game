@@ -7,8 +7,6 @@ package stealmysheep.common.assets;
 
 import stealmysheep.common.game.Point;
 
-import java.time.Instant;
-
 /**
  * @author frmik18
  */
@@ -17,10 +15,10 @@ public class Projectile extends Entity {
     private final int damage;
     /** Movement per second */
     private final Point deltaMovement;
-    private final Instant expiry;
+    private float expiry;
     private final Alignment alignment;
 
-    public Projectile(int damage, Point deltaMovement, Instant expiry, Alignment alignment) {
+    public Projectile(int damage, Point deltaMovement, float expiry, Alignment alignment) {
         this.damage = damage;
         this.deltaMovement = deltaMovement;
         this.expiry = expiry;
@@ -35,12 +33,16 @@ public class Projectile extends Entity {
         return deltaMovement;
     }
 
-    public Instant getExpiry() {
+    public Alignment getAlignment() {
+        return alignment;
+    }
+
+    public float getExpiry() {
         return expiry;
     }
 
-    public Alignment getAlignment() {
-        return alignment;
+    public void decrementExpiry(float amount) {
+        expiry -= amount;
     }
 
     public enum Alignment {
