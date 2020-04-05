@@ -11,12 +11,11 @@ package group12.stealmysheep.island;
  */
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import group12.stealmysheep.Manager.AssetLoader;
 import group12.stealmysheep.Manager.GameInputProcessor;
 import java.util.Collection;
 import java.util.List;
@@ -26,8 +25,6 @@ import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.Position;
-import stealmysheep.common.assets.entityComponents.RangedWeapon;
-import stealmysheep.common.assets.entityComponents.Weapon;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
@@ -122,21 +119,21 @@ public class Island implements ApplicationListener {
             //Draws the entity
             if (entity.getImage() != null) {
                 Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
-                Position position = entity.getComponent(Position.class);
-                float x = position.getX();
-                float y = position.getY();
+                Sprite sprite = new Sprite(texture);
 
-                boolean flip = false;
+                sprite.setScale(0.35f);
+
+                Position position = entity.getComponent(Position.class);
+
                 if (position.getRadians() < 0) {
-                    flip = true;
-                    x = x + texture.getWidth() / 2;
-                    y = y - texture.getHeight() / 2;
-                } else {
-                    x = x - texture.getWidth() / 2;
-                    y = y - texture.getHeight() / 2;
+                    sprite.flip(true, false);
                 }
 
-                spriteBatch.draw(texture, x, y, flip ? -texture.getWidth() : texture.getWidth(), texture.getHeight());
+                float x = position.getX() - sprite.getWidth() / 2;
+                float y = position.getY() - sprite.getHeight() / 2;
+                sprite.setPosition(x, y);
+                sprite.draw(spriteBatch);
+
             }
         }
 
