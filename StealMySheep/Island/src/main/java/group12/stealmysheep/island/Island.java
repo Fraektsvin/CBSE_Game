@@ -26,6 +26,8 @@ import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.assets.entityComponents.RangedWeapon;
+import stealmysheep.common.assets.entityComponents.Weapon;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
@@ -113,22 +115,19 @@ public class Island implements ApplicationListener {
     }
 
     private void draw() {
-
         spriteBatch.begin();
-        for (Entity entity : world.getEntities()) {
-            Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
 
-            Position position = entity.getComponent(Position.class);
-            if (position != null && texture != null) {
+        for (Entity entity : world.getEntities()) {
+
+            //Draws the entity
+            if (entity.getImage() != null) {
+                Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
+                Position position = entity.getComponent(Position.class);
                 float x = position.getX();
                 float y = position.getY();
-                float radians = position.getRadians();
-
-                float radiansTop = 3.141592f / 2;
-                float radiansBottom = (3 * 3.141592f) / 2;
 
                 boolean flip = false;
-                if (radiansTop < radians && radians < radiansBottom) {
+                if (position.getRadians() < 0) {
                     flip = true;
                     x = x + texture.getWidth() / 2;
                     y = y - texture.getHeight() / 2;
@@ -139,8 +138,8 @@ public class Island implements ApplicationListener {
 
                 spriteBatch.draw(texture, x, y, flip ? -texture.getWidth() : texture.getWidth(), texture.getHeight());
             }
-
         }
+
         spriteBatch.end();
     }
 
