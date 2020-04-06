@@ -16,7 +16,7 @@ import stealmysheep.common.assets.entityComponents.Component;
 public class Entity {
 
     private UUID id;
-    private HashMap<Class, Component> components;
+    private HashMap<Class<? extends Component>, Component> components;
 
     private String image;
 
@@ -46,17 +46,16 @@ public class Entity {
         this.components.put(component.getClass(), component);
     }
 
-    public void removeComponent(Class componentClass) {
-        if (this.components.containsKey(componentClass)) {
-            this.components.remove(componentClass);
-        }
+    public <C extends Component> void removeComponent(Class<C> componentClass) {
+        this.components.remove(componentClass);
     }
 
-    public <O extends Component> O getComponent(Class componentClass) {
-        return (O) this.components.get(componentClass);
+    public <C extends Component> C getComponent(Class<C> componentClass) {
+        //noinspection unchecked
+        return (C) this.components.get(componentClass);
     }
 
-    public boolean hasComponent(Class componentClass) {
+    public <C extends Component> boolean hasComponent(Class<C> componentClass) {
         return this.components.containsKey(componentClass);
     }
 
