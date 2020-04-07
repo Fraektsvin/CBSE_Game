@@ -12,6 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This service is responsible for checking for collisions.
+ * It does not affect the game direct. Collisions are communicated via the BoxCollider class.
+ *
+ * @author frmik18
+ */
 @ServiceProvider(service = IPostUpdate.class)
 public class CollisionHandler implements IPostUpdate {
     @Override
@@ -34,6 +40,11 @@ public class CollisionHandler implements IPostUpdate {
     }
 }
 
+/**
+ * Helper class representing an Entity with components required for collision detection.
+ *
+ * @author frmik18
+ */
 class Collidable {
     private final Entity entity;
     private final BoxCollider box;
@@ -52,14 +63,22 @@ class Collidable {
         boolean collBottom = false;
         boolean collLeft = false;
 
+        Range rx1 = rangeX();
+        Range ry1 = rangeY();
         for (Collidable other : list) {
             // Skip if same entity
             if (this == other) continue;
+            Range rx2 = other.rangeX();
+            Range ry2 = other.rangeY();
 
             // If both ranges don't overlap then skip
-            if (!rangeX().overlaps(other.rangeX()) || !rangeY().overlaps(other.rangeY())) continue;
+            if (!rx1.overlaps(rx2) || !ry1.overlaps(ry2)) continue;
 
-            // TODO check face
+            // Check which faces are colliding
+            if (ry1.min <= ry2.min) collTop = true;
+            if (rx1.min <= rx2.min) collRight = true;
+            if (ry1.max >= ry2.max) collBottom = true;
+            if (rx1.max >= rx2.max) collLeft = true;
 
             collidesWith.add(other.entity);
         }
@@ -76,6 +95,11 @@ class Collidable {
     }
 }
 
+/**
+ * Helper class to deal with range overlap
+ *
+ * @author frmik18
+ */
 class Range {
     final float min;
     final float max;
