@@ -1,14 +1,17 @@
 package stealmysheep.collision;
 
 import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
+import stealmysheep.common.services.IPlugin;
 import stealmysheep.common.services.IPostUpdate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +21,28 @@ import java.util.stream.Collectors;
  *
  * @author frmik18
  */
-@ServiceProvider(service = IPostUpdate.class)
-public class CollisionHandler implements IPostUpdate {
+@ServiceProviders({
+        @ServiceProvider(service = IPostUpdate.class),
+        @ServiceProvider(service = IPlugin.class),
+})
+public class CollisionPlugin implements IPostUpdate, IPlugin {
+
+    @Override
+    public void start(GameData gameData, World world) {
+        // Ignore
+    }
+
+    /**
+     * Reset collisions
+     */
+    @Override
+    public void stop(GameData gameData, World world) {
+        world.getEntities().forEach(entity -> {
+            BoxCollider box = entity.getComponent(BoxCollider.class);
+            if (box != null) box.updateCollisions(Collections.emptyList(), false, false, false, false);
+        });
+    }
+
     @Override
     public void postUpdate(GameData gameData, World world) {
         List<Collidable> list = findCollidables(world);
@@ -72,7 +95,7 @@ class Collidable {
             Range ry2 = other.rangeY();
 
             // If both ranges don't overlap then skip
-            if (!rx1.overlaps(rx2) || !ry1.overlaps(ry2)) continue;
+            if (!(rx1.overlaps(rx2) && ry1.overlaps(ry2))) continue;
 
             // Check which faces are colliding
             if (ry1.min <= ry2.min) collTop = true;
