@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * This service is responsible for checking for collisions.
- * It does not affect the game direct. Collisions are communicated via the BoxCollider class.
+ * It does not affect the game directly. Collisions are communicated via the BoxCollider class.
  *
  * @author frmik18
  */
