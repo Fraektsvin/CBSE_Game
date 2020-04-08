@@ -27,6 +27,7 @@ public class SheepControlSystem implements IUpdate {
 //    private Random random = new Random();
 //    private int processCounter = 0;
 //    
+
     @Override
     public void update(GameData gameData, World world) {
         for (Entity sheep : world.getEntities(Sheep.class)) {
@@ -46,4 +47,4 @@ public class SheepControlSystem implements IUpdate {
         }
     }
 
-        }
+}

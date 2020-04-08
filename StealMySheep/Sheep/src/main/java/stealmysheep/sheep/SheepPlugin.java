@@ -54,7 +54,7 @@ public class SheepPlugin implements IPlugin {
         Entity sheep = new Sheep("sheep.png");
         sheep.addComponent(new Movement(acceleration, speed));
         sheep.addComponent(new Position(x, y, radians));
-
+        
         return sheep;
     }
 
