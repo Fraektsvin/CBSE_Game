@@ -18,18 +18,25 @@ public class GameInputProcessor extends InputAdapter {
     private Input inputs;
 
     public boolean keyDown(int k) {
-        if (k == Keys.UP) {
+        if (k == Keys.W) {
             inputs.setKeyStatus(Input.UP, true);;
         }
-        if (k == Keys.LEFT) {
+        if (k == Keys.A) {
             inputs.setKeyStatus(inputs.LEFT, true);
         }
-        if (k == Keys.DOWN) {
+        if (k == Keys.S) {
             inputs.setKeyStatus(inputs.DOWN, true);
         }
-        if (k == Keys.RIGHT) {
+        if (k == Keys.D) {
             inputs.setKeyStatus(inputs.RIGHT, true);
         }
+        if (k == Keys.R) {
+            inputs.setKeyStatus(inputs.R, false);
+        }
+        if (k == Buttons.LEFT) {
+            inputs.setKeysStatus(Inputs.MOUSELEFT,false);
+        }
+       
         if (k == Keys.ENTER) {
             inputs.setKeyStatus(inputs.ENTER, true);
         }
@@ -46,18 +53,25 @@ public class GameInputProcessor extends InputAdapter {
     }
 
     public boolean keyUp(int k) {
-        if (k == Keys.UP) {
+        if (k == Keys.W) {
             inputs.setKeyStatus(inputs.UP, false);
         }
-        if (k == Keys.LEFT) {
+        if (k == Keys.A) {
             inputs.setKeyStatus(inputs.LEFT, false);
         }
-        if (k == Keys.DOWN) {
+        if (k == Keys.S) {
             inputs.setKeyStatus(inputs.DOWN, false);
         }
-        if (k == Keys.RIGHT) {
+        if (k == Keys.D) {
             inputs.setKeyStatus(inputs.RIGHT, false);
         }
+        if (k == Keys.R) {
+            inputs.setKeyStatus(inputs.R, false);
+        }
+         if (k == Buttons.LEFT) {
+            inputs.setKeysStatus(Inputs.MOUSELEFT,false);
+        }
+        
         if (k == Keys.ENTER) {
             inputs.setKeyStatus(inputs.ENTER, false);
         }
