@@ -41,10 +41,7 @@ public class GameInputProcessor extends InputAdapter {
         if (k == Keys.R) {
 
             gameData.getInput().setKeyStatus(Inputs.R, true);
-        }
-        if (k == Buttons.LEFT) {
-            gameData.getInput().setKeysStatus(Inputs.MOUSELEFT, true);
-
+        
         }
 
         if (k == Keys.ENTER) {
@@ -80,9 +77,7 @@ public class GameInputProcessor extends InputAdapter {
         if (k == Keys.R) {
             gameData.getInput().setKeyStatus(Input.R, false);
         }
-        if (k == Buttons.LEFT) {
-            gameData.getInput().setKeyStatus(Input.MOUSELEFT, false);
-        }
+       
 
         if (k == Keys.ENTER) {
             gameData.getInput().setKeyStatus(Input.ENTER, false);
@@ -97,6 +92,21 @@ public class GameInputProcessor extends InputAdapter {
             gameData.getInput().setKeyStatus(Input.SHIFT, false);
         }
         return true;
+        
+    }
+@Override
+    public boolean touchDown(int x, int y, int pointer, int button) {
+        if (button == Buttons.LEFT) {
+            gameData.getInput().setKeyStatus(Input.MOUSELEFT, true);
+        }
+        return true;
     }
 
+    @Override
+    public boolean touchUp(int x, int y, int pointer, int button) {
+        if (button == Buttons.LEFT) {
+            gameData.getInput().setKeyStatus(Input.MOUSELEFT, false);
+        }
+        return true;
+    }
 }
