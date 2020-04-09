@@ -25,30 +25,30 @@ public class GameInputProcessor extends InputAdapter {
     public boolean keyDown(int k) {
 
         if (k == Keys.W) {
-            gameData.setKeyStatus(input.UP, true);;
+            gameData.getInput().setKeyStatus(Input.UP, true);;
         }
         if (k == Keys.A) {
-            gameData.setKeyStatus(inputs.LEFT, true);
+            gameData.getInput().setKeyStatus(Inputs.LEFT, true);
         }
         if (k == Keys.S) {
-            gameData.setKeyStatus(inputs.DOWN, true);
+            gameData.getInput().setKeyStatus(Inputs.DOWN, true);
         }
         if (k == Keys.D) {
-            gameData.setKeyStatus(inputs.RIGHT, true);
+            gameData.getInput().setKeyStatus(Inputs.RIGHT, true);
 
         }
         if (k == Keys.R) {
-            gameData.setKeyStatus(inputs.R, false);
+            gameData.getInput().setKeyStatus(Inputs.R, false);
         }
         if (k == Buttons.LEFT) {
-            gameData.setKeysStatus(inputs.MOUSELEFT,false);
+            gameData.getInput().setKeysStatus(Inputs.MOUSELEFT,false);
         }
        
         if (k == Keys.ENTER) {
-            gameData.getInput().setKeyStatus(input.ENTER, true);
+            gameData.getInput().setKeyStatus(Input.ENTER, true);
         }
         if (k == Keys.ESCAPE) {
-            gameData.getInput().setKeyStatus(input.ESCAPE, true);
+            gameData.getInput().setKeyStatus(Input.ESCAPE, true);
         }
         if (k == Keys.SPACE) {
             gameData.getInput().setKeyStatus(Input.SPACE, true);
@@ -62,36 +62,36 @@ public class GameInputProcessor extends InputAdapter {
     public boolean keyUp(int k) {
 
         if (k == Keys.W) {
-            gameData.setKeyStatus(inputs.UP, false);
+            gameData.getInput().setKeyStatus(Inputs.UP, false);
         }
         if (k == Keys.A) {
-            gameData.setKeyStatus(inputs.LEFT, false);
+            gameData.getInput().setKeyStatus(Inputs.LEFT, false);
         }
         if (k == Keys.S) {
-            gameData.setKeyStatus(inputs.DOWN, false);
+            gameData.getInput().setKeyStatus(Inputs.DOWN, false);
         }
         if (k == Keys.D) {
-            gameData.setKeyStatus(inputs.RIGHT, false);
+            gameData.getInput().setKeyStatus(Inputs.RIGHT, false);
 
         }
         if (k == Keys.R) {
-            gameData.setKeyStatus(inputs.R, false);
+            gameData.getInput().setKeyStatus(Inputs.R, false);
         }
          if (k == Buttons.LEFT) {
-             gameData.setKeysStatus(inputs.MOUSELEFT,false);
+             gameData.getInput().setKeysStatus(Inputs.MOUSELEFT,false);
         }
         
         if (k == Keys.ENTER) {
-            gameData.getInput().setKeyStatus(input.ENTER, false);
+            gameData.getInput().setKeyStatus(Input.ENTER, false);
         }
         if (k == Keys.ESCAPE) {
-            gameData.getInput().setKeyStatus(input.ESCAPE, false);
+            gameData.getInput().setKeyStatus(Input.ESCAPE, false);
         }
         if (k == Keys.SPACE) {
-            gameData.getInput().setKeyStatus(input.SPACE, false);
+            gameData.getInput().setKeyStatus(Input.SPACE, false);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            gameData.getInput().setKeyStatus(input.SHIFT, false);
+            gameData.getInput().setKeyStatus(Input.SHIFT, false);
         }
         return true;
     }
