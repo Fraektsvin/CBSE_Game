@@ -38,10 +38,10 @@ public class GameInputProcessor extends InputAdapter {
 
         }
         if (k == Keys.R) {
-            gameData.getInput().setKeyStatus(Inputs.R, false);
+            gameData.getInput().setKeyStatus(Inputs.R, true);
         }
         if (k == Buttons.LEFT) {
-            gameData.getInput().setKeysStatus(Inputs.MOUSELEFT,false);
+            gameData.getInput().setKeysStatus(Inputs.MOUSELEFT, true);
         }
        
         if (k == Keys.ENTER) {
