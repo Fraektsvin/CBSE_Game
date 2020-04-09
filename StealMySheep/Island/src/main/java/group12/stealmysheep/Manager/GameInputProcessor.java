@@ -23,6 +23,7 @@ public class GameInputProcessor extends InputAdapter {
         this.gameData = gameData;
     }
 
+    @Override
     public boolean keyDown(int k) {
 
         if (k == Keys.W) {
@@ -36,14 +37,10 @@ public class GameInputProcessor extends InputAdapter {
         }
         if (k == Keys.D) {
             gameData.getInput().setKeyStatus(Input.RIGHT, true);
-
         }
         if (k == Keys.R) {
-
-            gameData.getInput().setKeyStatus(Inputs.R, true);
-        
+            gameData.getInput().setKeyStatus(Input.R, true);
         }
-
         if (k == Keys.ENTER) {
             gameData.getInput().setKeyStatus(Input.ENTER, true);
         }
@@ -59,6 +56,7 @@ public class GameInputProcessor extends InputAdapter {
         return true;
     }
 
+    @Override
     public boolean keyUp(int k) {
 
         if (k == Keys.W) {
@@ -72,13 +70,10 @@ public class GameInputProcessor extends InputAdapter {
         }
         if (k == Keys.D) {
             gameData.getInput().setKeyStatus(Input.RIGHT, false);
-
         }
         if (k == Keys.R) {
             gameData.getInput().setKeyStatus(Input.R, false);
         }
-       
-
         if (k == Keys.ENTER) {
             gameData.getInput().setKeyStatus(Input.ENTER, false);
         }
@@ -92,9 +87,10 @@ public class GameInputProcessor extends InputAdapter {
             gameData.getInput().setKeyStatus(Input.SHIFT, false);
         }
         return true;
-        
+
     }
-@Override
+
+    @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         if (button == Buttons.LEFT) {
             gameData.getInput().setKeyStatus(Input.MOUSELEFT, true);
