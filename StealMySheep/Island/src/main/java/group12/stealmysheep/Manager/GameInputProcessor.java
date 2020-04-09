@@ -25,36 +25,36 @@ public class GameInputProcessor extends InputAdapter {
     public boolean keyDown(int k) {
 
         if (k == Keys.W) {
-            inputs.setKeyStatus(Input.UP, true);;
+            gameData.setKeyStatus(input.UP, true);;
         }
         if (k == Keys.A) {
-            inputs.setKeyStatus(inputs.LEFT, true);
+            gameData.setKeyStatus(inputs.LEFT, true);
         }
         if (k == Keys.S) {
-            inputs.setKeyStatus(inputs.DOWN, true);
+            gameData.setKeyStatus(inputs.DOWN, true);
         }
         if (k == Keys.D) {
-            inputs.setKeyStatus(inputs.RIGHT, true);
+            gameData.setKeyStatus(inputs.RIGHT, true);
 
         }
         if (k == Keys.R) {
-            inputs.setKeyStatus(inputs.R, false);
+            gameData.setKeyStatus(inputs.R, false);
         }
         if (k == Buttons.LEFT) {
-            inputs.setKeysStatus(Inputs.MOUSELEFT,false);
+            gameData.setKeysStatus(inputs.MOUSELEFT,false);
         }
        
         if (k == Keys.ENTER) {
-            gameData.getInput().setKeyStatus(Input.ENTER, true);
+            gameData.getInput().setKeyStatus(input.ENTER, true);
         }
         if (k == Keys.ESCAPE) {
-            gameData.getInput().setKeyStatus(Input.ESCAPE, true);
+            gameData.getInput().setKeyStatus(input.ESCAPE, true);
         }
         if (k == Keys.SPACE) {
             gameData.getInput().setKeyStatus(Input.SPACE, true);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            gameData.getInput().setKeyStatus(Input.SHIFT, true);
+            gameData.getInput().setKeyStatus(input.SHIFT, true);
         }
         return true;
     }
@@ -62,36 +62,36 @@ public class GameInputProcessor extends InputAdapter {
     public boolean keyUp(int k) {
 
         if (k == Keys.W) {
-            inputs.setKeyStatus(inputs.UP, false);
+            gameData.setKeyStatus(inputs.UP, false);
         }
         if (k == Keys.A) {
-            inputs.setKeyStatus(inputs.LEFT, false);
+            gameData.setKeyStatus(inputs.LEFT, false);
         }
         if (k == Keys.S) {
-            inputs.setKeyStatus(inputs.DOWN, false);
+            gameData.setKeyStatus(inputs.DOWN, false);
         }
         if (k == Keys.D) {
-            inputs.setKeyStatus(inputs.RIGHT, false);
+            gameData.setKeyStatus(inputs.RIGHT, false);
 
         }
         if (k == Keys.R) {
-            inputs.setKeyStatus(inputs.R, false);
+            gameData.setKeyStatus(inputs.R, false);
         }
          if (k == Buttons.LEFT) {
-            inputs.setKeysStatus(Inputs.MOUSELEFT,false);
+             gameData.setKeysStatus(inputs.MOUSELEFT,false);
         }
         
         if (k == Keys.ENTER) {
-            gameData.getInput().setKeyStatus(Input.ENTER, false);
+            gameData.getInput().setKeyStatus(input.ENTER, false);
         }
         if (k == Keys.ESCAPE) {
-            gameData.getInput().setKeyStatus(Input.ESCAPE, false);
+            gameData.getInput().setKeyStatus(input.ESCAPE, false);
         }
         if (k == Keys.SPACE) {
-            gameData.getInput().setKeyStatus(Input.SPACE, false);
+            gameData.getInput().setKeyStatus(input.SPACE, false);
         }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
-            gameData.getInput().setKeyStatus(Input.SHIFT, false);
+            gameData.getInput().setKeyStatus(input.SHIFT, false);
         }
         return true;
     }
