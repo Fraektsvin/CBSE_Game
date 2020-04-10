@@ -44,6 +44,10 @@ public class BoxCollider implements Component {
         this.width = width;
     }
 
+    public Collection<Entity> getCollidesWith() {
+        return collidesWith;
+    }
+
     public boolean collidesTop() {
         return collTop;
     }
