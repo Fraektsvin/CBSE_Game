@@ -86,53 +86,37 @@ class Collidable {
         boolean collBottom = false;
         boolean collLeft = false;
 
-        Range rx1 = rangeX();
-        Range ry1 = rangeY();
         for (Collidable other : list) {
             // Skip if same entity
             if (this == other) continue;
-            Range rx2 = other.rangeX();
-            Range ry2 = other.rangeY();
 
-            // If both ranges don't overlap then skip
-            if (!(rx1.overlaps(rx2) && ry1.overlaps(ry2))) continue;
+            // Use Minkowski sum to check for collision and the collision side
+            // We could have checked if the 4 ranges of the rectangles overlap,
+            //   but this would not allow for checking which side is colliding.
+            // Adapted from: https://gamedev.stackexchange.com/questions/24078/which-side-was-hit/24091#24091
+            float w = (box.getWidth() + other.box.getWidth()) / 2;
+            float h = (box.getHeight() + other.box.getHeight()) / 2;
+            float dx = position.getX() - other.position.getX();
+            float dy = position.getY() - other.position.getY();
 
-            // Check which faces are colliding
-            if (ry1.min <= ry2.min) collTop = true;
-            if (rx1.min <= rx2.min) collRight = true;
-            if (ry1.max >= ry2.max) collBottom = true;
-            if (rx1.max >= rx2.max) collLeft = true;
+            // Check for collision
+            if (!(Math.abs(dx) <= w && Math.abs(dy) <= h)) continue;
 
             collidesWith.add(other.entity);
+
+            // Check which sides collides
+            float wy = w * dy;
+            float hx = h * dx;
+
+            if (wy > -hx) {
+                if (wy < -hx) collTop = true;
+                else collLeft = true;
+            } else {
+                if (wy < -hx) collRight = true;
+                else collBottom = true;
+            }
         }
 
         box.updateCollisions(collidesWith, collTop, collRight, collBottom, collLeft);
-    }
-
-    Range rangeX() {
-        return new Range(position.getX() - box.getWidth()/2, position.getX() + box.getWidth()/2);
-    }
-
-    Range rangeY() {
-        return new Range(position.getY() - box.getHeight()/2, position.getY() + box.getHeight()/2);
-    }
-}
-
-/**
- * Helper class to deal with range overlap
- *
- * @author frmik18
- */
-class Range {
-    final float min;
-    final float max;
-
-    Range(float min, float max) {
-        this.min = min;
-        this.max = max;
-    }
-
-    boolean overlaps(Range other) {
-        return max >= other.min && other.max >= min;
     }
 }
