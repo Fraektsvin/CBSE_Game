@@ -5,6 +5,10 @@
  */
 package stealmysheep.weapon;
 
+import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.MeleeWeapon;
+import stealmysheep.common.assets.entityComponents.Projectile;
+import stealmysheep.common.assets.entityComponents.RangedWeapon;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IUpdate;
@@ -17,7 +21,46 @@ public class WeaponUpdate implements IUpdate {
 
     @Override
     public void update(GameData gameData, World world) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        for (Entity entity : world.getEntities()) {
+            if (entity.hasComponent(RangedWeapon.class)) {
+                updateRangedWeapon(gameData, world, entity);
+            }
+
+            if (entity.hasComponent(MeleeWeapon.class)) {
+                updateMeleeWeapon(gameData, world, entity);
+            }
+
+        }
+
+        updateProjectiles(gameData, world);
+
+    }
+
+    private void updateProjectiles(GameData gameData, World world) {
+
+    }
+
+    private void updateMeleeWeapon(GameData gameData, World world, Entity entity) {
+
+    }
+
+    private void updateRangedWeapon(GameData gameData, World world, Entity entity) {
+//        if rangedWeapon.isAttacking is true:
+//                  createProjectile():
+//                  set rangedWeapon.isAttacking to false
+//
+//      Projectile createProjectile():
+//             return projectile
+    }
+
+    private boolean checkForHit(Projectile projectile, World world) {
+//                     for every Entity in world:
+//                   if entity has BoxCollider:
+//                         if entity has Health:
+//                               //damage entity
+//                         remove projectile from world
+        return false;
     }
 
 }
