@@ -17,6 +17,7 @@ public class Projectile implements Component {
     private String sourceId;
     private int damage;
     private float lifetime, lifeTimer;
+    private boolean remove;
 
     public Projectile(String sourceId, int damage, float lifetime) {
         this.sourceId = sourceId;
@@ -56,8 +57,13 @@ public class Projectile implements Component {
         this.lifeTimer = lifeTimer;
     }
 
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     @Override
     public void update(Entity entity, GameData gameData) {
+
     }
 
 }
