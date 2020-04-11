@@ -17,6 +17,12 @@ public class Projectile extends Entity {
         this.Speed = Speed;
     }
 
+    public Projectile(float Speed, String image) {
+        super(image);
+        this.Speed = Speed;
+
+    }
+
     public float getSpeed() {
         return Speed;
     }
