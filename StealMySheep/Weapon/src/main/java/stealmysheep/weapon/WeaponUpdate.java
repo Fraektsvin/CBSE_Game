@@ -6,6 +6,7 @@
 package stealmysheep.weapon;
 
 import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.Projectile;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
 import stealmysheep.common.assets.entityComponents.ProjectileComponent;
 import stealmysheep.common.assets.entityComponents.RangedWeapon;
@@ -20,6 +21,7 @@ import stealmysheep.common.services.IUpdate;
 public class WeaponUpdate implements IUpdate {
 
     @Override
+
     public void update(GameData gameData, World world) {
 
         for (Entity entity : world.getEntities()) {
@@ -46,16 +48,19 @@ public class WeaponUpdate implements IUpdate {
     }
 
     private void updateRangedWeapon(GameData gameData, World world, Entity entity) {
-
-        if (RangedWeapon) //        if rangedWeapon.isAttacking is true:
-        //                  createProjectile():
-        //                  set rangedWeapon.isAttacking to false
-        //
-        //      Projectile createProjectile():
-        //             return projectile
-        {
-
+        RangedWeapon rangedWeapon = entity.getComponent(RangedWeapon.class);
+        if (rangedWeapon.isIsAttacking()) {
+            world.addEntity(createProjectile(entity));
+            rangedWeapon.setIsAttacking(false);
         }
+    }
+
+    private Projectile createProjectile(Entity entity) {
+        Projectile projectile = new Projectile(400);
+        ProjectileComponent projectileComponen = new ProjectileComponent(entity.getId(), 50, 3);
+        projectile.addComponent(projectileComponen);
+        return projectile;
+
     }
 
     private boolean checkForHit(ProjectileComponent projectile, World world) {
