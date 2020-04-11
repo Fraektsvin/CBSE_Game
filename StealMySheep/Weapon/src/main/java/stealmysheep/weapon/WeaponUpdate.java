@@ -5,9 +5,12 @@
  */
 package stealmysheep.weapon;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Projectile;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
+import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.assets.entityComponents.ProjectileComponent;
 import stealmysheep.common.assets.entityComponents.RangedWeapon;
 import stealmysheep.common.game.GameData;
@@ -35,11 +38,31 @@ public class WeaponUpdate implements IUpdate {
 
         }
 
-        updateProjectiles(gameData, world);
+        for (Entity projectile : world.getEntities(Projectile.class)) {
+            Projectile projectileEntity = (Projectile) projectile;
+            updateProjectile(gameData, world, projectileEntity);
+
+        }
 
     }
 
-    private void updateProjectiles(GameData gameData, World world) {
+    private void updateProjectile(GameData gameData, World world, Projectile projectile) {
+        ProjectileComponent projectileComponent = projectile.getComponent(ProjectileComponent.class);
+        Position position = projectile.getComponent(Position.class);
+
+        if (projectileComponent == null && position == null) {
+            return;
+        }
+
+        if (projectileComponent.getRemove()) {
+            world.removeEntity(projectile);
+            return;
+        }
+
+        position.setX((float) (position.getX() + cos(position.getRadians()) * projectile.getSpeed() * gameData.getDeltaTime()));
+        position.setY((float) (position.getX() + sin(position.getRadians()) * projectile.getSpeed() * gameData.getDeltaTime()));
+
+        projectileComponent.update(projectile, gameData);
 
     }
 
@@ -63,7 +86,8 @@ public class WeaponUpdate implements IUpdate {
 
     }
 
-    private boolean checkForHit(ProjectileComponent projectile, World world) {
+    private boolean checkForHit(Projectile projectile, World world) {
+
 //                     for every Entity in world:
 //                   if entity has BoxCollider:
 //                         if entity has Health:
