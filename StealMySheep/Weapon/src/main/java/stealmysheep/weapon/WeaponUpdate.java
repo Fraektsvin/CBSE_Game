@@ -79,9 +79,15 @@ public class WeaponUpdate implements IUpdate {
     }
 
     private Projectile createProjectile(Entity entity) {
+
+        Position entityPosition = entity.getComponent(Position.class);
+
         Projectile projectile = new Projectile(400);
+        Position position = new Position(entityPosition.getX(), entityPosition.getY(), entityPosition.getRadians());
         ProjectileComponent projectileComponen = new ProjectileComponent(entity.getId(), 50, 3);
+
         projectile.addComponent(projectileComponen);
+        projectile.addComponent(position);
         return projectile;
 
     }
