@@ -9,6 +9,7 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Sheep;
+import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
@@ -44,16 +45,18 @@ public class SheepPlugin implements IPlugin {
 
     private Entity createSheep(GameData gameData) {
 
-        float acceleration = 600;
-        float speed = 300;
+        float acceleration = 60;
+        float speed = 20;
         float x = gameData.getSceneWidth() / 2;
         float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
-        float radius = 8;
+        float height = 3;
+        float width = 6;
 
         Entity sheep = new Sheep("sheep.png");
         sheep.addComponent(new Movement(acceleration, speed));
         sheep.addComponent(new Position(x, y, radians));
+        sheep.addComponent(new BoxCollider(height, width));
         
         return sheep;
     }
