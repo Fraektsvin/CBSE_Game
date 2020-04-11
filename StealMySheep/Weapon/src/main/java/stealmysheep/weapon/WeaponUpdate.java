@@ -7,7 +7,7 @@ package stealmysheep.weapon;
 
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
-import stealmysheep.common.assets.entityComponents.Projectile;
+import stealmysheep.common.assets.entityComponents.ProjectileComponent;
 import stealmysheep.common.assets.entityComponents.RangedWeapon;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
@@ -46,15 +46,19 @@ public class WeaponUpdate implements IUpdate {
     }
 
     private void updateRangedWeapon(GameData gameData, World world, Entity entity) {
-//        if rangedWeapon.isAttacking is true:
-//                  createProjectile():
-//                  set rangedWeapon.isAttacking to false
-//
-//      Projectile createProjectile():
-//             return projectile
+
+        if (RangedWeapon) //        if rangedWeapon.isAttacking is true:
+        //                  createProjectile():
+        //                  set rangedWeapon.isAttacking to false
+        //
+        //      Projectile createProjectile():
+        //             return projectile
+        {
+
+        }
     }
 
-    private boolean checkForHit(Projectile projectile, World world) {
+    private boolean checkForHit(ProjectileComponent projectile, World world) {
 //                     for every Entity in world:
 //                   if entity has BoxCollider:
 //                         if entity has Health:
