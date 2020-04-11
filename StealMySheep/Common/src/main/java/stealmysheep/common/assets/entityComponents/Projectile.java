@@ -57,13 +57,20 @@ public class Projectile implements Component {
         this.lifeTimer = lifeTimer;
     }
 
+    public boolean getRemove() {
+        return remove;
+    }
+
     public void setRemove(boolean remove) {
         this.remove = remove;
     }
 
     @Override
     public void update(Entity entity, GameData gameData) {
-
+        lifeTimer += gameData.getDeltaTime();
+        if (lifetime <= lifeTimer) {
+            remove = true;
+        }
     }
 
 }
