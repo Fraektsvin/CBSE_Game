@@ -7,6 +7,8 @@ package stealmysheep.weapon;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Projectile;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
@@ -21,6 +23,8 @@ import stealmysheep.common.services.IUpdate;
  *
  * @author nadinfariss
  */
+@ServiceProviders(value = {
+    @ServiceProvider(service = IUpdate.class),})
 public class WeaponUpdate implements IUpdate {
 
     @Override
@@ -59,8 +63,14 @@ public class WeaponUpdate implements IUpdate {
             return;
         }
 
-        position.setX((float) (position.getX() + cos(position.getRadians()) * projectile.getSpeed() * gameData.getDeltaTime()));
-        position.setY((float) (position.getX() + sin(position.getRadians()) * projectile.getSpeed() * gameData.getDeltaTime()));
+        float x = position.getX();
+        float y = position.getY();
+        float radians = position.getRadians();
+        float dt = gameData.getDeltaTime();
+        float speed = projectile.getSpeed();
+
+        position.setX(x + (float) cos(radians) * speed * dt);
+        position.setY(y + (float) cos(radians) * speed * dt);
 
         projectileComponent.update(projectile, gameData);
 
@@ -79,10 +89,10 @@ public class WeaponUpdate implements IUpdate {
     }
 
     private Projectile createProjectile(Entity entity) {
-
+        System.out.println("Creating projectile");
         Position entityPosition = entity.getComponent(Position.class);
 
-        Projectile projectile = new Projectile(400);
+        Projectile projectile = new Projectile(400f, "thief.png");
         Position position = new Position(entityPosition.getX(), entityPosition.getY(), entityPosition.getRadians());
         ProjectileComponent projectileComponen = new ProjectileComponent(entity.getId(), 50, 3);
 
