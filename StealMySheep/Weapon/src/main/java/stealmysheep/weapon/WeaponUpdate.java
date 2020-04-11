@@ -18,33 +18,35 @@ import stealmysheep.common.services.IUpdate;
  * @author nadinfariss
  */
 public class WeaponUpdate implements IUpdate {
-
+    
     @Override
     public void update(GameData gameData, World world) {
-
+        
         for (Entity entity : world.getEntities()) {
             if (entity.hasComponent(RangedWeapon.class)) {
                 updateRangedWeapon(gameData, world, entity);
             }
-
+            
             if (entity.hasComponent(MeleeWeapon.class)) {
                 updateMeleeWeapon(gameData, world, entity);
             }
-
+            
         }
-
-        updateProjectiles(gameData, world);
-
+        
+        for (Projectile projectile : world.getEntities(Projectile.class)) {
+            updateProjectiles(gameData, world, projectile);
+        }
+        
     }
-
-    private void updateProjectiles(GameData gameData, World world) {
-
+    
+    private void updateProjectiles(GameData gameData, World world, Projectile projectile) {
+        
     }
-
+    
     private void updateMeleeWeapon(GameData gameData, World world, Entity entity) {
-
+        
     }
-
+    
     private void updateRangedWeapon(GameData gameData, World world, Entity entity) {
 //        if rangedWeapon.isAttacking is true:
 //                  createProjectile():
@@ -53,7 +55,7 @@ public class WeaponUpdate implements IUpdate {
 //      Projectile createProjectile():
 //             return projectile
     }
-
+    
     private boolean checkForHit(Projectile projectile, World world) {
 //                     for every Entity in world:
 //                   if entity has BoxCollider:
@@ -62,5 +64,5 @@ public class WeaponUpdate implements IUpdate {
 //                         remove projectile from world
         return false;
     }
-
+    
 }
