@@ -70,7 +70,7 @@ public class WeaponUpdate implements IUpdate {
         float speed = projectile.getSpeed();
 
         position.setX(x + (float) cos(radians) * speed * dt);
-        position.setY(y + (float) cos(radians) * speed * dt);
+        position.setY(y + (float) sin(radians) * speed * dt);
 
         projectileComponent.update(projectile, gameData);
 
@@ -92,9 +92,11 @@ public class WeaponUpdate implements IUpdate {
         System.out.println("Creating projectile");
         Position entityPosition = entity.getComponent(Position.class);
 
-        Projectile projectile = new Projectile(400f, "thief.png");
+        Projectile projectile = new Projectile(600f, "thief.png");
         Position position = new Position(entityPosition.getX(), entityPosition.getY(), entityPosition.getRadians());
         ProjectileComponent projectileComponen = new ProjectileComponent(entity.getId(), 50, 3);
+
+        System.out.println(entityPosition.getRadians());
 
         projectile.addComponent(projectileComponen);
         projectile.addComponent(position);

@@ -37,6 +37,7 @@ public class PlayerControlSystem implements IUpdate {
         for (Entity player : world.getEntities(Player.class)) {
             Position position = player.getComponent(Position.class);
             Movement movement = player.getComponent(Movement.class);
+            RangedWeapon rangedWeapon = player.getComponent(RangedWeapon.class);
 
             movement.setUp(gameData.getInput().isDown(UP));
             movement.setLeft(gameData.getInput().isDown(LEFT));
@@ -46,14 +47,17 @@ public class PlayerControlSystem implements IUpdate {
             // added the mouse location
             float deltaX = mouseX - position.getX();
             float deltaY = mouseY - position.getY();
+            position.setRadians((float) Math.atan2(deltaY, deltaX));
 
-            RangedWeapon rangedWeapon = player.getComponent(RangedWeapon.class);
-            rangedWeapon.setIsAttacking(gameData.getInput().isDown(MOUSELEFT));
+            if (gameData.getInput().isDown(MOUSELEFT)) {
+                if (rangedWeapon.getShotTimer() <= 0) {
+                    rangedWeapon.setIsAttacking(gameData.getInput().isDown(MOUSELEFT));
+                    rangedWeapon.setShotTimer(rangedWeapon.getShotCooldown());
+                }
+            }
 
-            position.setRadians((float) Math.atan2(deltaX, deltaY));
-
+            rangedWeapon.update(player, gameData);
             movement.update(player, gameData);
-
             position.update(player, gameData);
 
         }
