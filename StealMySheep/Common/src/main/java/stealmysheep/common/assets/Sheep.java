@@ -11,15 +11,18 @@ package stealmysheep.common.assets;
  */
 public class Sheep extends Entity {
 
-    private float radius = 6;
+    private float radius;
     private boolean moving;
+    private float x, y;
     
-    public Sheep() {
+    public Sheep(float radius) {
         super();
+        this.radius = radius;
     }
 
-    public Sheep(String image) {
+    public Sheep(String image, float radius) {
         super(image);
+        this.radius = radius;
     }
 
     public float getRadius() {
@@ -36,6 +39,22 @@ public class Sheep extends Entity {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
     
 }

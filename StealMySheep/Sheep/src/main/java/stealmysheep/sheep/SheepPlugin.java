@@ -52,8 +52,9 @@ public class SheepPlugin implements IPlugin {
         float radians = 3.1415f / 2;
         float height = 3;
         float width = 6;
+        float radius = 50;
 
-        Entity sheep = new Sheep("sheep.png");
+        Entity sheep = new Sheep("sheep.png", radius);
         sheep.addComponent(new Movement(acceleration, speed));
         sheep.addComponent(new Position(x, y, radians));
         sheep.addComponent(new BoxCollider(height, width));
