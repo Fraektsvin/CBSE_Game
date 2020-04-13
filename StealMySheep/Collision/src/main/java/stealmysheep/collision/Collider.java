@@ -23,7 +23,7 @@ public class Collider implements IPostUpdate {
     }
 
     /**
-     * Use Minkowski sum to check for collision and the collision side.
+     * Use Minkowski sum to check for collision between rectangles.
      * Adapted from: https://gamedev.stackexchange.com/questions/24078/which-side-was-hit/24091#24091
      */
     private boolean collides(Entity a, Entity b) {
