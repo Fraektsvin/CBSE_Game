@@ -64,6 +64,7 @@
         <module>Common</module>
         <module>Island</module>
         <module>Player</module>
+        <module>Map/Map/Map</module>
     </modules>
 
     <properties>
