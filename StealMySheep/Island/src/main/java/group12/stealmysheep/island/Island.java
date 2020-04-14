@@ -125,7 +125,7 @@ public class Island implements ApplicationListener {
 
                 Position position = entity.getComponent(Position.class);
 
-                if (position.getRadians() < 0) {
+                if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
                     sprite.flip(true, false);
                 }
 

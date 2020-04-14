@@ -47,7 +47,6 @@ public class PlayerControlSystem implements IUpdate {
             // added the mouse location
             float deltaX = mouseX - position.getX();
             float deltaY = mouseY - position.getY();
-            System.out.println("x: " + mouseX + "       " + "y: " + mouseY);
 
             position.setRadians((float) Math.atan2(deltaY, deltaX));
 
