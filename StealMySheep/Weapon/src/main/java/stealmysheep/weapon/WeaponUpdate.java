@@ -11,6 +11,8 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Projectile;
+import stealmysheep.common.assets.entityComponents.BoxCollider;
+import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.assets.entityComponents.ProjectileComponent;
@@ -74,6 +76,8 @@ public class WeaponUpdate implements IUpdate {
 
         projectileComponent.update(projectile, gameData);
 
+        hit(projectile, world);
+
     }
 
     private void updateMeleeWeapon(GameData gameData, World world, Entity entity) {
@@ -89,29 +93,51 @@ public class WeaponUpdate implements IUpdate {
     }
 
     private Projectile createProjectile(Entity entity) {
-        System.out.println("Creating projectile");
+
         Position entityPosition = entity.getComponent(Position.class);
+        RangedWeapon rangedWeapon = entity.getComponent(RangedWeapon.class);
 
-        Projectile projectile = new Projectile(600f, "thief.png");
+        Projectile projectile = new Projectile(600f, "projectile.png");
         Position position = new Position(entityPosition.getX(), entityPosition.getY(), entityPosition.getRadians());
-        ProjectileComponent projectileComponen = new ProjectileComponent(entity.getId(), 50, 3);
-
-        System.out.println(entityPosition.getRadians());
+        ProjectileComponent projectileComponen = new ProjectileComponent(entity.getId(), rangedWeapon.getDamage(), 5);
 
         projectile.addComponent(projectileComponen);
         projectile.addComponent(position);
-        return projectile;
 
+        return projectile;
     }
 
-    private boolean checkForHit(Projectile projectile, World world) {
+    private void hit(Projectile projectile, World world) {
 
-//                     for every Entity in world:
-//                   if entity has BoxCollider:
-//                         if entity has Health:
-//                               //damage entity
-//                         remove projectile from world
-        return false;
+        for (Entity entity : world.getEntities()) {
+            ProjectileComponent projectileComponent = projectile.getComponent(ProjectileComponent.class);
+            if (entity.getId().equals(projectileComponent.getSourceId())) {
+                continue;
+            }
+
+            if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class)) {
+                Position position = entity.getComponent(Position.class);
+                BoxCollider collider = entity.getComponent(BoxCollider.class);
+                Position projectilePosition = projectile.getComponent(Position.class);
+
+                float x = projectilePosition.getX();
+                float y = projectilePosition.getY();
+
+                float x1 = position.getX() - collider.getWidth() / 2;
+                float x2 = position.getX() + collider.getWidth() / 2;
+                float y1 = position.getY() - collider.getHeight() / 2;
+                float y2 = position.getY() + collider.getHeight() / 2;
+
+                if (x > x1 && x < x2 && y > y1 && y < y2) {
+                    world.removeEntity(projectile);
+                    if (entity.hasComponent(Health.class)) {
+                        Health health = entity.getComponent(Health.class);
+                        health.damage(projectileComponent.getDamage());
+
+                    }
+                }
+            }
+        }
     }
 
 }

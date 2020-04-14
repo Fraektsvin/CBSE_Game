@@ -15,9 +15,12 @@ import stealmysheep.common.game.GameData;
 public class Health implements Component {
 
     private int maxHealth;
+    private int health;
+    private boolean dead;
 
     public Health(int maxHealth) {
         this.maxHealth = maxHealth;
+        this.health = this.maxHealth;
     }
 
     public int getMaxHealth() {
@@ -28,8 +31,15 @@ public class Health implements Component {
         this.maxHealth = maxHealth;
     }
 
+    public void damage(int amount) {
+        this.health -= amount;
+    }
+
     @Override
     public void update(Entity entity, GameData gameData) {
+        if (this.health <= 0) {
+            dead = true;
+        }
     }
 
 }
