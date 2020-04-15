@@ -8,6 +8,7 @@ package stealmysheep.sheep;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import java.util.ArrayList;
 import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -30,8 +31,6 @@ import stealmysheep.common.services.IUpdate;
 public class SheepControlSystem implements IUpdate {
 
     private Random random = new Random();
-    //private int processCounter = 0;
-    private int processCounter;
 
     @Override
     public void update(GameData gameData, World world) {
@@ -50,7 +49,9 @@ public class SheepControlSystem implements IUpdate {
                     currentSheep.setY(y);
 
                 } else if (currentSheep.isMoving() == true) {
-
+                    System.out.println("moving sheep");
+                    Node goal = new Node(currentSheep.getX(), currentSheep.getY());
+                    System.out.println(greedyBestFirstSearch(sheep, goal));
                 }
 
             }
@@ -61,51 +62,97 @@ public class SheepControlSystem implements IUpdate {
 
     }
 
-    private void insert() {
+    private void insertAll(ArrayList<Node> children, ArrayList<Node> fringe) {
+        for (Node node : children) {
+            fringe.add(node);
+        }
+    }
+
+    private Node remove(ArrayList<Node> fringe, Node goal) {
+        Node lowest = fringe.get(0);
+        for (Node node : fringe) {
+            if (heuristic(node, goal) < heuristic(lowest, goal)) {
+                lowest = node;
+            }
+        }
+        fringe.remove(lowest);
+        return lowest;
+    }
+
+    private ArrayList expand(Node node) {
+        ArrayList<Node> neighbours = new ArrayList<>();
+        float x = node.getX();
+        float y = node.getY();
+        float[][] successors = {{x - 1, y + 1}, {x, y + 1}, {x + 1, y + 1},
+        {x - 1, y}, {x + 1, y}, {x - 1, y - 1}, {x, y - 1}, {x + 1, y - 1}};
+        for (float[] element : successors) {
+            Node neighbour = new Node(element[0], element[1]);
+            neighbour.setParent(node);
+            neighbours.add(neighbour);
+        }
+        return neighbours;
 
     }
 
-    private void insertAll() {
+    private ArrayList<Node> greedyBestFirstSearch(Entity entity, Node goal) {
+        ArrayList<Node> fringe = new ArrayList<>();
+        Position position = entity.getComponent(Position.class);
+        Node node = new Node(position.getX(), position.getY());
+        fringe.add(node);
+        while (fringe != null) {
+            Node lowestNode = remove(fringe, goal);
+            if (greedyBestFirstSearchCheck(entity, goal, lowestNode)) {
+                return lowestNode.getPath();
+            }
+            // if the target of the sheep is within its collider then return node.path. 
+            ArrayList<Node> children = expand(lowestNode);
+            insertAll(children, fringe);
+        }
+        return null;
     }
 
-    private void remove() {
-
-    }
-
-    private void expand() {
-
-    }
-
-    private float heuristic(float x1, float x2, float y1, float y2) {
+    private float heuristic(Node node, Node goal) {
+        float x1 = node.getX();
+        float y1 = node.getY();
+        float x2 = goal.getX();
+        float y2 = goal.getY();
         float vec = (float) Math.sqrt(Math.pow((double) (x2 - x1), 2) + Math.pow((double) (y2 - y1), 2));
         return vec;
     }
 
-    //BoxCollider box = sheeps.getComponent(SheepPlugin.class);
-    //if(sheeps.isMoving() == false){
-    //}else if(sheeps.isMoving() == true){
-    /**
-     * if (processCounter % 5 == 0) { movement.setLeft(random.nextBoolean());
-     * }else if(processCounter % 5 == 1){
-     * movement.setRight(random.nextBoolean()); }else if(processCounter % 5 ==
-     * 2){ movement.setDown(random.nextBoolean()); }else if(processCounter % 5
-     * == 3){ movement.setUp(random.nextBoolean()); }
-     *
-     * movement.update(sheep, gameData); position.update(sheep, gameData);
-     *
-     * processCounter++;
-             *
-     */
-//            Movement movement = sheep.getComponent(Movement.class);
-//
-//              if (processCounter % 10 == 0) {
-//                movement.setLeft(random.nextBoolean());
-//                movement.setRight(random.nextBoolean());
-//            }
-//            movement.setUp(random.nextBoolean());
-//
-//            movement.update(sheep, gameData);
-//            position.update(sheep, gameData);
-//
-//            processCounter++;
+    private boolean destinationCheck(Entity entity, Node goal) {
+        BoxCollider collider = entity.getComponent(BoxCollider.class);
+        Position position = entity.getComponent(Position.class);
+        float x = goal.getX();
+        float y = goal.getY();
+
+        float x1 = position.getX() - collider.getWidth() / 2;
+        float x2 = position.getX() + collider.getWidth() / 2;
+        float y1 = position.getY() - collider.getHeight() / 2;
+        float y2 = position.getY() + collider.getHeight() / 2;
+
+        if (x > x1 && x < x2 && y > y1 && y < y2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean greedyBestFirstSearchCheck(Entity entity, Node goal, Node node) {
+        BoxCollider collider = entity.getComponent(BoxCollider.class);
+
+        float x = goal.getX();
+        float y = goal.getY();
+
+        float x1 = node.getX() - collider.getWidth() / 2;
+        float x2 = node.getX() + collider.getWidth() / 2;
+        float y1 = node.getY() - collider.getHeight() / 2;
+        float y2 = node.getY() + collider.getHeight() / 2;
+
+        if (x > x1 && x < x2 && y > y1 && y < y2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

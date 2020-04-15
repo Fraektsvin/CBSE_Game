@@ -21,7 +21,6 @@ public class PlayState extends GameState {
 
     private Player player;
     private Input GameKey;
-    private Sheep sheep;
     
     public PlayState(Manager gsm) {
         super(gsm);
@@ -33,8 +32,6 @@ public class PlayState extends GameState {
 
         player = new Player();
         
-        sheep = new Sheep();
-
     }
 
     public void update(float dt) {

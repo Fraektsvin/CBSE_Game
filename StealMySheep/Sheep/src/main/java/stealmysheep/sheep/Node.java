@@ -5,10 +5,56 @@
  */
 package stealmysheep.sheep;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author NidaBasaran
  */
 public class Node {
+    float x;
+    float y;
+    Node parent;
+    
+    public Node(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
+    }
+    
+    public ArrayList<Node> getPath() {
+        ArrayList<Node> path = new ArrayList<Node>();
+        Node currentNode = this;
+        path.add(currentNode);
+        while (currentNode.getParent() != null) {
+            currentNode = currentNode.parent;
+            path.add(currentNode);
+        }
+        return path;
+        
+    }
     
 }
