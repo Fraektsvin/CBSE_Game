@@ -28,11 +28,10 @@ import stealmysheep.common.services.IUpdate;
 @ServiceProviders(value = {
     @ServiceProvider(service = IUpdate.class),})
 public class SheepControlSystem implements IUpdate {
-    
-      private Random random = new Random();
-      //private int processCounter = 0;
-      private int processCounter;
-     
+
+    private Random random = new Random();
+    //private int processCounter = 0;
+    private int processCounter;
 
     @Override
     public void update(GameData gameData, World world) {
@@ -40,8 +39,8 @@ public class SheepControlSystem implements IUpdate {
             Position position = sheep.getComponent(Position.class);
             Movement movement = sheep.getComponent(Movement.class);
             Sheep currentSheep = (Sheep) sheep;
-            if(currentSheep.isMoving() == false){
-                if(random.nextInt(100)+1 <= 5){
+            if (currentSheep.isMoving() == false) {
+                if (random.nextInt(100) + 1 <= 5) {
                     currentSheep.setMoving(true);
                     float a = (float) (Math.random() * 2 * Math.PI);
                     float r = (float) (currentSheep.getRadius() * sqrt(Math.random()));
@@ -49,48 +48,54 @@ public class SheepControlSystem implements IUpdate {
                     float y = (float) (r * sin(a));
                     currentSheep.setX(x);
                     currentSheep.setY(y);
-                    
-                }else if(currentSheep.isMoving() == true){
-                    
+
+                } else if (currentSheep.isMoving() == true) {
+
                 }
-                
+
             }
-          }
         }
-            
-        private void moveSheep(Sheep sheep){
-            
-        }
-        
-        private float heuristic(float x1, float x2, float y1, float y2){           
-            float vec = (float) Math.sqrt(Math.pow((double)(x2-x1),2) + Math.pow((double)(y2-y1),2));
-            return vec;
-        }
+    }
 
+    private void moveSheep(Sheep sheep) {
 
+    }
 
+    private void insert() {
 
-            //BoxCollider box = sheeps.getComponent(SheepPlugin.class);
+    }
 
-            //if(sheeps.isMoving() == false){
-                            //}else if(sheeps.isMoving() == true){
-            /**
-            if (processCounter % 5 == 0) {
-                movement.setLeft(random.nextBoolean());
-            }else if(processCounter % 5 == 1){
-                movement.setRight(random.nextBoolean());
-            }else if(processCounter % 5 == 2){
-                movement.setDown(random.nextBoolean());
-            }else if(processCounter % 5 == 3){
-                movement.setUp(random.nextBoolean());
-            }
-            
-            movement.update(sheep, gameData);
-            position.update(sheep, gameData);
+    private void insertAll() {
+    }
 
-            processCounter++;
-             **/   
-            
+    private void remove() {
+
+    }
+
+    private void expand() {
+
+    }
+
+    private float heuristic(float x1, float x2, float y1, float y2) {
+        float vec = (float) Math.sqrt(Math.pow((double) (x2 - x1), 2) + Math.pow((double) (y2 - y1), 2));
+        return vec;
+    }
+
+    //BoxCollider box = sheeps.getComponent(SheepPlugin.class);
+    //if(sheeps.isMoving() == false){
+    //}else if(sheeps.isMoving() == true){
+    /**
+     * if (processCounter % 5 == 0) { movement.setLeft(random.nextBoolean());
+     * }else if(processCounter % 5 == 1){
+     * movement.setRight(random.nextBoolean()); }else if(processCounter % 5 ==
+     * 2){ movement.setDown(random.nextBoolean()); }else if(processCounter % 5
+     * == 3){ movement.setUp(random.nextBoolean()); }
+     *
+     * movement.update(sheep, gameData); position.update(sheep, gameData);
+     *
+     * processCounter++;
+             *
+     */
 //            Movement movement = sheep.getComponent(Movement.class);
 //
 //              if (processCounter % 10 == 0) {
@@ -103,6 +108,4 @@ public class SheepControlSystem implements IUpdate {
 //            position.update(sheep, gameData);
 //
 //            processCounter++;
-        
- }
-    
+}
