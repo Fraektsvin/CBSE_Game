@@ -48,11 +48,11 @@ public class SheepControlSystem implements IUpdate {
                     currentSheep.setX(x);
                     currentSheep.setY(y);
 
-                } else if (currentSheep.isMoving() == true) {
-                    System.out.println("moving sheep");
-                    Node goal = new Node(currentSheep.getX(), currentSheep.getY());
-                    System.out.println(greedyBestFirstSearch(sheep, goal));
                 }
+            } else if (currentSheep.isMoving() == true) {
+                System.out.println("moving sheep");
+                Node goal = new Node(currentSheep.getX(), currentSheep.getY());
+                System.out.println(greedyBestFirstSearch(sheep, goal));
 
             }
         }
