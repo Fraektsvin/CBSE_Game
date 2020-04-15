@@ -39,7 +39,7 @@ public class SheepControlSystem implements IUpdate {
             Movement movement = sheep.getComponent(Movement.class);
             Sheep currentSheep = (Sheep) sheep;
             if (currentSheep.isMoving() == false) {
-                if (random.nextInt(100) + 1 <= 5) {
+                if (random.nextInt(100) + 1 <= 2) {
                     currentSheep.setMoving(true);
                     float a = (float) (Math.random() * 2 * Math.PI);
                     float r = (float) (currentSheep.getRadius() * sqrt(Math.random()));
