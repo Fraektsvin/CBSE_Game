@@ -76,11 +76,23 @@ public class WeaponUpdate implements IUpdate {
 
         projectileComponent.update(projectile, gameData);
 
-        hit(projectile, world);
+        hit(projectileComponent.getDamage(), x, y, projectileComponent.getSourceId(), projectile.getId(), world);
 
     }
 
     private void updateMeleeWeapon(GameData gameData, World world, Entity entity) {
+        MeleeWeapon meleeweapon = entity.getComponent(MeleeWeapon.class);
+        Position position = entity.getComponent(Position.class);
+        if (meleeweapon.isIsAttacking()) {
+            float x = position.getX();
+            float y = position.getY();
+            float radians = position.getRadians();
+
+            float xx = x + (float) (meleeweapon.getRange() * cos(radians));
+            float yy = y + (float) (meleeweapon.getRange() * sin(radians));
+            hit(meleeweapon.getDamage(), xx, yy, meleeweapon.getEntityId(), null, world);
+            meleeweapon.setIsAttacking(false);
+        }
 
     }
 
@@ -107,21 +119,16 @@ public class WeaponUpdate implements IUpdate {
         return projectile;
     }
 
-    private void hit(Projectile projectile, World world) {
+    private void hit(int damage, float x, float y, String sourceId, String weaponId, World world) {
 
         for (Entity entity : world.getEntities()) {
-            ProjectileComponent projectileComponent = projectile.getComponent(ProjectileComponent.class);
-            if (entity.getId().equals(projectileComponent.getSourceId())) {
+            if (entity.getId().equals(sourceId)) {
                 continue;
             }
 
             if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class)) {
                 Position position = entity.getComponent(Position.class);
                 BoxCollider collider = entity.getComponent(BoxCollider.class);
-                Position projectilePosition = projectile.getComponent(Position.class);
-
-                float x = projectilePosition.getX();
-                float y = projectilePosition.getY();
 
                 float x1 = position.getX() - collider.getWidth() / 2;
                 float x2 = position.getX() + collider.getWidth() / 2;
@@ -129,10 +136,12 @@ public class WeaponUpdate implements IUpdate {
                 float y2 = position.getY() + collider.getHeight() / 2;
 
                 if (x > x1 && x < x2 && y > y1 && y < y2) {
-                    world.removeEntity(projectile);
+                    if (weaponId != null) {
+                        world.removeEntity(weaponId);
+                    }
                     if (entity.hasComponent(Health.class)) {
                         Health health = entity.getComponent(Health.class);
-                        health.damage(projectileComponent.getDamage());
+                        health.damage(damage);
 
                     }
                 }

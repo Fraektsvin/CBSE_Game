@@ -66,6 +66,7 @@ public class PlayerPlugin implements IPlugin {
         int damage = 50;
         player.addComponent(new RangedWeapon(magazineSize, reloadTime, shotCooldown, entityId, damage));
 
+        //add melee weapon
         return player;
     }
 
