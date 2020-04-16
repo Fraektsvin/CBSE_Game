@@ -81,6 +81,7 @@ public class WeaponUpdate implements IUpdate {
     }
 
     private void updateMeleeWeapon(GameData gameData, World world, Entity entity) {
+        //test
 
     }
 
