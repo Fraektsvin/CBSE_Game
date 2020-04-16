@@ -13,7 +13,6 @@ import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Projectile;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Health;
-import stealmysheep.common.assets.entityComponents.MeleeWeapon;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.assets.entityComponents.ProjectileComponent;
 import stealmysheep.common.assets.entityComponents.RangedWeapon;
@@ -27,19 +26,14 @@ import stealmysheep.common.services.IUpdate;
  */
 @ServiceProviders(value = {
     @ServiceProvider(service = IUpdate.class),})
-public class WeaponUpdate implements IUpdate {
+public class RangeWeaponUpdate implements IUpdate {
 
     @Override
-
     public void update(GameData gameData, World world) {
 
         for (Entity entity : world.getEntities()) {
             if (entity.hasComponent(RangedWeapon.class)) {
                 updateRangedWeapon(gameData, world, entity);
-            }
-
-            if (entity.hasComponent(MeleeWeapon.class)) {
-                updateMeleeWeapon(gameData, world, entity);
             }
 
         }
@@ -50,6 +44,14 @@ public class WeaponUpdate implements IUpdate {
 
         }
 
+    }
+
+    private void updateRangedWeapon(GameData gameData, World world, Entity entity) {
+        RangedWeapon rangedWeapon = entity.getComponent(RangedWeapon.class);
+        if (rangedWeapon.isIsAttacking()) {
+            world.addEntity(createProjectile(entity));
+            rangedWeapon.setIsAttacking(false);
+        }
     }
 
     private void updateProjectile(GameData gameData, World world, Projectile projectile) {
@@ -76,21 +78,8 @@ public class WeaponUpdate implements IUpdate {
 
         projectileComponent.update(projectile, gameData);
 
-        hit(projectile, world);
+        projectileHit(projectile, world);
 
-    }
-
-    private void updateMeleeWeapon(GameData gameData, World world, Entity entity) {
-        //test
-
-    }
-
-    private void updateRangedWeapon(GameData gameData, World world, Entity entity) {
-        RangedWeapon rangedWeapon = entity.getComponent(RangedWeapon.class);
-        if (rangedWeapon.isIsAttacking()) {
-            world.addEntity(createProjectile(entity));
-            rangedWeapon.setIsAttacking(false);
-        }
     }
 
     private Projectile createProjectile(Entity entity) {
@@ -108,7 +97,7 @@ public class WeaponUpdate implements IUpdate {
         return projectile;
     }
 
-    private void hit(Projectile projectile, World world) {
+    private void projectileHit(Projectile projectile, World world) {
 
         for (Entity entity : world.getEntities()) {
             ProjectileComponent projectileComponent = projectile.getComponent(ProjectileComponent.class);
