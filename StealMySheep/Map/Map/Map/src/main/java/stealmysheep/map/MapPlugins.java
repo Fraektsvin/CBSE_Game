@@ -19,18 +19,18 @@ import stealmysheep.common.services.IPlugin;
  * @author Antonio
  */
 
-
 public class MapPlugins implements IPlugin {
 
     private static String currentMapName;
     private Tile[][] map;
-    int[][] numberMap = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-    {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-    {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-    {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-    {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    int[][] numberMap = {{7, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+    {6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5}};
 
     @Override
     public void start(GameData gameData, World world) {
@@ -43,6 +43,7 @@ public class MapPlugins implements IPlugin {
     public void stop(GameData gameData, World world) {
 
     }
+
     private Tiletype[][] convertIntArrayToTileArray(int[][] mapArray) {
         Tiletype[][] tileMap = new Tiletype[mapArray.length][mapArray[0].length];
         for (int x = 0; x < mapArray.length; x++) {

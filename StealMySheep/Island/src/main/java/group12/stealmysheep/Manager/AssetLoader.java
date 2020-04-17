@@ -34,6 +34,15 @@ public class AssetLoader {
         assetManager.load("assets/player.png", Texture.class);
         assetManager.load("assets/thief.png", Texture.class);
         assetManager.load("assets/sheep.png", Texture.class);
+        assetManager.load("assets/waterBottom.png", Texture.class);
+        assetManager.load("assets/waterTop.png", Texture.class);
+        assetManager.load("assets/waterRight.png", Texture.class);
+        assetManager.load("assets/waterLeft.png", Texture.class);
+        assetManager.load("assets/waterTopLeft.png", Texture.class);
+        assetManager.load("assets/waterTopRight.png", Texture.class);
+        assetManager.load("assets/waterBottomRight.png", Texture.class);
+        assetManager.load("assets/waterBottomLeft.png", Texture.class);
+        assetManager.load("assets/sand.png", Texture.class);
     }
 
 }
