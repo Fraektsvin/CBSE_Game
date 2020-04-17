@@ -50,16 +50,19 @@ public class SheepControlSystem implements IUpdate {
 
                 }
             } else if (currentSheep.isMoving() == true) {
-                System.out.println("moving sheep");
                 Node goal = new Node(currentSheep.getX(), currentSheep.getY());
-                System.out.println(greedyBestFirstSearch(sheep, goal));
+                ArrayList<Node> path = greedyBestFirstSearch(sheep, goal, world);
+                float x = path.get(path.size() - 1).getX();
+                float y = path.get(path.size() - 1).getY();
+                position.setRadians((float) Math.atan2(x, y));
+                position.setX(position.getX() + (float) cos(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
+                position.setY(position.getY() + (float) sin(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
+                if (destinationCheck(sheep, path.get(0))) {
+                    currentSheep.setMoving(false);
+                }
 
             }
         }
-    }
-
-    private void moveSheep(Sheep sheep) {
-
     }
 
     private void insertAll(ArrayList<Node> children, ArrayList<Node> fringe) {
@@ -79,7 +82,7 @@ public class SheepControlSystem implements IUpdate {
         return lowest;
     }
 
-    private ArrayList expand(Node node) {
+    private ArrayList expand(Node node, World world) {
         ArrayList<Node> neighbours = new ArrayList<>();
         float x = node.getX();
         float y = node.getY();
@@ -87,14 +90,15 @@ public class SheepControlSystem implements IUpdate {
         {x - 1, y}, {x + 1, y}, {x - 1, y - 1}, {x, y - 1}, {x + 1, y - 1}};
         for (float[] element : successors) {
             Node neighbour = new Node(element[0], element[1]);
-            neighbour.setParent(node);
-            neighbours.add(neighbour);
+            if (nodeRestriction(neighbour, world) != true) {
+                neighbour.setParent(node);
+                neighbours.add(neighbour);
+            }
         }
         return neighbours;
-
     }
 
-    private ArrayList<Node> greedyBestFirstSearch(Entity entity, Node goal) {
+    private ArrayList<Node> greedyBestFirstSearch(Entity entity, Node goal, World world) {
         ArrayList<Node> fringe = new ArrayList<>();
         Position position = entity.getComponent(Position.class);
         Node node = new Node(position.getX(), position.getY());
@@ -105,7 +109,7 @@ public class SheepControlSystem implements IUpdate {
                 return lowestNode.getPath();
             }
             // if the target of the sheep is within its collider then return node.path. 
-            ArrayList<Node> children = expand(lowestNode);
+            ArrayList<Node> children = expand(lowestNode, world);
             insertAll(children, fringe);
         }
         return null;
@@ -154,5 +158,25 @@ public class SheepControlSystem implements IUpdate {
         } else {
             return false;
         }
+    }
+
+    public boolean nodeRestriction(Node node, World world) {
+        for (Entity entity : world.getEntities()) {
+            if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class)) {
+                Position position = entity.getComponent(Position.class);
+                BoxCollider collider = entity.getComponent(BoxCollider.class);
+                float x1 = position.getX() - collider.getWidth() / 2;
+                float x2 = position.getX() + collider.getWidth() / 2;
+                float y1 = position.getY() - collider.getHeight() / 2;
+                float y2 = position.getY() + collider.getHeight() / 2;
+                float x = node.getX();
+                float y = node.getY();
+                if (x > x1 && x < x2 && y > y1 && y < y2) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
     }
 }
