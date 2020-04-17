@@ -20,6 +20,7 @@
                     <publicPackages>
                         <publicPackage>stealmysheep.common.assets</publicPackage>
                         <publicPackage>stealmysheep.common.assets.entityComponents</publicPackage>
+                        <publicPackage>stealmysheep.common.assets.map</publicPackage>
                         <publicPackage>stealmysheep.common.game</publicPackage>
                         <publicPackage>stealmysheep.common.services</publicPackage>
                     </publicPackages>
