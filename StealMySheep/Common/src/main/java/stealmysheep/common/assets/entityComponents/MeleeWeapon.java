@@ -48,6 +48,9 @@ public class MeleeWeapon extends Weapon {
 
     @Override
     public void update(Entity entity, GameData gameData) {
+        if (this.swingTimer > 0) {
+            this.swingTimer -= gameData.getDeltaTime();
+        }
     }
 
 }

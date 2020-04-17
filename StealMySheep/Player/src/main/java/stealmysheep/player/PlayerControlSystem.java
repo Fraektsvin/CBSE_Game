@@ -11,9 +11,11 @@ import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Player;
 import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.assets.entityComponents.RangedWeapon;
 import stealmysheep.common.game.GameData;
 import static stealmysheep.common.game.Input.DOWN;
 import static stealmysheep.common.game.Input.LEFT;
+import static stealmysheep.common.game.Input.MOUSELEFT;
 import static stealmysheep.common.game.Input.RIGHT;
 import static stealmysheep.common.game.Input.UP;
 import static stealmysheep.common.game.Input.mouseX;
@@ -35,20 +37,28 @@ public class PlayerControlSystem implements IUpdate {
         for (Entity player : world.getEntities(Player.class)) {
             Position position = player.getComponent(Position.class);
             Movement movement = player.getComponent(Movement.class);
+            RangedWeapon rangedWeapon = player.getComponent(RangedWeapon.class);
 
             movement.setUp(gameData.getInput().isDown(UP));
             movement.setLeft(gameData.getInput().isDown(LEFT));
             movement.setDown(gameData.getInput().isDown(DOWN));
             movement.setRight(gameData.getInput().isDown(RIGHT));
 
-            // added the mouse location 
+            // added the mouse location
             float deltaX = mouseX - position.getX();
             float deltaY = mouseY - position.getY();
 
-            position.setRadians((float) Math.atan2(deltaX, deltaY));
+            position.setRadians((float) Math.atan2(deltaY, deltaX));
 
+            if (gameData.getInput().isDown(MOUSELEFT)) {
+                if (rangedWeapon.getShotTimer() <= 0) {
+                    rangedWeapon.setIsAttacking(gameData.getInput().isDown(MOUSELEFT));
+                    rangedWeapon.setShotTimer(rangedWeapon.getShotCooldown());
+                }
+            }
+
+            rangedWeapon.update(player, gameData);
             movement.update(player, gameData);
-
             position.update(player, gameData);
 
         }

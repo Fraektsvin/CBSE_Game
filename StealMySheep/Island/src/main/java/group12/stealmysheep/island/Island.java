@@ -98,7 +98,7 @@ public class Island implements ApplicationListener {
 
     private void update() {
         gameData.getInput().update();
-        gameData.getInput().updateMouse(Gdx.input.getX(), Gdx.input.getY());
+        gameData.getInput().updateMouse(Gdx.input.getX(), gameData.getSceneHeight() - Gdx.input.getY());
 
         // Update
         for (IUpdate update : lookup.lookupAll(IUpdate.class)) {
@@ -125,7 +125,7 @@ public class Island implements ApplicationListener {
 
                 Position position = entity.getComponent(Position.class);
 
-                if (position.getRadians() < 0) {
+                if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
                     sprite.flip(true, false);
                 }
 

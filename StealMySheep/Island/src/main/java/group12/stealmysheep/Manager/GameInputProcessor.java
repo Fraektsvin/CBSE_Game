@@ -9,6 +9,7 @@ package group12.stealmysheep.Manager;
  *
  * @author Antonio
  */
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Input.Keys;
 import stealmysheep.common.game.GameData;
@@ -22,18 +23,23 @@ public class GameInputProcessor extends InputAdapter {
         this.gameData = gameData;
     }
 
+    @Override
     public boolean keyDown(int k) {
-        if (k == Keys.UP) {
-            gameData.getInput().setKeyStatus(Input.UP, true);
+
+        if (k == Keys.W) {
+            gameData.getInput().setKeyStatus(Input.UP, true);;
         }
-        if (k == Keys.LEFT) {
+        if (k == Keys.A) {
             gameData.getInput().setKeyStatus(Input.LEFT, true);
         }
-        if (k == Keys.DOWN) {
+        if (k == Keys.S) {
             gameData.getInput().setKeyStatus(Input.DOWN, true);
         }
-        if (k == Keys.RIGHT) {
+        if (k == Keys.D) {
             gameData.getInput().setKeyStatus(Input.RIGHT, true);
+        }
+        if (k == Keys.R) {
+            gameData.getInput().setKeyStatus(Input.R, true);
         }
         if (k == Keys.ENTER) {
             gameData.getInput().setKeyStatus(Input.ENTER, true);
@@ -50,18 +56,23 @@ public class GameInputProcessor extends InputAdapter {
         return true;
     }
 
+    @Override
     public boolean keyUp(int k) {
-        if (k == Keys.UP) {
+
+        if (k == Keys.W) {
             gameData.getInput().setKeyStatus(Input.UP, false);
         }
-        if (k == Keys.LEFT) {
+        if (k == Keys.A) {
             gameData.getInput().setKeyStatus(Input.LEFT, false);
         }
-        if (k == Keys.DOWN) {
+        if (k == Keys.S) {
             gameData.getInput().setKeyStatus(Input.DOWN, false);
         }
-        if (k == Keys.RIGHT) {
+        if (k == Keys.D) {
             gameData.getInput().setKeyStatus(Input.RIGHT, false);
+        }
+        if (k == Keys.R) {
+            gameData.getInput().setKeyStatus(Input.R, false);
         }
         if (k == Keys.ENTER) {
             gameData.getInput().setKeyStatus(Input.ENTER, false);
@@ -76,6 +87,22 @@ public class GameInputProcessor extends InputAdapter {
             gameData.getInput().setKeyStatus(Input.SHIFT, false);
         }
         return true;
+
     }
 
+    @Override
+    public boolean touchDown(int x, int y, int pointer, int button) {
+        if (button == Buttons.LEFT) {
+            gameData.getInput().setKeyStatus(Input.MOUSELEFT, true);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int x, int y, int pointer, int button) {
+        if (button == Buttons.LEFT) {
+            gameData.getInput().setKeyStatus(Input.MOUSELEFT, false);
+        }
+        return true;
+    }
 }
