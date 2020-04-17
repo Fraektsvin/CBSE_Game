@@ -5,35 +5,26 @@
  */
 package stealmysheep.map;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import stealmysheep.common.assets.map.Tiletype;
+import stealmysheep.common.assets.map.Tile;
 import org.openide.util.lookup.ServiceProvider;
-import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
+
 @ServiceProvider(service = IPlugin.class)
-/**
- *
- * @author Antonio
- */
-/**
+/*
  *
  * @author Antonio
  */
 
-public class MapPlugins implements IPlugin, MapApi {
+
+public class MapPlugins implements IPlugin {
 
     private static String currentMapName;
     private Tile[][] map;
-    int[][] Numbermap = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    int[][] numberMap = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
     {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
     {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
@@ -44,79 +35,40 @@ public class MapPlugins implements IPlugin, MapApi {
     @Override
     public void start(GameData gameData, World world) {
         // loadFromFile(currentMapName, gameData, world);
-        convertIntArrayToTileArray(Numbermap, gameData, world);
-    }
-
-    private void convertIntArrayToTileArray(int[][] mapArray, GameData gameData, World world) {
-        Tiletype[][] tmpTiles = new Tiletype[mapArray.length][mapArray[0].length];
-        for (int x = 0; x < mapArray.length; x++) {
-            for (int y = 0; y < mapArray[x].length; y++) {
-                tmpTiles[x][y] = Tiletype.values()[mapArray[x][y]];
-            }
-        }
-        createMap(tmpTiles, gameData, world);
-    }
-
-    @Override
-    public void createMap(Tiletype[][] d, GameData gameData, World world) {
-        float tileHeight = 70;
-        float tileWeight = 70;
-
-        map = new Tile[d.length][d[0].length];
-
-        for (int r = 0; r < d.length; r++) {
-            for (int c = 0; c < d[r].length; c++) {
-                Tile t = new Tile(d[r][c].getImage());
-                Position p = new Position(c * tileWeight, r * tileHeight, 0);
-                t.addComponent(p);
-                map[r][c] = t;
-            }
-
-        }
+        Tiletype[][] tileMap = convertIntArrayToTileArray(this.numberMap);
+        createMap(tileMap, gameData, world);
     }
 
     @Override
     public void stop(GameData gameData, World world) {
 
     }
-}
-/* @Override
-    public void loadFromFile(String File, GameData gameData, World world) {
-         try {
-            InputStream is;
-            if (File.equals("DefaultMap.txt")) {
-                is = getClass().getClassLoader().getResourceAsStream("/maps/" + MapPlugins.currentMapName);
-            } else {
-                String path = System.getProperty("user.home") + "/racing_game/maps/";
-                String file = path + File;
+    private Tiletype[][] convertIntArrayToTileArray(int[][] mapArray) {
+        Tiletype[][] tileMap = new Tiletype[mapArray.length][mapArray[0].length];
+        for (int x = 0; x < mapArray.length; x++) {
+            for (int y = 0; y < mapArray[x].length; y++) {
+                tileMap[x][y] = Tiletype.values()[mapArray[x][y]];
+            }
+        }
+        return tileMap;
+    }
 
-                is = new FileInputStream(file);
+    private void createMap(Tiletype[][] tileTypeMap, GameData gameData, World world) {
+        float tileHeight = 70;
+        float tileWeight = 70;
+
+        map = new Tile[tileTypeMap.length][tileTypeMap[0].length];
+
+        for (int x = 0; x < tileTypeMap.length; x++) {
+            for (int y = 0; y < tileTypeMap[x].length; y++) {
+                Tile tile = new Tile(tileTypeMap[x][y].getImage());
+                Position position = new Position(y * tileWeight, x * tileHeight, 0);
+                tile.addComponent(position);
+                world.addEntity(tile);
+                map[x][y] = tile;
             }
-            ArrayList<int[]> data = new ArrayList<>();
-            try (Scanner sc = new Scanner(is)) {
-                while (sc.hasNextLine()) {
-                    String nextLine = sc.nextLine();
-                    String[] values = nextLine.split(",");
-                    int[] row = new int[values.length];
-                    for (int i = 0; i < values.length; i++) {
-                        row[i] = Integer.parseInt(values[i]);
-                    }
-                    data.add(row);
-                }
-                int[][] map = new int[data.size()][data.get(0).length];
-                for (int i = 0; i < data.size(); i++) {
-                    map[i] = data.get(i);
-                }
-                createMap(map, gameData, world);
-                currentMapName = File;
-            }
-            is.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MapPlugins.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MapPlugins.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
-}
 
-*/
+}

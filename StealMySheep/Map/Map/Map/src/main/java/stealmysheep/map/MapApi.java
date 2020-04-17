@@ -5,6 +5,7 @@
  */
 package stealmysheep.map;
 
+import stealmysheep.common.assets.map.Tiletype;
 import javax.swing.text.html.parser.Entity;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
