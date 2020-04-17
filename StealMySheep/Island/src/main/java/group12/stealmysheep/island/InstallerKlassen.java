@@ -21,8 +21,8 @@ public class InstallerKlassen extends ModuleInstall {
         LwjglApplicationConfiguration cfg
                 = new LwjglApplicationConfiguration();
         cfg.title = "StealMySheep";
-        cfg.width = 600;
-        cfg.height = 400;
+        cfg.width = 800;
+        cfg.height = 800;
         cfg.useGL30 = false;
         cfg.resizable = false;
 

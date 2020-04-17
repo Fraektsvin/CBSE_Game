@@ -93,8 +93,8 @@ public class SheepControlSystem implements IUpdate {
         ArrayList<Node> neighbours = new ArrayList<>();
         float x = node.getX();
         float y = node.getY();
-        float[][] successors = {{x - 30, y + 30}, {x, y + 30}, {x + 20, y + 30},
-        {x - 30, y}, {x + 30, y}, {x - 30, y - 30}, {x, y - 30}, {x + 10, y - 30}};
+        float[][] successors = {{x - 30, y + 30}, {x, y + 30}, {x + 30, y + 30},
+        {x - 30, y}, {x + 30, y}, {x - 30, y - 30}, {x, y - 30}, {x + 30, y - 30}};
         for (float[] element : successors) {
             Node neighbour = new Node(element[0], element[1]);
             if (nodeRestriction(neighbour, world) != true) {
