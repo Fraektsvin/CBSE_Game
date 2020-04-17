@@ -9,6 +9,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -18,7 +19,6 @@ import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
-import static stealmysheep.common.game.Input.UP;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IUpdate;
 
@@ -35,30 +35,37 @@ public class SheepControlSystem implements IUpdate {
     @Override
     public void update(GameData gameData, World world) {
         for (Entity sheep : world.getEntities(Sheep.class)) {
+            Sheep currentSheep = (Sheep) sheep;
             Position position = sheep.getComponent(Position.class);
             Movement movement = sheep.getComponent(Movement.class);
-            Sheep currentSheep = (Sheep) sheep;
+            BoxCollider collider = sheep.getComponent(BoxCollider.class);
+
             if (currentSheep.isMoving() == false) {
                 if (random.nextInt(100) + 1 <= 2) {
                     currentSheep.setMoving(true);
-                    float a = (float) (Math.random() * 2 * Math.PI);
-                    float r = (float) (currentSheep.getRadius() * sqrt(Math.random()));
+                    Random random = new Random();
+                    float a = (float) (random.nextFloat() * 2 * Math.PI);
+                    float r = (float) (currentSheep.getRadius() * sqrt(random.nextFloat()));
                     float x = (float) (r * cos(a));
                     float y = (float) (r * sin(a));
-                    currentSheep.setX(x);
-                    currentSheep.setY(y);
-
+                    currentSheep.setX(position.getX() + x);
+                    currentSheep.setY(position.getY() + y);
                 }
             } else if (currentSheep.isMoving() == true) {
                 Node goal = new Node(currentSheep.getX(), currentSheep.getY());
                 ArrayList<Node> path = greedyBestFirstSearch(sheep, goal, world);
-                float x = path.get(path.size() - 1).getX();
-                float y = path.get(path.size() - 1).getY();
-                position.setRadians((float) Math.atan2(x, y));
-                position.setX(position.getX() + (float) cos(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
-                position.setY(position.getY() + (float) sin(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
-                if (destinationCheck(sheep, path.get(0))) {
-                    currentSheep.setMoving(false);
+
+                if (!path.isEmpty()) {
+                    float x = path.get(path.size() - 1).getX() - position.getX();
+                    float y = path.get(path.size() - 1).getY() - position.getY();
+                    position.setRadians((float) Math.atan2(y, x));
+
+                    position.setX(position.getX() + (float) cos(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
+                    position.setY(position.getY() + (float) sin(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
+
+                    if (checkPointCollider(goal.getX(), goal.getY(), position.getX(), position.getY(), collider)) {
+                        currentSheep.setMoving(false);
+                    }
                 }
 
             }
@@ -86,8 +93,8 @@ public class SheepControlSystem implements IUpdate {
         ArrayList<Node> neighbours = new ArrayList<>();
         float x = node.getX();
         float y = node.getY();
-        float[][] successors = {{x - 1, y + 1}, {x, y + 1}, {x + 1, y + 1},
-        {x - 1, y}, {x + 1, y}, {x - 1, y - 1}, {x, y - 1}, {x + 1, y - 1}};
+        float[][] successors = {{x - 30, y + 30}, {x, y + 30}, {x + 20, y + 30},
+        {x - 30, y}, {x + 30, y}, {x - 30, y - 30}, {x, y - 30}, {x + 10, y - 30}};
         for (float[] element : successors) {
             Node neighbour = new Node(element[0], element[1]);
             if (nodeRestriction(neighbour, world) != true) {
@@ -99,13 +106,15 @@ public class SheepControlSystem implements IUpdate {
     }
 
     private ArrayList<Node> greedyBestFirstSearch(Entity entity, Node goal, World world) {
-        ArrayList<Node> fringe = new ArrayList<>();
         Position position = entity.getComponent(Position.class);
+        BoxCollider collider = entity.getComponent(BoxCollider.class);
+
+        ArrayList<Node> fringe = new ArrayList<>();
         Node node = new Node(position.getX(), position.getY());
         fringe.add(node);
         while (fringe != null) {
             Node lowestNode = remove(fringe, goal);
-            if (greedyBestFirstSearchCheck(entity, goal, lowestNode)) {
+            if (checkPointCollider(goal.getX(), goal.getY(), lowestNode.getX(), lowestNode.getY(), collider)) {
                 return lowestNode.getPath();
             }
             // if the target of the sheep is within its collider then return node.path. 
@@ -124,36 +133,14 @@ public class SheepControlSystem implements IUpdate {
         return vec;
     }
 
-    private boolean destinationCheck(Entity entity, Node goal) {
-        BoxCollider collider = entity.getComponent(BoxCollider.class);
-        Position position = entity.getComponent(Position.class);
-        float x = goal.getX();
-        float y = goal.getY();
+    private boolean checkPointCollider(float nodeX, float nodeY, float positionX, float positionY, BoxCollider collider) {
 
-        float x1 = position.getX() - collider.getWidth() / 2;
-        float x2 = position.getX() + collider.getWidth() / 2;
-        float y1 = position.getY() - collider.getHeight() / 2;
-        float y2 = position.getY() + collider.getHeight() / 2;
+        float x1 = positionX - collider.getWidth() / 2;
+        float x2 = positionX + collider.getWidth() / 2;
+        float y1 = positionY - collider.getHeight() / 2;
+        float y2 = positionY + collider.getHeight() / 2;
 
-        if (x > x1 && x < x2 && y > y1 && y < y2) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean greedyBestFirstSearchCheck(Entity entity, Node goal, Node node) {
-        BoxCollider collider = entity.getComponent(BoxCollider.class);
-
-        float x = goal.getX();
-        float y = goal.getY();
-
-        float x1 = node.getX() - collider.getWidth() / 2;
-        float x2 = node.getX() + collider.getWidth() / 2;
-        float y1 = node.getY() - collider.getHeight() / 2;
-        float y2 = node.getY() + collider.getHeight() / 2;
-
-        if (x > x1 && x < x2 && y > y1 && y < y2) {
+        if (nodeX > x1 && nodeX < x2 && nodeY > y1 && nodeY < y2) {
             return true;
         } else {
             return false;
@@ -162,18 +149,19 @@ public class SheepControlSystem implements IUpdate {
 
     public boolean nodeRestriction(Node node, World world) {
         for (Entity entity : world.getEntities()) {
+
+            if (entity.getClass().equals(Sheep.class)) {
+                continue;
+            }
             if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class)) {
                 Position position = entity.getComponent(Position.class);
                 BoxCollider collider = entity.getComponent(BoxCollider.class);
-                float x1 = position.getX() - collider.getWidth() / 2;
-                float x2 = position.getX() + collider.getWidth() / 2;
-                float y1 = position.getY() - collider.getHeight() / 2;
-                float y2 = position.getY() + collider.getHeight() / 2;
-                float x = node.getX();
-                float y = node.getY();
-                if (x > x1 && x < x2 && y > y1 && y < y2) {
+
+                boolean hit = checkPointCollider(node.getX(), node.getY(), position.getX(), position.getY(), collider);
+                if (hit) {
                     return true;
                 }
+
             }
 
         }

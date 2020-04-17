@@ -5,6 +5,7 @@
  */
 package stealmysheep.sheep;
 
+import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
@@ -44,21 +45,21 @@ public class SheepPlugin implements IPlugin {
     }
 
     private Entity createSheep(GameData gameData) {
-
+        Random random = new Random();
         float acceleration = 60;
-        float speed = 20;
-        float x = gameData.getSceneWidth() / 2;
-        float y = gameData.getSceneHeight() / 2;
+        float speed = 30;
+        float x = random.nextInt(gameData.getSceneWidth());
+        float y = random.nextInt(gameData.getSceneHeight());
         float radians = 3.1415f / 2;
-        float height = 3;
-        float width = 6;
-        float radius = 50;
+        float height = 50;
+        float width = 70;
+        float radius = 125;
 
         Entity sheep = new Sheep("sheep.png", radius);
         sheep.addComponent(new Movement(acceleration, speed));
         sheep.addComponent(new Position(x, y, radians));
         sheep.addComponent(new BoxCollider(height, width));
-        
+
         return sheep;
     }
 

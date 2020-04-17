@@ -12,10 +12,11 @@ import java.util.ArrayList;
  * @author NidaBasaran
  */
 public class Node {
+
     float x;
     float y;
     Node parent;
-    
+
     public Node(float x, float y) {
         this.x = x;
         this.y = y;
@@ -44,7 +45,7 @@ public class Node {
     public void setParent(Node parent) {
         this.parent = parent;
     }
-    
+
     public ArrayList<Node> getPath() {
         ArrayList<Node> path = new ArrayList<Node>();
         Node currentNode = this;
@@ -53,8 +54,12 @@ public class Node {
             currentNode = currentNode.parent;
             path.add(currentNode);
         }
+        if (path.get(path.size() - 1) != null) {
+            path.remove(path.size() - 1);
+        }
+
         return path;
-        
+
     }
-    
+
 }
