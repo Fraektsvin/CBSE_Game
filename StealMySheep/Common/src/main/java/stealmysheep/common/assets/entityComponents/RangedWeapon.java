@@ -67,6 +67,10 @@ public class RangedWeapon extends Weapon {
 
     @Override
     public void update(Entity entity, GameData gameData) {
+        if (this.shotTimer > 0) {
+            this.shotTimer -= gameData.getDeltaTime();
+        }
+
     }
 
 }
