@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stealmysheep.sheep;
+package stealmysheep.common.AI;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author NidaBasaran
  */
 public class Node {
-
     float x;
     float y;
     Node parent;
@@ -63,3 +62,5 @@ public class Node {
     }
 
 }
+
+

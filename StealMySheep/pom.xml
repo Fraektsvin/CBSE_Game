@@ -67,7 +67,7 @@
         <module>Sheep</module>
         <module>Weapon</module>
         <module>Collision</module>
-
+        <module>AI</module>
     </modules>
 
     <properties>
