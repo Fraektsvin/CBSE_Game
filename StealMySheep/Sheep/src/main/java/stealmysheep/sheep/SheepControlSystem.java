@@ -77,6 +77,9 @@ public class SheepControlSystem implements IUpdate {
                     if (ai.checkPointCollider(goal.getX(), goal.getY(), position.getX(), position.getY(), collider)) {
                         currentSheep.setMoving(false);
                     }
+                    
+                } else {
+                    currentSheep.setMoving(false);
                 }
 
             }

@@ -13,19 +13,21 @@ import stealmysheep.common.AI.Node;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Sheep;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
+import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.World;
 
 /**
  *
  * @author NidaBasaran
- * 
+ *
  */
 @ServiceProviders(value = {
     @ServiceProvider(service = IAI.class),})
 
 public class AIController implements IAI {
-     private void insertAll(ArrayList<Node> children, ArrayList<Node> fringe) {
+
+    private void insertAll(ArrayList<Node> children, ArrayList<Node> fringe) {
         for (Node node : children) {
             fringe.add(node);
         }
@@ -102,8 +104,8 @@ public class AIController implements IAI {
 
     public boolean nodeRestriction(Node node, World world) {
         for (Entity entity : world.getEntities()) {
-
-            if (entity.getClass().equals(Sheep.class)) {
+     
+            if (entity.hasComponent(Movement.class)) {
                 continue;
             }
             if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class)) {
@@ -121,5 +123,3 @@ public class AIController implements IAI {
         return false;
     }
 }
-
-
