@@ -18,7 +18,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <publicPackages>
-                        <publicPackage>stealmysheep.common.AI</publicPackage>
+                        <publicPackage>stealmysheep.common.ai</publicPackage>
                         <publicPackage>stealmysheep.common.assets</publicPackage>
                         <publicPackage>stealmysheep.common.assets.entityComponents</publicPackage>
                         <publicPackage>stealmysheep.common.assets.map</publicPackage>

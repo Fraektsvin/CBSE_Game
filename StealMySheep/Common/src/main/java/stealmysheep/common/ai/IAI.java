@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stealmysheep.common.AI;
+package stealmysheep.common.ai;
 
 import java.util.ArrayList;
 import stealmysheep.common.assets.Entity;

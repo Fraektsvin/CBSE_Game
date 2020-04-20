@@ -9,12 +9,11 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
-import stealmysheep.common.AI.IAI;
-import stealmysheep.common.AI.Node;
+import stealmysheep.common.ai.IAI;
+import stealmysheep.common.ai.Node;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Sheep;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
@@ -24,8 +23,7 @@ import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IUpdate;
 import org.openide.util.Lookup;
-import org.openide.util.LookupEvent;
-import org.openide.util.LookupListener;
+
 /**
  *
  * @author NidaBasaran
