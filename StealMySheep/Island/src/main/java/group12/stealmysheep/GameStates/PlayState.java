@@ -8,6 +8,7 @@ package group12.stealmysheep.GameStates;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import group12.stealmysheep.Manager.Manager;
 import stealmysheep.common.assets.Player;
+import stealmysheep.common.assets.Sheep;
 import stealmysheep.common.game.Input;
 
 /**
@@ -20,7 +21,7 @@ public class PlayState extends GameState {
 
     private Player player;
     private Input GameKey;
-
+    
     public PlayState(Manager gsm) {
         super(gsm);
     }
@@ -30,7 +31,7 @@ public class PlayState extends GameState {
         sr = new ShapeRenderer();
 
         player = new Player();
-
+        
     }
 
     public void update(float dt) {
