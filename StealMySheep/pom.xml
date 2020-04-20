@@ -65,6 +65,8 @@
         <module>Island</module>
         <module>Player</module>
         <module>Map/Map/Map</module>
+        <module>Weapon</module>
+        <module>Collision</module>
     </modules>
 
     <properties>

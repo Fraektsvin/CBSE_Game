@@ -12,13 +12,14 @@ import stealmysheep.common.game.GameData;
  *
  * @author oscar
  */
-public class Projectile implements Component {
+public class ProjectileComponent implements Component {
 
     private String sourceId;
     private int damage;
     private float lifetime, lifeTimer;
+    private boolean remove;
 
-    public Projectile(String sourceId, int damage, float lifetime) {
+    public ProjectileComponent(String sourceId, int damage, float lifetime) {
         this.sourceId = sourceId;
         this.damage = damage;
         this.lifetime = lifetime;
@@ -56,8 +57,20 @@ public class Projectile implements Component {
         this.lifeTimer = lifeTimer;
     }
 
+    public boolean getRemove() {
+        return remove;
+    }
+
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     @Override
     public void update(Entity entity, GameData gameData) {
+        lifeTimer += gameData.getDeltaTime();
+        if (lifetime <= lifeTimer) {
+            remove = true;
+        }
     }
 
 }

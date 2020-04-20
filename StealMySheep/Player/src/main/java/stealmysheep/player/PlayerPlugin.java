@@ -9,6 +9,7 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Player;
+import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
@@ -58,14 +59,16 @@ public class PlayerPlugin implements IPlugin {
         player.addComponent(new Movement(acceleration, speed));
         player.addComponent(new Position(x, y, radians));
         player.addComponent(new Health(100));
+        player.addComponent(new BoxCollider(75, 35));
         //add Range wepon
         int magazineSize = 5;
         float reloadTime = 3;
-        float shotCooldown = 1;
+        float shotCooldown = 0.5f;
         String entityId = player.getId();
         int damage = 50;
         player.addComponent(new RangedWeapon(magazineSize, reloadTime, shotCooldown, entityId, damage));
 
+        //add melee weapon
         return player;
     }
 
