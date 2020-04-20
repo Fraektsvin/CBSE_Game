@@ -65,6 +65,7 @@
         <module>Island</module>
         <module>Player</module>
         <module>Sheep</module>
+        <module>Map/Map/Map</module>
         <module>Weapon</module>
         <module>Collision</module>
         <module>AI</module>

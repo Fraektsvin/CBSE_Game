@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import group12.stealmysheep.Manager.AssetLoader;
 import group12.stealmysheep.Manager.GameInputProcessor;
 import java.util.Collection;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
@@ -38,7 +40,7 @@ public class Island implements ApplicationListener {
     private final GameData gameData = new GameData();
     private World world = new World();
     private SpriteBatch spriteBatch;
-//    private AssetLoader assetLoader;
+    private AssetLoader assetLoader;
 
     private final Lookup lookup = Lookup.getDefault();
     private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
@@ -47,8 +49,7 @@ public class Island implements ApplicationListener {
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
-//        assetLoader = new AssetLoader();
-//        assetLoader.loadAssets();
+        assetLoader = new AssetLoader();
 
         gameData.setSceneWidth(Gdx.graphics.getWidth());
         gameData.setSceneHeight(Gdx.graphics.getHeight());
@@ -114,30 +115,42 @@ public class Island implements ApplicationListener {
     private void draw() {
         spriteBatch.begin();
 
+        for (Entity entity : world.getEntities(Tile.class)) {
+            drawEntity(entity);
+        }
+
         for (Entity entity : world.getEntities()) {
-
-            //Draws the entity
-            if (entity.getImage() != null) {
-                Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));
-                Sprite sprite = new Sprite(texture);
-
-                sprite.setScale(0.35f);
-
-                Position position = entity.getComponent(Position.class);
-
-                if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
-                    sprite.flip(true, false);
-                }
-
-                float x = position.getX() - sprite.getWidth() / 2;
-                float y = position.getY() - sprite.getHeight() / 2;
-                sprite.setPosition(x, y);
-                sprite.draw(spriteBatch);
-
+            if (!entity.getClass().equals(Tile.class)) {
+                drawEntity(entity);
             }
         }
 
         spriteBatch.end();
+    }
+
+    private void drawEntity(Entity entity) {
+        if (entity.getImage() != null) {
+            //Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));'
+            Texture texture = this.assetLoader.getAsset("assets/" + entity.getImage());
+            Sprite sprite = new Sprite(texture);
+
+            sprite.setScale(0.35f);
+                if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
+                    sprite.flip(true, false);
+                }
+
+            Position position = entity.getComponent(Position.class);
+
+            if (position.getRadians() < 0) {
+                sprite.flip(true, false);
+            }
+
+            float x = position.getX() - sprite.getWidth() / 2;
+            float y = position.getY() - sprite.getHeight() / 2;
+            sprite.setPosition(x, y);
+            sprite.draw(spriteBatch);
+
+        }
     }
 
     private final LookupListener lookupListener = new LookupListener() {
