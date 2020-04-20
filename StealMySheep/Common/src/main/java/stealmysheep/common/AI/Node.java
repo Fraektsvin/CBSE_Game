@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author NidaBasaran
  */
 public class Node {
-    float x;
-    float y;
+    final float x;
+    final float y;
     Node parent;
 
     public Node(float x, float y) {
@@ -25,16 +25,8 @@ public class Node {
         return x;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
     public float getY() {
         return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
     }
 
     public Node getParent() {
