@@ -43,6 +43,9 @@ public class AssetLoader {
         assetManager.load("assets/waterBottomRight.png", Texture.class);
         assetManager.load("assets/waterBottomLeft.png", Texture.class);
         assetManager.load("assets/sand.png", Texture.class);
+        assetManager.load("assets/projectile.png", Texture.class);
+        assetManager.load("assets/archer.png", Texture.class);
+        assetManager.load("assets/rock.png", Texture.class);
     }
 
 }

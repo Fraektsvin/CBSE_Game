@@ -133,13 +133,12 @@ public class Island implements ApplicationListener {
             //Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));'
             Texture texture = this.assetLoader.getAsset("assets/" + entity.getImage());
             Sprite sprite = new Sprite(texture);
+            Position position = entity.getComponent(Position.class);
 
             sprite.setScale(0.35f);
-                if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
-                    sprite.flip(true, false);
-                }
-
-            Position position = entity.getComponent(Position.class);
+            if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
+                sprite.flip(true, false);
+            }
 
             if (position.getRadians() < 0) {
                 sprite.flip(true, false);
