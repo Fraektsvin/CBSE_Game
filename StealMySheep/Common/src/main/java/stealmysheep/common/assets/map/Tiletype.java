@@ -18,7 +18,9 @@ public enum Tiletype {
     WATERBOTTOMRIGHT(5, "waterBottomRight.png"),
     WATERBOTTOMLEFT(6, "waterBottomLeft.png"),
     WATERTOPLEFT(7, "waterTopLeft.png"),
-    WATERTOPRIGHT(8, "waterTopRight.png");
+    WATERTOPRIGHT(8, "waterTopRight.png"),
+    ROCK(9,"tileRock.png"),
+    TILEBUSH(10,"tileBush.png");
 
     private int numbervalue;
     private String image;
