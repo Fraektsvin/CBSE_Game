@@ -6,34 +6,34 @@
 package group12.stealmysheep.Manager;
 
 import stealmysheep.common.assets.Enemy;
-import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.World;
-
-
 
 /**
  *
  * @author Antonio
  */
-public class SpawnManager {
-    
-    private int currentWave; 
+public class WaveManager {
+
+    private int currentWave;
+
+    public WaveManager() {
+        this.currentWave = 0;
+    }
 
     public int getCurrentWave() {
         return currentWave;
     }
 
-    public SpawnManager() {
-        this.currentWave = 0;
-    }
-
     public void setCurrentWave(int currentWave) {
         this.currentWave = currentWave;
     }
-    
-    public boolean EndWaveCheck(World world) {
-       return world.getEntities(Enemy.class).isEmpty();
 
+    public void setNextWave() {
+        currentWave += 1;
     }
-    
+
+    public boolean endWaveCheck(World world) {
+        return world.getEntities(Enemy.class).isEmpty();
+    }
+
 }

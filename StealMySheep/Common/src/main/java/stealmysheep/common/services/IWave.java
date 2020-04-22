@@ -13,7 +13,7 @@ import stealmysheep.common.game.World;
  * @author Antonio
  */
 public interface IWave {
-    
- public void wave(GameData gameData, World world, int wave);   
-   
+
+    public void startWave(GameData gameData, World world, int wave);
+
 }

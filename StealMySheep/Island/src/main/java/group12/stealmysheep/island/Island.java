@@ -13,11 +13,10 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import group12.stealmysheep.Manager.AssetController;
 import group12.stealmysheep.Manager.GameInputProcessor;
+import group12.stealmysheep.Manager.WaveManager;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,13 +24,13 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
-import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
 import stealmysheep.common.services.IPostUpdate;
 import stealmysheep.common.services.IUpdate;
+import stealmysheep.common.services.IWave;
 
 public class Island implements ApplicationListener {
 
@@ -41,6 +40,7 @@ public class Island implements ApplicationListener {
     private World world = new World();
     private SpriteBatch spriteBatch;
     private AssetController assetController;
+    private WaveManager waveManager;
 
     private final Lookup lookup = Lookup.getDefault();
     private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
@@ -79,6 +79,7 @@ public class Island implements ApplicationListener {
 
         update();
         draw();
+        wave();
     }
 
     @Override
@@ -126,6 +127,16 @@ public class Island implements ApplicationListener {
         }
 
         spriteBatch.end();
+    }
+
+    private void wave() {
+        if (this.waveManager.endWaveCheck(world)) {
+            this.waveManager.setNextWave();
+            for (IWave wave : lookup.lookupAll(IWave.class)) {
+                wave.startWave(this.gameData, this.world, this.waveManager.getCurrentWave());
+            }
+
+        }
     }
 
     private final LookupListener lookupListener = new LookupListener() {
