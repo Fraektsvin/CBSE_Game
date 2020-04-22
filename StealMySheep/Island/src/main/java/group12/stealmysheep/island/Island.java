@@ -132,13 +132,13 @@ public class Island implements ApplicationListener {
     }
 
     private void wave() {
+        Collection<? extends IWave> waves = lookup.lookupAll(IWave.class);
+        if (waves.isEmpty()) {
+            return;
+        }
+
         if (this.waveManager.endWaveCheck(world)) {
             this.waveManager.setNextWave();
-
-            Collection<? extends IWave> waves = lookup.lookupAll(IWave.class);
-            if (waves.isEmpty()) {
-                return;
-            }
 
             for (IWave wave : waves) {
                 wave.startWave(this.gameData, this.world, this.waveManager.getCurrentWave());
