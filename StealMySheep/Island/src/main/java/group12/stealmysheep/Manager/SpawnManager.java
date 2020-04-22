@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.island;
+package group12.stealmysheep.Manager;
 
 /**
  *
  * @author Antonio
  */
-public class Spawn {
+public class SpawnManager {
+    
     
 }
