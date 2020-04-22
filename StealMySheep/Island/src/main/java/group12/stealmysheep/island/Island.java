@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import group12.stealmysheep.Manager.AssetController;
 import group12.stealmysheep.Manager.GameInputProcessor;
 import group12.stealmysheep.Manager.WaveManager;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -133,7 +134,13 @@ public class Island implements ApplicationListener {
     private void wave() {
         if (this.waveManager.endWaveCheck(world)) {
             this.waveManager.setNextWave();
-            for (IWave wave : lookup.lookupAll(IWave.class)) {
+
+            Collection<? extends IWave> waves = lookup.lookupAll(IWave.class);
+            if (waves.isEmpty()) {
+                return;
+            }
+
+            for (IWave wave : waves) {
                 wave.startWave(this.gameData, this.world, this.waveManager.getCurrentWave());
             }
 
