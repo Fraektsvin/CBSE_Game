@@ -48,6 +48,7 @@ public class Island implements ApplicationListener {
 
     @Override
     public void create() {
+        this.waveManager = new WaveManager();
         spriteBatch = new SpriteBatch();
         assetController = new AssetController();
 
