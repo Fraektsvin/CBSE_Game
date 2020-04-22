@@ -21,7 +21,6 @@ import stealmysheep.common.services.IPlugin;
 
 public class MapPlugins implements IPlugin {
 
-    private static String currentMapName;
     private Tile[][] map;
     int[][] numberMap = {{7, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
@@ -40,7 +39,7 @@ public class MapPlugins implements IPlugin {
     public void start(GameData gameData, World world) {
         // loadFromFile(currentMapName, gameData, world);
         Tiletype[][] tileMap = convertIntArrayToTileArray(this.numberMap);
-        createMap(tileMap, gameData, world);
+        createMap(tileMap, world);
     }
 
     @Override
@@ -58,16 +57,16 @@ public class MapPlugins implements IPlugin {
         return tileMap;
     }
 
-    private void createMap(Tiletype[][] tileTypeMap, GameData gameData, World world) {
+    private void createMap(Tiletype[][] tileTypeMap, World world) {
         float tileHeight = 70;
-        float tileWeight = 70;
+        float tileWidth = 70;
 
         map = new Tile[tileTypeMap.length][tileTypeMap[0].length];
 
         for (int x = 0; x < tileTypeMap.length; x++) {
             for (int y = 0; y < tileTypeMap[x].length; y++) {
                 Tile tile = new Tile(tileTypeMap[x][y].getImage());
-                Position position = new Position(y * tileWeight, x * tileHeight, 0);
+                Position position = new Position(y * tileWidth, x * tileHeight, 0);
                 tile.addComponent(position);
                 world.addEntity(tile);
                 map[x][y] = tile;
