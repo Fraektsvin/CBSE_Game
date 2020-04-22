@@ -2,7 +2,9 @@ package stealmysheep.enemy;
 
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
+import stealmysheep.common.assets.Enemy;
 import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.Player;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
@@ -21,8 +23,6 @@ import stealmysheep.common.services.IPlugin;
 
 public class EnemyPlugin implements IPlugin {
 
-    private Entity enemy;
-
     public EnemyPlugin() {
 
     }
@@ -34,7 +34,9 @@ public class EnemyPlugin implements IPlugin {
 
     @Override
     public void stop(GameData gameData, World world) {
-        world.removeEntity(enemy);
-    }
+        for (Entity enemy : world.getEntities(Enemy.class)) {
+            world.removeEntity(enemy);
+        }
 
+    }
 }

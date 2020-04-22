@@ -91,8 +91,23 @@ public class EnemyControlSystem implements IUpdate {
 
     }
 
-    public void moveEnemy() {
+    private void moveEnemy() {
+        // ryk enemy mod target. Her tjekkes der ikke for target. Det sker i metoden under.
 
     }
 
+    private boolean checkTargetExistence(World world) {
+        // tjekker om target findes og return true når den findes og false når den ikke eksisterer. 
+        return false;
+
+    }
+
+    private void setTarget(World world) {
+// hvis begge (tjek modul beskrivelser) true første prio lig sheep. 
+// hvis den første er true og den anden er false er første prio player. 
+// første metode der gøres brug af ligeså snart der spawnes. 
+    }
+    private void attack() {
+        
+    }
 }
