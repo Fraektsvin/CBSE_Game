@@ -45,7 +45,8 @@ public class AssetController {
         assetManager.load("assets/sand.png", Texture.class);
         assetManager.load("assets/projectile.png", Texture.class);
         assetManager.load("assets/archer.png", Texture.class);
-        assetManager.load("assets/rock.png", Texture.class);
+        assetManager.load("assets/tileRock.png", Texture.class);
+        assetManager.load("assets/tileBush.png", Texture.class);
     }
 
     public Texture getAsset(String name) {
