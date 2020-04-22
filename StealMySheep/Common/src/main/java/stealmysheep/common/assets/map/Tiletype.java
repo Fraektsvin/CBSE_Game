@@ -10,24 +10,34 @@ package stealmysheep.common.assets.map;
  * @author Antonio
  */
 public enum Tiletype {
-    SAND(0, "sand.png"),
-    WATERLEFT(1, "waterLeft.png"),
-    WATERRIGHT(2, "waterRight.png"),
-    WATERTOP(3, "waterTop.png"),
-    WATERBOTTOM(4, "waterBottom.png"),
-    WATERBOTTOMRIGHT(5, "waterBottomRight.png"),
-    WATERBOTTOMLEFT(6, "waterBottomLeft.png"),
-    WATERTOPLEFT(7, "waterTopLeft.png"),
-    WATERTOPRIGHT(8, "waterTopRight.png"),
-    ROCK(9,"tileRock.png"),
-    TILEBUSH(10,"tileBush.png");
+    SAND(0, "sand.png", false),
+    WATERLEFT(1, "waterLeft.png", false),
+    WATERRIGHT(2, "waterRight.png", false),
+    WATERTOP(3, "waterTop.png", false),
+    WATERBOTTOM(4, "waterBottom.png", false),
+    WATERBOTTOMRIGHT(5, "waterBottomRight.png", false),
+    WATERBOTTOMLEFT(6, "waterBottomLeft.png", false),
+    WATERTOPLEFT(7, "waterTopLeft.png", false),
+    WATERTOPRIGHT(8, "waterTopRight.png", false),
+    ROCK(9,"tileRock.png",true),
+    TILEBUSH(10 ,"tileBush.png", true);
 
     private int numbervalue;
     private String image;
+    private boolean hascollider; 
 
-    private Tiletype(int numbervalue, String image) {
+    public void setHascollider(boolean hascollider) {
+        this.hascollider = hascollider;
+    }
+
+    public boolean isHascollider() {
+        return hascollider;
+    }
+
+    private Tiletype(int numbervalue, String image, Boolean hascollider) {
         this.numbervalue = numbervalue;
         this.image = image;
+        this.hascollider = hascollider;
     }
 
     public void setNumbervalue(int numbervalue) {
