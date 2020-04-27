@@ -13,11 +13,11 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import group12.stealmysheep.Manager.AssetLoader;
+import group12.stealmysheep.Manager.AssetController;
 import group12.stealmysheep.Manager.GameInputProcessor;
+import group12.stealmysheep.Manager.WaveManager;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,13 +25,13 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
-import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
 import stealmysheep.common.services.IPostUpdate;
 import stealmysheep.common.services.IUpdate;
+import stealmysheep.common.services.IWave;
 
 public class Island implements ApplicationListener {
 
@@ -40,7 +40,8 @@ public class Island implements ApplicationListener {
     private final GameData gameData = new GameData();
     private World world = new World();
     private SpriteBatch spriteBatch;
-    private AssetLoader assetLoader;
+    private AssetController assetController;
+    private WaveManager waveManager;
 
     private final Lookup lookup = Lookup.getDefault();
     private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
@@ -48,8 +49,9 @@ public class Island implements ApplicationListener {
 
     @Override
     public void create() {
+        this.waveManager = new WaveManager();
         spriteBatch = new SpriteBatch();
-        assetLoader = new AssetLoader();
+        assetController = new AssetController();
 
         gameData.setSceneWidth(Gdx.graphics.getWidth());
         gameData.setSceneHeight(Gdx.graphics.getHeight());
@@ -79,6 +81,7 @@ public class Island implements ApplicationListener {
 
         update();
         draw();
+        wave();
     }
 
     @Override
@@ -116,38 +119,30 @@ public class Island implements ApplicationListener {
         spriteBatch.begin();
 
         for (Entity entity : world.getEntities(Tile.class)) {
-            drawEntity(entity);
+            assetController.drawEntity(entity, this.spriteBatch);
         }
 
         for (Entity entity : world.getEntities()) {
             if (!entity.getClass().equals(Tile.class)) {
-                drawEntity(entity);
+                assetController.drawEntity(entity, this.spriteBatch);
             }
         }
 
         spriteBatch.end();
     }
 
-    private void drawEntity(Entity entity) {
-        if (entity.getImage() != null) {
-            //Texture texture = new Texture(Gdx.files.classpath("assets/" + entity.getImage()));'
-            Texture texture = this.assetLoader.getAsset("assets/" + entity.getImage());
-            Sprite sprite = new Sprite(texture);
-            Position position = entity.getComponent(Position.class);
+    private void wave() {
+        Collection<? extends IWave> waves = lookup.lookupAll(IWave.class);
+        if (waves.isEmpty()) {
+            return;
+        }
 
-            sprite.setScale(0.35f);
-            if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
-                sprite.flip(true, false);
+        if (this.waveManager.endWaveCheck(world)) {
+            this.waveManager.setNextWave();
+
+            for (IWave wave : waves) {
+                wave.startWave(this.gameData, this.world, this.waveManager.getCurrentWave());
             }
-
-            if (position.getRadians() < 0) {
-                sprite.flip(true, false);
-            }
-
-            float x = position.getX() - sprite.getWidth() / 2;
-            float y = position.getY() - sprite.getHeight() / 2;
-            sprite.setPosition(x, y);
-            sprite.draw(spriteBatch);
 
         }
     }
