@@ -35,6 +35,10 @@ public class EnemyControlSystem implements IUpdate {
     private IAI ai;
     private final Lookup lookup = Lookup.getDefault();
 
+    public EnemyControlSystem() {
+        this.random = new Random();
+    }
+
     @Override
     public void update(GameData gameData, World world) {
         this.ai = lookup.lookup(IAI.class);
@@ -51,7 +55,7 @@ public class EnemyControlSystem implements IUpdate {
                 Position targetPosition = currentEnemy.getTarget().getComponent(Position.class);
                 Node goal = new Node(targetPosition.getX(), targetPosition.getY());
                 this.ai.moveEntity(currentEnemy, goal, world, gameData);
-            }else{
+            } else {
                 setTarget(world, currentEnemy);
             }
         }
@@ -84,10 +88,8 @@ public class EnemyControlSystem implements IUpdate {
 
     private void setTargetPlayer(World world, Enemy enemy) {
 
-        Entity player = world.getEntities(Player.class
-        ).get(0);
-        if (player
-                == null) {
+        Entity player = world.getEntities(Player.class).get(0);
+        if (player == null) {
             return;
         }
 
@@ -103,16 +105,9 @@ public class EnemyControlSystem implements IUpdate {
 // hvis begge (tjek modul beskrivelser) true første prio lig sheep. 
 // hvis den første er true og den anden er false er første prio player. 
 // første metode der gøres brug af ligeså snart der spawnes.
-        int randomSheep = random.nextInt(world.getEntities(Sheep.class
-        ).size());
-        if (randomSheep
-                == 0) {
-            return;
-        }
+        int randomSheep = random.nextInt(world.getEntities(Sheep.class).size());
 
-        enemy.setTarget(world.getEntities(Sheep.class
-        ).get(randomSheep));
-
+        enemy.setTarget(world.getEntities(Sheep.class).get(randomSheep));
     }
 
     private void attack() {
