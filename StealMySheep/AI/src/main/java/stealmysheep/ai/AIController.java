@@ -10,7 +10,6 @@ import static java.lang.Math.sin;
 import java.util.ArrayList;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
-import stealmysheep.common.ai.AstarAI;
 import stealmysheep.common.ai.IAI;
 import stealmysheep.common.ai.Node;
 import stealmysheep.common.assets.Entity;
