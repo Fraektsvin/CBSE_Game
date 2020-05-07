@@ -30,7 +30,7 @@ public class EnemyPlugin implements IPlugin {
     @Override
     public void start(GameData gameData, World world) {
         EnemyCreator enemy = new EnemyCreator();
-        world.addEntity(enemy.createRock(gameData));
+        world.addEntity(enemy.createArcher(gameData));
     }
 
     @Override
