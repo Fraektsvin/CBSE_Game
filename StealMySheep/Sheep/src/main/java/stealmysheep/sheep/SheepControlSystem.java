@@ -43,13 +43,14 @@ public class SheepControlSystem implements IUpdate {
         if (ai == null) {
             return;
         }
+
         for (Entity sheep : world.getEntities(Sheep.class)) {
             Sheep currentSheep = (Sheep) sheep;
             Position position = sheep.getComponent(Position.class);
-            Movement movement = sheep.getComponent(Movement.class);
             BoxCollider collider = sheep.getComponent(BoxCollider.class);
 
             if (currentSheep.isMoving() == false) {
+
                 if (random.nextInt(100) + 1 <= 2) {
                     currentSheep.setMoving(true);
                     Random random = new Random();
@@ -59,28 +60,29 @@ public class SheepControlSystem implements IUpdate {
                     float y = (float) (r * sin(a));
                     currentSheep.setX(position.getX() + x);
                     currentSheep.setY(position.getY() + y);
+
+                    for (Entity entity : world.getEntities()) {
+                        if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class) && !entity.equals(currentSheep)) {
+                            BoxCollider entityCollider = entity.getComponent(BoxCollider.class);
+                            Position entityPosition = entity.getComponent(Position.class);
+                            if (!entityCollider.checkPointCollider(x, y, entityPosition.getX(), entityPosition.getY())) {
+                                currentSheep.setMoving(false);
+                            }
+                        }
+                    }
                 }
+
             } else if (currentSheep.isMoving() == true) {
                 Node goal = new Node(currentSheep.getX(), currentSheep.getY());
-                ArrayList<Node> path = ai.greedyBestFirstSearch(sheep, goal, world);
 
-                if (!path.isEmpty()) {
-                    float x = path.get(path.size() - 1).getX() - position.getX();
-                    float y = path.get(path.size() - 1).getY() - position.getY();
-                    position.setRadians((float) Math.atan2(y, x));
+                //System.out.println("Position: x=" + position.getX() + "  y=" + position.getY() + "       Goal: x=" + goal.getX() + "  y=" + goal.getY());
+                this.ai.moveEntity(sheep, goal, world, gameData);
 
-                    position.setX(position.getX() + (float) cos(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
-                    position.setY(position.getY() + (float) sin(position.getRadians()) * movement.getSpeed() * gameData.getDeltaTime());
-                    // player.getY and x
-
-                    if (ai.checkPointCollider(goal.getX(), goal.getY(), position.getX(), position.getY(), collider)) {
-                        currentSheep.setMoving(false);
-                    }
-
-                } else {
+                if (collider.checkPointCollider(goal.getX(), goal.getY(), position.getX(), position.getY())) {
+                    System.out.println("Goal reached");
                     currentSheep.setMoving(false);
-                }
 
+                }
             }
         }
     }

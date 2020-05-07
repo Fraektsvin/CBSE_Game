@@ -25,23 +25,26 @@ import stealmysheep.common.services.IPlugin;
     @ServiceProvider(service = IPlugin.class),})
 public class SheepPlugin implements IPlugin {
 
-    private Entity sheep;
-
     public SheepPlugin() {
     }
 
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        sheep = createSheep(gameData);
-        world.addEntity(sheep);
+        for (int i = 0; i < 1; i++) {
+            Entity sheep = createSheep(gameData);
+            world.addEntity(sheep);
+        }
 
     }
 
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(sheep);
+        for (Entity sheep : world.getEntities(Sheep.class)) {
+            world.removeEntity(sheep);
+        }
+
     }
 
     private Entity createSheep(GameData gameData) {
