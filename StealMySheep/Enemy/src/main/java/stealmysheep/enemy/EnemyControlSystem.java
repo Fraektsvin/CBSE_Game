@@ -36,11 +36,6 @@ public class EnemyControlSystem implements IUpdate {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void moveEnemy() {
-        // ryk enemy mod target. Her tjekkes der ikke for target. Det sker i metoden under.
-        
-    }
-
     private boolean checkTargetExistence(World world, Enemy enemy) {
         // tjekker om target findes og return true når den findes og false når den ikke eksisterer.
         Entity target = enemy.getTarget();
