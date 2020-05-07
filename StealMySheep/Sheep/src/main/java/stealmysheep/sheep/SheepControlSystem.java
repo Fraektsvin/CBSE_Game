@@ -62,7 +62,7 @@ public class SheepControlSystem implements IUpdate {
                     currentSheep.setY(position.getY() + y);
 
                     for (Entity entity : world.getEntities()) {
-                        if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class) && !entity.equals(currentSheep)) {
+                        if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class) && entity.equals(currentSheep)) {
                             BoxCollider entityCollider = entity.getComponent(BoxCollider.class);
                             Position entityPosition = entity.getComponent(Position.class);
                             if (!entityCollider.checkPointCollider(x, y, entityPosition.getX(), entityPosition.getY())) {
