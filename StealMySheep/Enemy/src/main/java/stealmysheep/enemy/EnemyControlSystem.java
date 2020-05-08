@@ -16,8 +16,11 @@ import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Player;
 import stealmysheep.common.assets.Sheep;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
+import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.entityComponents.Movement;
 import stealmysheep.common.assets.entityComponents.Position;
+import stealmysheep.common.assets.entityComponents.RangedWeapon;
+import stealmysheep.common.assets.entityComponents.Weapon;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IUpdate;
@@ -41,18 +44,14 @@ public class EnemyControlSystem implements IUpdate {
 
     @Override
     public void update(GameData gameData, World world) {
+
         this.ai = lookup.lookup(IAI.class);
         if (ai == null) {
             return;
         }
         for (Entity enemy : world.getEntities(Enemy.class)) {
             Enemy currentEnemy = (Enemy) enemy;
-            BoxCollider collider = enemy.getComponent(BoxCollider.class);
-            Position position = enemy.getComponent(Position.class);
-            Movement movement = enemy.getComponent(Movement.class);
-            Entity player = world.getEntities(Player.class).get(0);
-            Position playerPosition = player.getComponent(Position.class);
-
+            handleHealth(world, currentEnemy);
             if (checkTargetExistence(world, currentEnemy)) {
                 Position targetPosition = currentEnemy.getTarget().getComponent(Position.class);
                 Node goal = new Node(targetPosition.getX(), targetPosition.getY());
@@ -60,21 +59,33 @@ public class EnemyControlSystem implements IUpdate {
             } else {
                 setTarget(world, currentEnemy);
             }
-            if (currentEnemy.willTargetSheep() && currentEnemy.willTargetPlayer()) {
-                switchTarget(world, currentEnemy);
-            }
+            handleTarget(world, currentEnemy);
             // hvis et enemy går efter får og willtarget også er true så skal der ske at hvis spilleren er en indenfor targetradius så skal dens mål ikke længere være sheep men player 
         }
     }
 
-    private void switchTarget(World world, Enemy enemy) {
+    private void handleTarget(World world, Enemy enemy) {
         Entity player = world.getEntities(Player.class).get(0);
+        if (player == null) {
+            return;
+        }
         Position playerPosition = player.getComponent(Position.class);
         Position enemyPosition = enemy.getComponent(Position.class);
-        if ((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getTargetRadius(), 2)) {
-            setTargetPlayer(world, enemy);
+
+        if (enemy.getTarget().getClass().equals(Sheep.class) && enemy.willTargetPlayer()) {
+            if ((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getTargetRadius(), 2)) {
+                setTargetPlayer(world, enemy);
+            }
+        } else if (enemy.getTarget().getClass().equals(Player.class)) {
+            if (enemy.willTargetSheep() && !((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getTargetRadius(), 2))) {
+                setTargetSheep(world, enemy);
+            } else if ((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getAttackRadius(), 2)) {
+                attack(enemy, enemy.getTarget());
+            }
+
         }
     }
+
     private boolean checkTargetExistence(World world, Enemy enemy) {
         // tjekker om target findes og return true når den findes og false når den ikke eksisterer.
         Entity target = enemy.getTarget();
@@ -87,7 +98,6 @@ public class EnemyControlSystem implements IUpdate {
             return false;
         } else {
             return true;
-
         }
     }
 
@@ -128,7 +138,31 @@ public class EnemyControlSystem implements IUpdate {
         ).get(randomSheep));
     }
 
-    private void attack() {
+    private void handleHealth(World world, Enemy enemy) {
+        Health health = enemy.getComponent(Health.class);
+        if (health == null) {
+            return;
+        }
+
+        if (health.isDead()) {
+            world.removeEntity(enemy);
+        }
+
+    }
+
+    private void attack(Enemy enemy, Entity target) {
+        Position position = enemy.getComponent(Position.class);
+        Position targetPosition = target.getComponent(Position.class);
+        RangedWeapon weapon = enemy.getComponent(RangedWeapon.class);
+
+        float deltaX = targetPosition.getX() - position.getX();
+        float deltaY = targetPosition.getY() - position.getY();
+
+        position.setRadians((float) Math.atan2(deltaY, deltaX));
+        weapon.setIsAttacking(true);
+    }
+
+    private void steal(Enemy enemy, Entity target) {
 
     }
 }

@@ -51,13 +51,8 @@ public class PlayerControlSystem implements IUpdate {
             position.setRadians((float) Math.atan2(deltaY, deltaX));
 
             if (gameData.getInput().isDown(MOUSELEFT)) {
-                if (rangedWeapon.getShotTimer() <= 0) {
-                    rangedWeapon.setIsAttacking(gameData.getInput().isDown(MOUSELEFT));
-                    rangedWeapon.setShotTimer(rangedWeapon.getShotCooldown());
-                }
+                rangedWeapon.setIsAttacking(gameData.getInput().isDown(MOUSELEFT));
             }
-
-            rangedWeapon.update(player, gameData);
             movement.update(player, gameData);
             position.update(player, gameData);
 
