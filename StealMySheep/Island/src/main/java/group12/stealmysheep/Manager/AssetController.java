@@ -10,24 +10,24 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
+import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.Position;
 
 /**
  *
  * @author oscar
  */
-public class AssetLoader {
+public class AssetController {
 
     public final AssetManager assetManager;
 
-    public AssetLoader() {
+    public AssetController() {
         assetManager = new AssetManager();
         loadAssets();
         assetManager.finishLoading();
-    }
-
-    public Texture getAsset(String name) {
-        return assetManager.get(name, Texture.class);
     }
 
     private void loadAssets() {
@@ -45,7 +45,35 @@ public class AssetLoader {
         assetManager.load("assets/sand.png", Texture.class);
         assetManager.load("assets/projectile.png", Texture.class);
         assetManager.load("assets/archer.png", Texture.class);
-        assetManager.load("assets/rock.png", Texture.class);
+        assetManager.load("assets/tileRock.png", Texture.class);
+        assetManager.load("assets/tileBush.png", Texture.class);
+    }
+
+    public Texture getAsset(String name) {
+        return assetManager.get(name, Texture.class);
+    }
+
+    public void drawEntity(Entity entity, SpriteBatch spriteBatch) {
+        if (entity.getImage() != null) {
+            Texture texture = this.assetManager.get("assets/" + entity.getImage());
+            Sprite sprite = new Sprite(texture);
+            Position position = entity.getComponent(Position.class);
+
+            sprite.setScale(0.35f);
+            if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
+                sprite.flip(true, false);
+            }
+
+            if (position.getRadians() < 0) {
+                sprite.flip(true, false);
+            }
+
+            float x = position.getX() - sprite.getWidth() / 2;
+            float y = position.getY() - sprite.getHeight() / 2;
+            sprite.setPosition(x, y);
+            sprite.draw(spriteBatch);
+
+        }
     }
 
 }
