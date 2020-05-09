@@ -49,7 +49,7 @@ public class SheepControlSystem implements IUpdate {
 
             if (currentSheep.isMoving() == false) {
 
-                if (random.nextInt(100) + 1 <= 2) {
+                if (random.nextInt(600) + 1 <= 2) {
                     currentSheep.setMoving(true);
                     Random random = new Random();
                     float a = (float) (random.nextFloat() * 2 * Math.PI);

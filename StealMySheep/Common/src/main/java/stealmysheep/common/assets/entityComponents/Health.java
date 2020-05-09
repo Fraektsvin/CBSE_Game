@@ -42,6 +42,14 @@ public class Health implements Component {
         }
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     @Override
     public void update(Entity entity, GameData gameData) {
     }

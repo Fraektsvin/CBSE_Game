@@ -34,6 +34,7 @@ public class AssetController {
         assetManager.load("assets/player.png", Texture.class);
         assetManager.load("assets/thief.png", Texture.class);
         assetManager.load("assets/sheep.png", Texture.class);
+        assetManager.load("assets/rock.png", Texture.class);
         assetManager.load("assets/waterBottom.png", Texture.class);
         assetManager.load("assets/waterTop.png", Texture.class);
         assetManager.load("assets/waterRight.png", Texture.class);

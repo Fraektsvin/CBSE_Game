@@ -31,7 +31,7 @@ public class SheepPlugin implements IPlugin {
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4; i++) {
             Entity sheep = createSheep(gameData);
             world.addEntity(sheep);
         }
@@ -48,11 +48,10 @@ public class SheepPlugin implements IPlugin {
     }
 
     private Entity createSheep(GameData gameData) {
-        Random random = new Random();
         float acceleration = 60;
         float speed = 30;
-        float x = random.nextInt(gameData.getSceneWidth());
-        float y = random.nextInt(gameData.getSceneHeight());
+        float x = gameData.getSceneWidth() / 2;
+        float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
         float height = 50;
         float width = 70;
