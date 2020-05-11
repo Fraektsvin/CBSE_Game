@@ -25,31 +25,33 @@ import stealmysheep.common.services.IPlugin;
     @ServiceProvider(service = IPlugin.class),})
 public class SheepPlugin implements IPlugin {
 
-    private Entity sheep;
-
     public SheepPlugin() {
     }
 
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        sheep = createSheep(gameData);
-        world.addEntity(sheep);
+        for (int i = 0; i < 4; i++) {
+            Entity sheep = createSheep(gameData);
+            world.addEntity(sheep);
+        }
 
     }
 
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(sheep);
+        for (Entity sheep : world.getEntities(Sheep.class)) {
+            world.removeEntity(sheep);
+        }
+
     }
 
     private Entity createSheep(GameData gameData) {
-        Random random = new Random();
         float acceleration = 60;
         float speed = 30;
-        float x = random.nextInt(gameData.getSceneWidth());
-        float y = random.nextInt(gameData.getSceneHeight());
+        float x = gameData.getSceneWidth() / 2;
+        float y = gameData.getSceneHeight() / 2;
         float radians = 3.1415f / 2;
         float height = 50;
         float width = 70;
