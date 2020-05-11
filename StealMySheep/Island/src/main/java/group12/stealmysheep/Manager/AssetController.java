@@ -65,10 +65,6 @@ public class AssetController {
                 sprite.flip(true, false);
             }
 
-            if (position.getRadians() < 0) {
-                sprite.flip(true, false);
-            }
-
             float x = position.getX() - sprite.getWidth() / 2;
             float y = position.getY() - sprite.getHeight() / 2;
             sprite.setPosition(x, y);

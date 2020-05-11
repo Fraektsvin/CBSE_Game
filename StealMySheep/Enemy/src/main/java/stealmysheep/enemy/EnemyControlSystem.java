@@ -15,6 +15,7 @@ import stealmysheep.common.assets.Enemy;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.Player;
 import stealmysheep.common.assets.Sheep;
+import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.entityComponents.MeleeWeapon;
 import stealmysheep.common.assets.entityComponents.Position;
@@ -44,16 +45,18 @@ public class EnemyControlSystem implements IUpdate {
     public void update(GameData gameData, World world) {
 
         this.ai = lookup.lookup(IAI.class);
-        if (ai == null) {
-            return;
-        }
+
         for (Entity enemy : world.getEntities(Enemy.class)) {
             Enemy currentEnemy = (Enemy) enemy;
             handleHealth(world, currentEnemy);
             if (checkTargetExistence(world, currentEnemy)) {
                 Position targetPosition = currentEnemy.getTarget().getComponent(Position.class);
                 Node goal = new Node(targetPosition.getX(), targetPosition.getY());
-                this.ai.moveEntity(currentEnemy, goal, world, gameData);
+
+                if (ai != null) {
+                    this.ai.moveEntity(currentEnemy, goal, world, gameData);
+                }
+
             } else {
                 setTarget(world, currentEnemy);
             }
@@ -73,10 +76,14 @@ public class EnemyControlSystem implements IUpdate {
         Position playerPosition = player.getComponent(Position.class);
         Position enemyPosition = enemy.getComponent(Position.class);
         if (enemy.getTarget() != null) {
-            if (enemy.getTarget().getClass().equals(Sheep.class) && enemy.willTargetPlayer()) {
-                if ((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getTargetRadius(), 2)) {
-                    setTargetPlayer(world, enemy);
+            if (enemy.getTarget().getClass().equals(Sheep.class)) {
+                if (enemy.willTargetPlayer()) {
+                    if ((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getTargetRadius(), 2)) {
+                        setTargetPlayer(world, enemy);
+                    }
                 }
+                steal(enemy, world);
+
             } else if (enemy.getTarget().getClass().equals(Player.class)) {
                 if (enemy.willTargetSheep() && !((Math.pow(playerPosition.getX() - enemyPosition.getX(), 2) + Math.pow(playerPosition.getY() - enemyPosition.getY(), 2)) < Math.pow(enemy.getTargetRadius(), 2))) {
                     setTargetSheep(world, enemy);
@@ -132,9 +139,9 @@ public class EnemyControlSystem implements IUpdate {
     }
 
     private void setTargetSheep(World world, Enemy enemy) {
-// hvis begge (tjek modul beskrivelser) true første prio lig sheep. 
-// hvis den første er true og den anden er false er første prio player. 
-// første metode der gøres brug af ligeså snart der spawnes.
+        if (world.getEntities(Sheep.class).size() <= 0) {
+            return;
+        }
         int randomSheep = random.nextInt(world.getEntities(Sheep.class).size());
 
         enemy.setTarget(world.getEntities(Sheep.class).get(randomSheep));
@@ -173,7 +180,27 @@ public class EnemyControlSystem implements IUpdate {
         }
     }
 
-    private void steal(Enemy enemy, Entity target) {
+    private void steal(Enemy enemy, World world) {
+        Entity target = enemy.getTarget();
+        Position position = enemy.getComponent(Position.class);
+        Position position2 = target.getComponent(Position.class);
 
+        BoxCollider collider = enemy.getComponent(BoxCollider.class);
+        BoxCollider collider2 = target.getComponent(BoxCollider.class);
+
+        float x1 = position.getX() - collider.getWidth() / 2;
+        float x2 = position.getX() + collider.getWidth() / 2;
+        float x3 = position2.getX() - collider2.getWidth() / 2;
+        float x4 = position2.getX() + collider2.getWidth() / 2;
+
+        float y1 = position.getY() - collider.getHeight() / 2;
+        float y2 = position.getY() + collider.getHeight() / 2;
+        float y3 = position2.getY() - collider2.getHeight() / 2;
+        float y4 = position2.getY() + collider2.getHeight() / 2;
+
+        if ((x1 < x4) && (x3 < x2) && (y1 < y4) && (y3 < y2)) {
+            world.removeEntity(target);
+        }
     }
+
 }
