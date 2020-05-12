@@ -1,4 +1,5 @@
-import org.junit.jupiter.api.AfterEach;
+package test;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,6 +7,7 @@ import stealmysheep.common.assets.Enemy;
 import stealmysheep.common.assets.Player;
 import stealmysheep.common.assets.Sheep;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
+import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
@@ -20,10 +22,6 @@ public class EnemyTest {
     @BeforeEach
     public void setUp() {
         this.world = new World();
-    }
-
-    @AfterEach
-    public void tearDown() {
     }
 
     @Test
@@ -65,6 +63,7 @@ public class EnemyTest {
         Enemy thief = new Enemy(targetPlayer, targetSheep, targetRadius, "thief.png");
         thief.addComponent(new Position(x, y, radians));
         thief.addComponent(new BoxCollider(height, width));
+        thief.addComponent(new Health(100));
         return thief;
     }
 
@@ -73,9 +72,13 @@ public class EnemyTest {
         float y = 0;
         float radians = 3.1415f / 2;
         float radius = 125;
+        float height = 5;
+        float width = 5;
 
         Sheep sheep = new Sheep("sheep.png", radius);
         sheep.addComponent(new Position(x, y, radians));
+        sheep.addComponent(new Health(100));
+        sheep.addComponent(new BoxCollider(height, width));
 
         return sheep;
     }
@@ -85,7 +88,7 @@ public class EnemyTest {
 
         Player player = new Player("player.png");
         player.addComponent(new Position(x, y, radians));
-
+        player.addComponent(new Health(100));
         return player;
     }
 
