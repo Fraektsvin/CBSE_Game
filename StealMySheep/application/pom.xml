@@ -58,7 +58,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>Map</artifactId>
             <version>${project.version}</version>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Player</artifactId>
@@ -69,7 +69,7 @@
             <artifactId>Sheep</artifactId>
             <version>${project.version}</version>
         </dependency>
-              <dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Weapon</artifactId>
             <version>${project.version}</version>
@@ -88,6 +88,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>Collision</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <artifactId>SilentUpdate</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -128,8 +133,8 @@
                                 <id>extra</id>
                                 <goals>
                                     <goal>autoupdate</goal>
-                                    <goal>webstart-app</goal>
-                                    <goal>build-installers</goal>
+                                    <!--goal>webstart-app</goal>
+                                    <goal>build-installers</goal>-->
                                 </goals>
                             </execution>
                         </executions>
