@@ -25,6 +25,7 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
@@ -125,10 +126,17 @@ public class Island implements ApplicationListener {
         for (Entity entity : world.getEntities()) {
             if (!entity.getClass().equals(Tile.class)) {
                 assetController.drawEntity(entity, this.spriteBatch);
+
             }
         }
 
         spriteBatch.end();
+        for (Entity entity : world.getEntities()) {
+            if (entity.hasComponent(Health.class)) {
+                assetController.drawHealth(entity);
+            }
+        }
+
     }
 
     private void wave() {

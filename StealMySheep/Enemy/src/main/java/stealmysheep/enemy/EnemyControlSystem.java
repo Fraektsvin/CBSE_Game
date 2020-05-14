@@ -48,7 +48,6 @@ public class EnemyControlSystem implements IUpdate {
 
         for (Entity enemy : world.getEntities(Enemy.class)) {
             Enemy currentEnemy = (Enemy) enemy;
-            handleHealth(world, currentEnemy);
             if (checkTargetExistence(world, currentEnemy)) {
                 Position targetPosition = currentEnemy.getTarget().getComponent(Position.class);
                 Node goal = new Node(targetPosition.getX(), targetPosition.getY());
@@ -62,6 +61,7 @@ public class EnemyControlSystem implements IUpdate {
             }
             handleTarget(world, currentEnemy);
             // hvis et enemy går efter får og willtarget også er true så skal der ske at hvis spilleren er en indenfor targetradius så skal dens mål ikke længere være sheep men player 
+            handleHealth(world, currentEnemy);
         }
     }
 

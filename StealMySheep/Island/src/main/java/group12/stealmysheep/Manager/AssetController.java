@@ -6,14 +6,15 @@
 package group12.stealmysheep.Manager;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import java.util.ArrayList;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.entityComponents.Position;
 
 /**
@@ -23,11 +24,13 @@ import stealmysheep.common.assets.entityComponents.Position;
 public class AssetController {
 
     public final AssetManager assetManager;
+    private ShapeRenderer sr;
 
     public AssetController() {
         assetManager = new AssetManager();
         loadAssets();
         assetManager.finishLoading();
+        this.sr = new ShapeRenderer();
     }
 
     private void loadAssets() {
@@ -71,6 +74,20 @@ public class AssetController {
             sprite.draw(spriteBatch);
 
         }
+    }
+
+    public void drawHealth(Entity entity) {
+        Health health = entity.getComponent(Health.class);
+        Position position = entity.getComponent(Position.class);
+        Texture texture = this.assetManager.get("assets/" + entity.getImage());
+
+        float totalBarWidth = 50;
+        float width = (float) health.getHealth() / (float) health.getMaxHealth() * totalBarWidth;
+        this.sr.begin(ShapeType.Filled);
+        this.sr.setColor(Color.GREEN);
+        this.sr.rect(position.getX() - 50 / 2, position.getY() + texture.getHeight() * 0.35f / 2 + 15, width, 5);
+        this.sr.end();
+
     }
 
 }
