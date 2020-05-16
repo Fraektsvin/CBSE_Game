@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.island;
+package group12.stealmysheep.GameStates;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -25,12 +25,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import group12.stealmysheep.Manager.GameInputProcessor;
+import group12.stealmysheep.island.Island;
+import java.util.Stack;
 
 /**
  *
  * @author Naimo
  */
-public class Load extends ApplicationAdapter {
+public class Load extends GameState {
 
     private Stage stage;
     private Skin skin;
@@ -47,9 +50,15 @@ public class Load extends ApplicationAdapter {
     private TextureRegion menuTextureRegion;
     private TextureRegionDrawable menuTexRegionDrawable;
     private ImageButton menuButton;
-    
-    @Override
-    public void create() {
+
+    private Stack<GameState> gameStates;
+    private Island island;
+
+    public Load(Island island) {
+        super(island);
+
+        this.gameStates = island.getGameStates();
+        this.island = island;
         stage = new Stage(new ScreenViewport());
         skin();
         batch = new SpriteBatch();
@@ -98,22 +107,49 @@ public class Load extends ApplicationAdapter {
         });
         mainTable.add(sheep);
         mainTable.row();
-          
+
         menuTexture = new Texture(Gdx.files.internal("skin/menuButton3.png"));
         menuTextureRegion = new TextureRegion(menuTexture);
         menuTexRegionDrawable = new TextureRegionDrawable(menuTextureRegion);
         menuButton = new ImageButton(menuTexRegionDrawable);
-        menuButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Menu button clicked");
-            }
-        });
+        if (playStateOn()) {
+            menuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println("Return to game button clicked");
+                    island.getGameStates().pop();
+                    ((PlayState) (island.getGameStates().peek())).setPaused(false);
+                    Gdx.input.setInputProcessor(new GameInputProcessor(island.getGameData()));
+                    dispose();
+                }
+            });
+        } else {
+            menuButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println("Return to menu button clicked");
+                    island.getGameStates().pop();
+                    island.getGameStates().push(new GameMenu(island));
+                    dispose();
+                }
+            });
+        }
+
         mainTable.add(menuButton);
         mainTable.row();
         mainTable.setFillParent(true);
         stage.addActor(mainTable);
         Gdx.input.setInputProcessor(stage);
+    }
+
+    private boolean playStateOn() {
+        Stack<GameState> gameStates = island.getGameStates();
+        if (!gameStates.isEmpty()) {
+            if (gameStates.get(gameStates.size() - 1).getClass() == PlayState.class) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void skin() {
@@ -143,9 +179,9 @@ public class Load extends ApplicationAdapter {
         batch.draw(imageSetting, 50, 590);
         batch.end();
     }
-    
+
     @Override
-    public void dispose(){
+    public void dispose() {
         stage.dispose();
     }
 }

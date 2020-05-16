@@ -9,7 +9,6 @@ package group12.stealmysheep.island;
  *
  * @author Antonio
  */
-
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import org.openide.modules.ModuleInstall;
@@ -27,7 +26,7 @@ public class InstallerKlassen extends ModuleInstall {
         cfg.useGL30 = false;
         cfg.resizable = false;
 
-        new LwjglApplication(new Load(), cfg);
+        new LwjglApplication(new Island(), cfg);
 
     }
 

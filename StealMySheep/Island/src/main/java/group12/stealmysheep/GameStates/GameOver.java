@@ -3,44 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group12.stealmysheep.island;
+package group12.stealmysheep.GameStates;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
+import group12.stealmysheep.island.Island;
 
 /**
  *
  * @author Naimo
  */
-public class GameWin extends ApplicationAdapter {
+public class GameOver extends GameState {
 
     private Stage stage;
-    private Skin skin;
-    private Table mainTable;
-    private SpriteBatch batch;
-    private Texture imageWin;
-       
-    private Label healthLabel;
-    private Label sheepLabel;
-    private Label pointsLabel;
-    
+    private Table menuTable;
+
     private Texture resetTexture;
     private Texture menuTexture;
 
@@ -53,27 +41,19 @@ public class GameWin extends ApplicationAdapter {
     private ImageButton resetButton;
     private ImageButton menuButton;
 
-    @Override
-    public void create() {
+    private SpriteBatch batch;
+    private Texture imageGameOver;
+
+    public GameOver(Island island) {
+        super(island);
         stage = new Stage(new ScreenViewport());
+
         batch = new SpriteBatch();
-        imageWin = new Texture("skin/winLogo.PNG");
-        skin();
-        mainTable = new Table();
-        
-        healthLabel = new Label("Player Health: ", skin);
-        mainTable.add(healthLabel);
-        mainTable.row().space(10);
-        
-        sheepLabel = new Label("Amount Of Sheep Left: ", skin);
-        mainTable.add(sheepLabel);
-        mainTable.row();
-        
-        pointsLabel = new Label("Total Points Gain: ", skin);
-        mainTable.add(pointsLabel);
-        mainTable.row().space(10);
-        
-        resetTexture = new Texture(Gdx.files.internal("skin/resetButton2.png"));
+        imageGameOver = new Texture("skin/GameOverLogo.PNG");
+
+        menuTable = new Table();
+
+        resetTexture = new Texture(Gdx.files.internal("skin/resetButton.png"));
         resetTextureRegion = new TextureRegion(resetTexture);
         resetTexRegionDrawable = new TextureRegionDrawable(resetTextureRegion);
         resetButton = new ImageButton(resetTexRegionDrawable);
@@ -82,13 +62,14 @@ public class GameWin extends ApplicationAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Reset game button clicked");
+
             }
         });
-        mainTable.add(resetButton);
-        mainTable.row().space(50);
+        menuTable.add(resetButton);
+        menuTable.row().space(50);
         //stage.addActor(startButton);
 
-        menuTexture = new Texture(Gdx.files.internal("skin/menuButton2.png"));
+        menuTexture = new Texture(Gdx.files.internal("skin/menuButton.png"));
         menuTextureRegion = new TextureRegion(menuTexture);
         menuTexRegionDrawable = new TextureRegionDrawable(menuTextureRegion);
         menuButton = new ImageButton(menuTexRegionDrawable);
@@ -99,35 +80,18 @@ public class GameWin extends ApplicationAdapter {
                 System.out.println("Menu button clicked");
             }
         });
-        mainTable.add(menuButton);
-        mainTable.row();
+        menuTable.add(menuButton);
+        menuTable.row();
         //stage.addActor(settingButton);
-        
-        mainTable.setFillParent(true);
+
+        menuTable.setFillParent(true);
         //menuTable.debug();
-        stage.addActor(mainTable);
+        stage.addActor(menuTable);
         //stage.addActor(exitButton);
 
         Gdx.input.setInputProcessor(stage);
     }
-    
-    public void skin(){
-        BitmapFont font = new BitmapFont();
-        skin = new Skin();
-        skin.add("default", font);
-        
-        Pixmap pixmap = new Pixmap((int) Gdx.graphics.getWidth() / 3, (int) Gdx.graphics.getHeight() / 13, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.WHITE);
- 
-        pixmap.fill();
-        skin.add("background", new Texture(pixmap));
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.background = skin.newDrawable("background", Color.WHITE);
-        labelStyle.fontColor = Color.CHARTREUSE;
-        labelStyle.font = skin.getFont("default");
-        skin.add("default", labelStyle);
-    }
-    
+
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -136,12 +100,12 @@ public class GameWin extends ApplicationAdapter {
         stage.draw();
 
         batch.begin();
-        batch.draw(imageWin, 180, 590);
+        batch.draw(imageGameOver, 200, 600);
         batch.end();
     }
-    
+
     @Override
-    public void dispose(){
+    public void dispose() {
         stage.dispose();
     }
 }
