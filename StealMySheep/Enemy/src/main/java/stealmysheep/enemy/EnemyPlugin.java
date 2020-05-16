@@ -81,5 +81,9 @@ public class EnemyPlugin implements IPlugin {
             world.removeEntity(enemy);
         }
 
+        for (Entity spawnPoint : world.getEntities(SpawnPoint.class)) {
+            world.removeEntity(spawnPoint);
+        }
+
     }
 }

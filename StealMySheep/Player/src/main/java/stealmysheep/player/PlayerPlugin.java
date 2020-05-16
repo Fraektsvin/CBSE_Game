@@ -27,15 +27,13 @@ import stealmysheep.common.services.IPlugin;
 
 public class PlayerPlugin implements IPlugin {
 
-    private Entity player;
-
     public PlayerPlugin() {
     }
 
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        player = createPlayer(gameData);
+        Entity player = createPlayer(gameData);
         world.addEntity(player);
 
     }
@@ -43,7 +41,10 @@ public class PlayerPlugin implements IPlugin {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(player);
+        for (Entity player : world.getEntities(Player.class)) {
+            world.removeEntity(player);
+        }
+
     }
 
     private Entity createPlayer(GameData gameData) {
