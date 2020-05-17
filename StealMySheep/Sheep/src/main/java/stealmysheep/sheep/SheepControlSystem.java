@@ -29,26 +29,30 @@ import stealmysheep.common.services.IUpdate;
 @ServiceProviders(value = {
     @ServiceProvider(service = IUpdate.class),})
 public class SheepControlSystem implements IUpdate {
-
+    
     private IAI ai;
-
+    
     private Random random = new Random();
     private final Lookup lookup = Lookup.getDefault();
-
+    
     @Override
     public void update(GameData gameData, World world) {
         this.ai = lookup.lookup(IAI.class);
         if (ai == null) {
             return;
         }
-
+        
+        if (world.getEntities(Sheep.class).isEmpty()) {
+            gameData.setEndGame(true);
+        }
+        
         for (Entity sheep : world.getEntities(Sheep.class)) {
             Sheep currentSheep = (Sheep) sheep;
             Position position = sheep.getComponent(Position.class);
             BoxCollider collider = sheep.getComponent(BoxCollider.class);
-
+            
             if (currentSheep.isMoving() == false) {
-
+                
                 if (random.nextInt(600) + 1 <= 2) {
                     currentSheep.setMoving(true);
                     Random random = new Random();
@@ -58,7 +62,7 @@ public class SheepControlSystem implements IUpdate {
                     float y = (float) (r * sin(a));
                     currentSheep.setX(position.getX() + x);
                     currentSheep.setY(position.getY() + y);
-
+                    
                     for (Entity entity : world.getEntities()) {
                         if (entity.hasComponent(BoxCollider.class) && entity.hasComponent(Position.class) && !entity.equals(currentSheep)) {
                             BoxCollider entityCollider = entity.getComponent(BoxCollider.class);
@@ -69,17 +73,17 @@ public class SheepControlSystem implements IUpdate {
                         }
                     }
                 }
-
+                
             } else if (currentSheep.isMoving() == true) {
                 Node goal = new Node(currentSheep.getX(), currentSheep.getY());
 
                 //System.out.println("Position: x=" + position.getX() + "  y=" + position.getY() + "       Goal: x=" + goal.getX() + "  y=" + goal.getY());
                 this.ai.moveEntity(sheep, goal, world, gameData);
-
+                
                 if (collider.checkPointCollider(goal.getX(), goal.getY(), position.getX(), position.getY())) {
                     System.out.println("Goal reached");
                     currentSheep.setMoving(false);
-
+                    
                 }
             }
         }

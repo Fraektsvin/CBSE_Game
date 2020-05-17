@@ -32,8 +32,4 @@ public class WaveManager {
         currentWave += 1;
     }
 
-    public boolean endWaveCheck(World world) {
-        return world.getEntities(Enemy.class).isEmpty();
-    }
-
 }

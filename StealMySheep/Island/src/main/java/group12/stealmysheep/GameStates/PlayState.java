@@ -72,6 +72,7 @@ public class PlayState extends GameState {
             wave();
             pause();
             draw();
+            endGame();
         }
     }
 
@@ -105,11 +106,16 @@ public class PlayState extends GameState {
 
     private void wave() {
         Collection<? extends IWave> waves = lookup.lookupAll(IWave.class);
-        if (waves.isEmpty()) {
-            return;
+
+        boolean endWave = false;
+        for (IWave wave : waves) {
+            if (wave.endWave(gameData, world)) {
+                endWave = true;
+                break;
+            }
         }
 
-        if (this.waveManager.endWaveCheck(world)) {
+        if (endWave) {
             this.waveManager.setNextWave();
 
             for (IWave wave : waves) {
@@ -131,6 +137,11 @@ public class PlayState extends GameState {
     private void endGame() {
         if (this.gameData.isEndGame()) {
             System.out.println("Game ending");
+            this.gameData.setEndGame(false);
+            for (IPlugin plugin : island.getGamePlugins()) {
+                plugin.stop(island.getGameData(), island.getWorld());
+            }
+
             island.getGameStates().pop();
             island.getGameStates().push(new GameOver(island));
         }

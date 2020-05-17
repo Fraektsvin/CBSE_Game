@@ -62,6 +62,14 @@ public class GameOver extends GameState {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Reset game button clicked");
+                while (!island.getGameStates().isEmpty()) {
+                    island.getGameStates().pop();
+                }
+
+                for (IPlugin plugin : island.getGamePlugins()) {
+                    plugin.stop(island.getGameData(), island.getWorld());
+                }
+                island.getGameStates().push(new PlayState(island));
 
             }
         });
