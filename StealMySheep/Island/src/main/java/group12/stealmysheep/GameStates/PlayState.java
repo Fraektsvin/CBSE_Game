@@ -127,7 +127,8 @@ public class PlayState extends GameState {
     private void pause() {
         System.out.println("Key status: " + this.gameData.getInput().isDown(Input.ESCAPE));
         if (this.gameData.getInput().isDown(Input.ESCAPE)) {
-            this.gameData.getInput().setKeyStatus(Input.ESCAPE, false);
+//            this.gameData.getInput().setKeyStatus(Input.ESCAPE, false);
+            this.gameData.getInput().resetKeys();
             this.paused = true;
             System.out.println("Pause Game");
             this.island.getGameStates().push(new Load(this.island));
@@ -137,6 +138,7 @@ public class PlayState extends GameState {
     private void endGame() {
         if (this.gameData.isEndGame()) {
             System.out.println("Game ending");
+            this.gameData.getInput().resetKeys();
             this.gameData.setEndGame(false);
             for (IPlugin plugin : island.getGamePlugins()) {
                 plugin.stop(island.getGameData(), island.getWorld());
