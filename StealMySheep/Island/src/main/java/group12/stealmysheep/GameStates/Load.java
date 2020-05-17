@@ -108,7 +108,7 @@ public class Load extends GameState {
         mainTable.add(sheep);
         mainTable.row();
 
-        menuTexture = new Texture(Gdx.files.internal("skin/menuButton3.png"));
+        menuTexture = new Texture(Gdx.files.internal("skin/returnButton.png"));
         menuTextureRegion = new TextureRegion(menuTexture);
         menuTexRegionDrawable = new TextureRegionDrawable(menuTextureRegion);
         menuButton = new ImageButton(menuTexRegionDrawable);
