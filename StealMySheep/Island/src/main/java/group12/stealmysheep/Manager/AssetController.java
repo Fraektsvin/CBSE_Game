@@ -30,6 +30,7 @@ public class AssetController {
         assetManager.load("assets/player.png", Texture.class);
         assetManager.load("assets/thief.png", Texture.class);
         assetManager.load("assets/sheep.png", Texture.class);
+        assetManager.load("assets/rock.png", Texture.class);
         assetManager.load("assets/waterBottom.png", Texture.class);
         assetManager.load("assets/waterTop.png", Texture.class);
         assetManager.load("assets/waterRight.png", Texture.class);
@@ -57,10 +58,6 @@ public class AssetController {
 
             sprite.setScale(0.35f);
             if (position.getRadians() > Math.PI / 2 || position.getRadians() < -(Math.PI / 2)) {
-                sprite.flip(true, false);
-            }
-
-            if (position.getRadians() < 0) {
                 sprite.flip(true, false);
             }
 

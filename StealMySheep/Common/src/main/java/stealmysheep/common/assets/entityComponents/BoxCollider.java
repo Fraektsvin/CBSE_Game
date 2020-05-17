@@ -41,4 +41,19 @@ public class BoxCollider implements Component {
     public void update(Entity entity, GameData gameData) {
     }
 
+    public boolean checkPointCollider(float nodeX, float nodeY, float positionX, float positionY) {
+
+        float x1 = positionX - this.width / 2;
+        float x2 = positionX + this.width / 2;
+        float y1 = positionY - this.height / 2;
+        float y2 = positionY + this.height / 2;
+
+        if (nodeX > x1 && nodeX < x2 && nodeY > y1 && nodeY < y2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
+

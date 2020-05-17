@@ -69,6 +69,8 @@
         <module>Weapon</module>
         <module>Collision</module>
         <module>AI</module>
+        <module>Enemy</module>
+        <module>SilentUpdate</module>
     </modules>
 
     <properties>

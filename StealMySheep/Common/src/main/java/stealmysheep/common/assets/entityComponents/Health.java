@@ -16,7 +16,6 @@ public class Health implements Component {
 
     private int maxHealth;
     private int health;
-    private boolean dead;
 
     public Health(int maxHealth) {
         this.maxHealth = maxHealth;
@@ -35,11 +34,24 @@ public class Health implements Component {
         this.health -= amount;
     }
 
+    public boolean isDead() {
+        if (this.health <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     @Override
     public void update(Entity entity, GameData gameData) {
-        if (this.health <= 0) {
-            dead = true;
-        }
     }
 
 }
