@@ -121,6 +121,7 @@ public class PlayState extends GameState {
     private void pause() {
         System.out.println("Key status: " + this.gameData.getInput().isDown(Input.ESCAPE));
         if (this.gameData.getInput().isDown(Input.ESCAPE)) {
+            this.gameData.getInput().setKeyStatus(Input.ESCAPE, false);
             this.paused = true;
             System.out.println("Pause Game");
             this.island.getGameStates().push(new Load(this.island));
