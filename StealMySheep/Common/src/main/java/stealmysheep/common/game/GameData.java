@@ -15,9 +15,11 @@ public class GameData {
     private int sceneHeight, sceneWidth;
     private Input input;
     private final Input keys = new Input();
+    private boolean endGame;
 
     public GameData() {
         this.input = new Input();
+        this.endGame = false;
     }
 
     public float getDeltaTime() {
@@ -46,6 +48,14 @@ public class GameData {
 
     public Input getInput() {
         return input;
+    }
+
+    public boolean isEndGame() {
+        return endGame;
+    }
+
+    public void setEndGame(boolean endGame) {
+        this.endGame = endGame;
     }
 
 }

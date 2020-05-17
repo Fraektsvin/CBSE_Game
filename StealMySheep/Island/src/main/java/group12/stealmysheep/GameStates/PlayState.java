@@ -128,6 +128,14 @@ public class PlayState extends GameState {
         }
     }
 
+    private void endGame() {
+        if (this.gameData.isEndGame()) {
+            System.out.println("Game ending");
+            island.getGameStates().pop();
+            island.getGameStates().push(new GameOver(island));
+        }
+    }
+
     public void setPaused(boolean paused) {
         this.paused = paused;
     }

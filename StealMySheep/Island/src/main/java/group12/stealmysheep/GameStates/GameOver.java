@@ -5,7 +5,6 @@
  */
 package group12.stealmysheep.GameStates;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import group12.stealmysheep.island.Island;
+import stealmysheep.common.services.IPlugin;
 
 /**
  *
@@ -78,6 +78,15 @@ public class GameOver extends GameState {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Menu button clicked");
+                while (!island.getGameStates().isEmpty()) {
+                    island.getGameStates().pop();
+                }
+
+                for (IPlugin plugin : island.getGamePlugins()) {
+                    plugin.stop(island.getGameData(), island.getWorld());
+                }
+                island.getGameStates().push(new GameMenu(island));
+                dispose();
             }
         });
         menuTable.add(menuButton);
