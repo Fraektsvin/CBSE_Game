@@ -6,13 +6,9 @@
 package group12.stealmysheep.Manager;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import java.util.ArrayList;
 import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.Position;
 
