@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Stack;
 import org.openide.util.Lookup;
 import stealmysheep.common.assets.Entity;
+import stealmysheep.common.assets.entityComponents.Health;
 import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
@@ -66,7 +67,6 @@ public class PlayState extends GameState {
 
     @Override
     public void render() {
-        System.out.println("paused status: " + this.paused);
         if (this.paused == false) {
             updateServices();
             wave();
@@ -98,10 +98,17 @@ public class PlayState extends GameState {
         for (Entity entity : world.getEntities()) {
             if (!entity.getClass().equals(Tile.class)) {
                 assetController.drawEntity(entity, this.spriteBatch);
+
             }
         }
 
         spriteBatch.end();
+
+        for (Entity entity : world.getEntities()) {
+            if (entity.hasComponent(Health.class)) {
+                assetController.drawHealth(entity);
+            }
+        }
     }
 
     private void wave() {
@@ -125,7 +132,7 @@ public class PlayState extends GameState {
     }
 
     private void pause() {
-        System.out.println("Key status: " + this.gameData.getInput().isDown(Input.ESCAPE));
+
         if (this.gameData.getInput().isDown(Input.ESCAPE)) {
 //            this.gameData.getInput().setKeyStatus(Input.ESCAPE, false);
             this.gameData.getInput().resetKeys();

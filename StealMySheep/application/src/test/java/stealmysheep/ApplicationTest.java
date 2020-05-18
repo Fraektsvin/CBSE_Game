@@ -5,7 +5,6 @@ import java.io.IOException;
 import static java.nio.file.Files.copy;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import static java.nio.file.Paths.get;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

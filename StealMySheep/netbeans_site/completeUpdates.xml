@@ -1,179 +1,150 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE module_updates PUBLIC "-//NetBeans//DTD Autoupdate Catalog 2.5//EN" "http://www.netbeans.org/dtds/autoupdate-catalog-2_5.dtd">
 <module_updates timestamp="09/38/16/12/05/2020">
-        
+
+
+
     <module codenamebase="stealmysheep.AI" distribution="AI-1.0-SNAPSHOT.nbm" downloadsize="7260" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.AI" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="AI" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.openide.util" distribution="org-openide-util-RELEASE112.nbm" downloadsize="207267" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.openide.util" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.8" OpenIDE-Module-Long-Description="Various helper methods and basic concept definitions including lookup, parallel execution and branding support." OpenIDE-Module-Module-Dependencies="org.openide.util.lookup &gt; 8.14" OpenIDE-Module-Name="Base Utilities API" OpenIDE-Module-Short-Description="Base Utilities API." OpenIDE-Module-Specification-Version="9.13"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.netbeans.bootstrap" distribution="org-netbeans-bootstrap-RELEASE112.nbm" downloadsize="557290" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.netbeans.bootstrap/1" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.7" OpenIDE-Module-Long-Description="This module provides the initial infrastructure that loads all other parts of the application. It cannot be disabled." OpenIDE-Module-Module-Dependencies="org.openide.modules &gt; 7.44, org.openide.util.ui &gt; 9.3, org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.0" OpenIDE-Module-Name="Bootstrap" OpenIDE-Module-Recommends="org.netbeans.NetigsoFramework" OpenIDE-Module-Short-Description="The core bootstrap of NetBeans-based applications." OpenIDE-Module-Specification-Version="2.84"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Collision" distribution="Collision-1.0-SNAPSHOT.nbm" downloadsize="4847" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Collision" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Collision" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Common" distribution="Common-1.0-SNAPSHOT.nbm" downloadsize="20033" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Common" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, org.openide.modules &gt; 7.54, org.openide.util.ui &gt; 9.14" OpenIDE-Module-Name="Common" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module autoload="true" codenamebase="org.netbeans.api.annotations.common" distribution="org-netbeans-api-annotations-common-RELEASE112.nbm" downloadsize="28286" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.netbeans.api.annotations.common/1" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.6" OpenIDE-Module-Long-Description="Contains annotations useful for static analysis, such as a @SuppressWarnings usable by FindBugs." OpenIDE-Module-Name="Common Annotations" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="Common annotations, namely for defect detection." OpenIDE-Module-Specification-Version="1.33"/>
-                
-
-    
-    </module>
         
 
-    
+    </module>
+
+    <module codenamebase="stealmysheep.Enemy" distribution="Enemy-1.0-SNAPSHOT.nbm" downloadsize="10452" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
+        
+        <manifest OpenIDE-Module="stealmysheep.Enemy" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="stealmysheep.Common &gt; 1.0, org.openide.modules &gt; 7.54, org.openide.util.lookup &gt; 8.39" OpenIDE-Module-Name="Enemy" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
+        
+
+    </module>
+
     <module codenamebase="org.openide.filesystems" distribution="org-openide-filesystems-RELEASE112.nbm" downloadsize="345635" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.openide.filesystems" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.8" OpenIDE-Module-Long-Description="Allows access to file like resources in a way independent on actual OS files. Supports notification of changes on disk." OpenIDE-Module-Module-Dependencies="org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.17" OpenIDE-Module-Name="File System API" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="Virtual File System API." OpenIDE-Module-Specification-Version="9.16"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Island" distribution="Island-1.0-SNAPSHOT.nbm" downloadsize="8405013" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Island" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.29.1, org.openide.modules &gt; 7.54, org.openide.util &gt; 9.13, org.openide.util.lookup &gt; 8.39, stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Island" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.openide.util.lookup" distribution="org-openide-util-lookup-RELEASE112.nbm" downloadsize="137825" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.openide.util.lookup" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.7" OpenIDE-Module-Long-Description="Many APIs in NetBeans use Lookup as an observable collection of services. The default lookup is the global service registry; selections, project capabilities, and more are also modeled as Lookup instances." OpenIDE-Module-Name="Lookup API" OpenIDE-Module-Short-Description="Generic service discovery mechanism used throughout NetBeans." OpenIDE-Module-Specification-Version="8.39"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Map" distribution="Map-1.0-SNAPSHOT.nbm" downloadsize="5327" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Map" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.29.1, stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Map" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.openide.modules" distribution="org-openide-modules-RELEASE112.nbm" downloadsize="42577" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.openide.modules" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.7" OpenIDE-Module-Long-Description="Allows to get list of installed modules, inspect their properties and dependencies." OpenIDE-Module-Module-Dependencies="org.openide.util.ui &gt; 9.3, org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.0" OpenIDE-Module-Name="Module System API" OpenIDE-Module-Short-Description="APIs for getting information about installed modules." OpenIDE-Module-Specification-Version="7.54"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.netbeans.libs.asm" distribution="org-netbeans-libs-asm-RELEASE112.nbm" downloadsize="246017" homepage="http://www.netbeans.org/" license="E6B6E7BE" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.netbeans.libs.asm" OpenIDE-Module-Display-Category="Libraries" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.7" OpenIDE-Module-Long-Description="This module bundles OW2 ASM (bytecode manipulation library)." OpenIDE-Module-Name="OW2 ASM" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="Bundles OW2 ASM (bytecode manipulation)" OpenIDE-Module-Specification-Version="5.9"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Player" distribution="Player-1.0-SNAPSHOT.nbm" downloadsize="6478" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Player" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, org.openide.util.lookup &gt; 8.39, stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Player" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Sheep" distribution="Sheep-1.0-SNAPSHOT.nbm" downloadsize="6836" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Sheep" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, org.openide.util.lookup &gt; 8.39, stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Sheep" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.netbeans.core.startup" distribution="org-netbeans-core-startup-RELEASE112.nbm" downloadsize="419534" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.netbeans.core.startup/1" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.7" OpenIDE-Module-Long-Description="This module provides the central additional functionality to Bootstrap to locate and enable the right modules." OpenIDE-Module-Module-Dependencies="org.netbeans.bootstrap/1 &gt; 2.81, org.openide.filesystems &gt; 9.0, org.openide.modules &gt; 7.41, org.openide.util.ui &gt; 9.3, org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.1, org.netbeans.libs.asm &gt; 5.0, org.netbeans.core.startup.base = 1" OpenIDE-Module-Name="Startup" OpenIDE-Module-Provides="org.openide.modules.InstalledFileLocator" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="Loads and enables modules." OpenIDE-Module-Specification-Version="1.68.0.1"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.netbeans.core.startup.base" distribution="org-netbeans-core-startup-base-RELEASE112.nbm" downloadsize="60799" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.netbeans.core.startup.base" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="1" OpenIDE-Module-Java-Dependencies="Java &gt; 1.6" OpenIDE-Module-Module-Dependencies="org.openide.filesystems &gt; 9.4, org.openide.modules &gt; 7.46, org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.30" OpenIDE-Module-Name="Startup Base" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="NetBeans startup commons" OpenIDE-Module-Specification-Version="1.68.0.1"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.StealMySheep.branding" distribution="StealMySheep-branding-1.0-SNAPSHOT.nbm" downloadsize="5765" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest AutoUpdate-Essential-Module="true" OpenIDE-Module="stealmysheep.StealMySheep.branding" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33" OpenIDE-Module-Name="StealMySheep-branding" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="org.openide.util.ui" distribution="org-openide-util-ui-RELEASE112.nbm" downloadsize="123741" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
-                
         
         <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.openide.util.ui" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.8" OpenIDE-Module-Long-Description="Various helper methods and basic concept definitions related to thick client desktop environment including actions and image handling." OpenIDE-Module-Module-Dependencies="org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.14" OpenIDE-Module-Name="Utilities API" OpenIDE-Module-Short-Description="Desktop Utilities API." OpenIDE-Module-Specification-Version="9.14"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <module codenamebase="stealmysheep.Weapon" distribution="Weapon-1.0-SNAPSHOT.nbm" downloadsize="7773" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
         
         <manifest OpenIDE-Module="stealmysheep.Weapon" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Weapon" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
         
+
+    </module>
+
     <license name="E6B6E7BE">
         Apache License
         Version 2.0, January 2004
@@ -689,7 +660,6 @@
         *******************************************************************************
 
     </license>
-        
     <license name="3617C072">
         Apache License
         Version 2.0, January 2004
@@ -1158,18 +1128,8 @@
         dmccann - December 22/2010 - 2.3 - Initial implementation
 
     </license>
-        
     <license name="EE864CEE">Copyright  2020
         -----------------------------------------------------
         License terms:
         Unknown</license>
-    
-    <module codenamebase="stealmysheep.Enemy" distribution="Enemy-1.0-SNAPSHOT.nbm" downloadsize="10452" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
-        
-        <manifest OpenIDE-Module="stealmysheep.Enemy" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="stealmysheep.Common &gt; 1.0, org.openide.modules &gt; 7.54, org.openide.util.lookup &gt; 8.39" OpenIDE-Module-Name="Enemy" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
 </module_updates>
