@@ -56,4 +56,9 @@ public class Input {
         return keys[key] && !pressedKeys[key];
     }
 
+    public void resetKeys() {
+        this.keys = new boolean[NUMBEROFKEYS];
+        this.pressedKeys = new boolean[NUMBEROFKEYS];
+    }
+
 }

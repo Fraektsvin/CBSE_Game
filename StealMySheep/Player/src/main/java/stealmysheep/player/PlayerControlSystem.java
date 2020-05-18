@@ -42,8 +42,9 @@ public class PlayerControlSystem implements IUpdate, IWave {
             Movement movement = player.getComponent(Movement.class);
             RangedWeapon rangedWeapon = player.getComponent(RangedWeapon.class);
             Health health = player.getComponent(Health.class);
-            
-            if(health.isDead()){
+
+            if (health.isDead()) {
+                gameData.setEndGame(true);
                 world.removeEntity(player);
                 return;
             }
@@ -76,6 +77,11 @@ public class PlayerControlSystem implements IUpdate, IWave {
             health.setHealth(health.getMaxHealth());
 
         }
+    }
+
+    @Override
+    public boolean endWave(GameData gameData, World world) {
+        return false;
     }
 
 }

@@ -14,12 +14,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import group12.stealmysheep.GameStates.GameMenu;
+import group12.stealmysheep.GameStates.GameState;
 import group12.stealmysheep.Manager.AssetController;
 import group12.stealmysheep.Manager.GameInputProcessor;
-import group12.stealmysheep.Manager.WaveManager;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Stack;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -30,9 +31,6 @@ import stealmysheep.common.assets.map.Tile;
 import stealmysheep.common.game.GameData;
 import stealmysheep.common.game.World;
 import stealmysheep.common.services.IPlugin;
-import stealmysheep.common.services.IPostUpdate;
-import stealmysheep.common.services.IUpdate;
-import stealmysheep.common.services.IWave;
 
 public class Island implements ApplicationListener {
 
@@ -42,47 +40,43 @@ public class Island implements ApplicationListener {
     private World world = new World();
     private SpriteBatch spriteBatch;
     private AssetController assetController;
-    private WaveManager waveManager;
 
     private final Lookup lookup = Lookup.getDefault();
     private List<IPlugin> gamePlugins = new CopyOnWriteArrayList<>();
     private Lookup.Result<IPlugin> result;
 
+    private Stack<GameState> gameStates;
+
     @Override
     public void create() {
-        this.waveManager = new WaveManager();
+        this.gameStates = new Stack<>();
         spriteBatch = new SpriteBatch();
         assetController = new AssetController();
 
         gameData.setSceneWidth(Gdx.graphics.getWidth());
         gameData.setSceneHeight(Gdx.graphics.getHeight());
+        System.out.println(gameData.getSceneHeight());
 
         cam = new OrthographicCamera(gameData.getSceneWidth(), gameData.getSceneHeight());
         cam.translate(gameData.getSceneWidth() / 2, gameData.getSceneHeight() / 2);
         cam.update();
 
-        Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+        gameStates.push(new GameMenu(this));
 
         result = lookup.lookupResult(IPlugin.class);
         result.addLookupListener(lookupListener);
         result.allItems();
-
-        for (IPlugin plugin : result.allInstances()) {
-            plugin.start(gameData, world);
-            gamePlugins.add(plugin);
-        }
 
     }
 
     @Override
     public void render() {
         gameData.setDeltaTime(Gdx.graphics.getDeltaTime());
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        gameData.getInput().update();
+        gameData.getInput().updateMouse(Gdx.input.getX(), gameData.getSceneHeight() - Gdx.input.getY());
 
-        update();
-        draw();
-        wave();
+        this.gameStates.peek().render();
     }
 
     @Override
@@ -99,60 +93,6 @@ public class Island implements ApplicationListener {
 
     @Override
     public void dispose() {
-    }
-
-    private void update() {
-        gameData.getInput().update();
-        gameData.getInput().updateMouse(Gdx.input.getX(), gameData.getSceneHeight() - Gdx.input.getY());
-
-        // Update
-        for (IUpdate update : lookup.lookupAll(IUpdate.class)) {
-            update.update(gameData, world);
-        }
-
-        // Post Update
-        for (IPostUpdate postUpdate : lookup.lookupAll(IPostUpdate.class)) {
-            postUpdate.postUpdate(gameData, world);
-        }
-    }
-
-    private void draw() {
-        spriteBatch.begin();
-
-        for (Entity entity : world.getEntities(Tile.class)) {
-            assetController.drawEntity(entity, this.spriteBatch);
-        }
-
-        for (Entity entity : world.getEntities()) {
-            if (!entity.getClass().equals(Tile.class)) {
-                assetController.drawEntity(entity, this.spriteBatch);
-
-            }
-        }
-
-        spriteBatch.end();
-        for (Entity entity : world.getEntities()) {
-            if (entity.hasComponent(Health.class)) {
-                assetController.drawHealth(entity);
-            }
-        }
-
-    }
-
-    private void wave() {
-        Collection<? extends IWave> waves = lookup.lookupAll(IWave.class);
-        if (waves.isEmpty()) {
-            return;
-        }
-
-        if (this.waveManager.endWaveCheck(world)) {
-            this.waveManager.setNextWave();
-
-            for (IWave wave : waves) {
-                wave.startWave(this.gameData, this.world, this.waveManager.getCurrentWave());
-            }
-
-        }
     }
 
     private final LookupListener lookupListener = new LookupListener() {
@@ -179,5 +119,41 @@ public class Island implements ApplicationListener {
         }
 
     };
+
+    public GameData getGameData() {
+        return gameData;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public SpriteBatch getSpriteBatch() {
+        return spriteBatch;
+    }
+
+    public AssetController getAssetController() {
+        return assetController;
+    }
+
+    public List<IPlugin> getGamePlugins() {
+        return gamePlugins;
+    }
+
+    public Lookup getLookup() {
+        return lookup;
+    }
+
+    public Lookup.Result<IPlugin> getResult() {
+        return result;
+    }
+
+    public LookupListener getLookupListener() {
+        return lookupListener;
+    }
+
+    public Stack<GameState> getGameStates() {
+        return gameStates;
+    }
 
 }

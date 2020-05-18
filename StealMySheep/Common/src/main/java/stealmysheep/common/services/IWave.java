@@ -15,5 +15,7 @@ import stealmysheep.common.game.World;
 public interface IWave {
 
     public void startWave(GameData gameData, World world, int wave);
+    
+    public boolean endWave(GameData gameData, World world);
 
 }

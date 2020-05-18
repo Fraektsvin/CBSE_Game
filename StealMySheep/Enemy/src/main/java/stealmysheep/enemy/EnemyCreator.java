@@ -160,4 +160,9 @@ public class EnemyCreator implements IWave {
         return archer;
     }
 
+    @Override
+    public boolean endWave(GameData gameData, World world) {
+        return world.getEntities(Enemy.class).isEmpty();
+    }
+
 }
