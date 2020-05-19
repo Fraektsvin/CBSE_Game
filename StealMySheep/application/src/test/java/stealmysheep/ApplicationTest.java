@@ -69,10 +69,9 @@ public class ApplicationTest extends NbTestCase {
         System.out.println(this.module.getName());
 
         List<IPlugin> plugins = new CopyOnWriteArrayList<>();
-        List<IWave> waves = new CopyOnWriteArrayList<>();
         List<IUpdate> updates = new CopyOnWriteArrayList<>();
 
-        waitForUpdate(plugins, waves, updates);
+        waitForUpdate(plugins, updates);
         System.out.println("Testing with all modules");
 
         assertEquals("Regular game plugins", 4, plugins.size());
@@ -80,27 +79,24 @@ public class ApplicationTest extends NbTestCase {
 
         System.out.println("Removing one module");
         removeModule();
-        waitForUpdate(plugins, waves, updates);
+        waitForUpdate(plugins, updates);
 
         assertEquals("One module unloaded", 3, plugins.size());
         assertEquals("One module unloaded", 4, updates.size());
 
         System.out.println("Testing with all modules again");
         addModule();
-        waitForUpdate(plugins, waves, updates);
+        waitForUpdate(plugins, updates);
 
         assertEquals("Regular game plugins", 4, plugins.size());
         assertEquals("Regular game updates", 5, updates.size());
 
     }
 
-    public void waitForUpdate(List<IPlugin> iplugins, List<IWave> iwaves, List<IUpdate> iupdates) throws InterruptedException, IOException {
+    public void waitForUpdate(List<IPlugin> iplugins, List<IUpdate> iupdates) throws InterruptedException, IOException {
         Thread.sleep(10000);
         iplugins.clear();
         iplugins.addAll(Lookup.getDefault().lookupAll(IPlugin.class));
-
-        iwaves.clear();
-        iwaves.addAll(Lookup.getDefault().lookupAll(IWave.class));
 
         iupdates.clear();
         iupdates.addAll(Lookup.getDefault().lookupAll(IUpdate.class));
