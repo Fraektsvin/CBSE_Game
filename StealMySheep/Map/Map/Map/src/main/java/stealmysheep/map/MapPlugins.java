@@ -8,6 +8,7 @@ package stealmysheep.map;
 import stealmysheep.common.assets.map.Tiletype;
 import stealmysheep.common.assets.map.Tile;
 import org.openide.util.lookup.ServiceProvider;
+import stealmysheep.common.assets.Entity;
 import stealmysheep.common.assets.entityComponents.BoxCollider;
 import stealmysheep.common.assets.entityComponents.Position;
 import stealmysheep.common.game.GameData;
@@ -45,7 +46,9 @@ public class MapPlugins implements IPlugin {
     
     @Override
     public void stop(GameData gameData, World world) {
-        
+        for (Entity tile : world.getEntities(Tile.class)) {
+            world.removeEntity(tile);
+        }
     }
     
     private Tiletype[][] convertIntArrayToTileArray(int[][] mapArray) {

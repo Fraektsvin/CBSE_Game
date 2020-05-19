@@ -5,7 +5,7 @@
  */
 package group12.stealmysheep.GameStates;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import group12.stealmysheep.Manager.ModuleManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -54,8 +54,41 @@ public class Load extends GameState {
     private Stack<GameState> gameStates;
     private Island island;
 
+    private ModuleManager moduleManager;
+
+    private void addModules() {
+        for (GameModule gameModule : ModuleManager.getModules()) {
+            String buttonText = gameModule.getName();
+            CheckBox button = new CheckBox(buttonText, skin);
+
+            if (gameModule.isActive()) {
+                button.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                        Gdx.graphics.setContinuousRendering(button.isChecked());
+                        ModuleManager.unloadModule(gameModule);
+                    }
+                });
+            } else {
+                button.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                        Gdx.graphics.setContinuousRendering(button.isChecked());
+                        ModuleManager.loadModule(gameModule);
+                    }
+                });
+            }
+
+            mainTable.add(button);
+            mainTable.row();
+        }
+
+    }
+
     public Load(Island island) {
         super(island);
+
+        this.moduleManager = ModuleManager.getInstance();
 
         this.gameStates = island.getGameStates();
         this.island = island;
@@ -64,49 +97,7 @@ public class Load extends GameState {
         batch = new SpriteBatch();
         imageSetting = new Texture("skin/settingLogo.PNG");
         mainTable = new Table();
-        aI = new CheckBox("AI", skin);
-        aI.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.graphics.setContinuousRendering(aI.isChecked());
-                System.out.println("AI has been unloaded");
-            }
-        });
-        mainTable.add(aI);
-        mainTable.row().space(1);
-
-        player = new CheckBox("Player", skin);
-        player.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                Gdx.graphics.setContinuousRendering(player.isChecked());
-                System.out.println("Player has been unloaded");
-            }
-        });
-        mainTable.add(player);
-        mainTable.row();
-
-        enemy = new CheckBox("Enemy", skin);
-        enemy.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                Gdx.graphics.setContinuousRendering(enemy.isChecked());
-                System.out.println("Enemy has been unloaded");
-            }
-        });
-        mainTable.add(enemy);
-        mainTable.row();
-
-        sheep = new CheckBox("Sheep", skin);
-        sheep.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                Gdx.graphics.setContinuousRendering(sheep.isChecked());
-                System.out.println("Sheep has been unloaded");
-            }
-        });
-        mainTable.add(sheep);
-        mainTable.row();
+        addModules();
 
         menuTexture = new Texture(Gdx.files.internal("skin/returnButton.png"));
         menuTextureRegion = new TextureRegion(menuTexture);
