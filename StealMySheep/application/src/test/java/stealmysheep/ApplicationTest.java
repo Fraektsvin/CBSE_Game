@@ -75,22 +75,22 @@ public class ApplicationTest extends NbTestCase {
         waitForUpdate(plugins, waves, updates);
         System.out.println("Testing with all modules");
 
-        assertEquals("No plugins", 4, plugins.size());
-        assertEquals("No updates", 5, updates.size());
+        assertEquals("Regular game plugins", 4, plugins.size());
+        assertEquals("Regular game updates", 5, updates.size());
 
         System.out.println("Removing one module");
         removeModule();
         waitForUpdate(plugins, waves, updates);
 
-        assertEquals("One plugins", 3, plugins.size());
-        assertEquals("One updates", 4, updates.size());
+        assertEquals("One module unloaded", 3, plugins.size());
+        assertEquals("One module unloaded", 4, updates.size());
 
         System.out.println("Testing with all modules again");
         addModule();
         waitForUpdate(plugins, waves, updates);
 
-        assertEquals("No plugins", 4, plugins.size());
-        assertEquals("No updates", 5, updates.size());
+        assertEquals("Regular game plugins", 4, plugins.size());
+        assertEquals("Regular game updates", 5, updates.size());
 
     }
 
