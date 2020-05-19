@@ -28,15 +28,8 @@
     
     </module>
         
-    <module codenamebase="stealmysheep.Collision" distribution="Collision-1.0-SNAPSHOT.nbm" downloadsize="4847" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
-        
-        <manifest OpenIDE-Module="stealmysheep.Collision" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="stealmysheep.Common &gt; 1.0" OpenIDE-Module-Name="Collision" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
 
     
-    </module>
-        
     <module codenamebase="stealmysheep.Common" distribution="Common-1.0-SNAPSHOT.nbm" downloadsize="20033" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
                 
         
@@ -55,8 +48,15 @@
     
     </module>
         
+    <module codenamebase="stealmysheep.Enemy" distribution="Enemy-1.0-SNAPSHOT.nbm" downloadsize="10452" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
+                
+        
+        <manifest OpenIDE-Module="stealmysheep.Enemy" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="stealmysheep.Common &gt; 1.0, org.openide.modules &gt; 7.54, org.openide.util.lookup &gt; 8.39" OpenIDE-Module-Name="Enemy" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
+                
 
     
+    </module>
+        
     <module codenamebase="org.openide.filesystems" distribution="org-openide-filesystems-RELEASE112.nbm" downloadsize="345635" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
                 
         
@@ -1164,12 +1164,4 @@
         License terms:
         Unknown</license>
     
-    <module codenamebase="stealmysheep.Enemy" distribution="Enemy-1.0-SNAPSHOT.nbm" downloadsize="10452" license="EE864CEE" needsrestart="false" releasedate="2020/05/12" targetcluster="stealmysheep">
-                
-        
-        <manifest OpenIDE-Module="stealmysheep.Enemy" OpenIDE-Module-Display-Category="stealmysheep" OpenIDE-Module-Implementation-Version="1.0-20200512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="stealmysheep.Common &gt; 1.0, org.openide.modules &gt; 7.54, org.openide.util.lookup &gt; 8.39" OpenIDE-Module-Name="Enemy" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-                
-
-    
-    </module>
 </module_updates>
