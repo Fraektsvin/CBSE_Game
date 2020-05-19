@@ -42,7 +42,7 @@ public class ModuleManager {
 
     private static ModuleManager singleton_instance = null;
 
-    private static String updateXML = "C:\\Users\\oscar\\OneDrive\\Skrivebord\\Project\\Steal My Sheep\\StealMySheep\\netbeans_site\\updates.xml";
+    private static String updateXML = "/Users/NidaBasaran/documents/GitHub/CBSE_Game/StealMySheep/netbeans_site/updates.xml";
     private String moduleInclude = "stealmysheep";
     private static NodeList nodeList;
     private static ArrayList<GameModule> gameModules;

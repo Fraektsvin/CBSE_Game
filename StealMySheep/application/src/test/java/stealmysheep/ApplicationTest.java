@@ -46,8 +46,6 @@ import stealmysheep.common.services.IWave;
 
 public class ApplicationTest extends NbTestCase {
 
-    private static final Path ADD_ENEMY_XML = Paths.get(new File("src/test/resources/addenemy/updates.xml").getAbsolutePath());
-    private static final Path REM_ENEMY_XML = Paths.get(new File("src/test/resources/remenemy/updates.xml").getAbsolutePath());
     private static final String UPDATES_XML = "C:/Users/oscar/OneDrive/Skrivebord/Project/Steal My Sheep/StealMySheep/netbeans_site/updates.xml";
     private GameModule module;
     private Document doc;
