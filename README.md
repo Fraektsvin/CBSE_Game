@@ -17,4 +17,4 @@ Enable load/unload of modules
 * Insert the updates.xml path into ModuleManager in Island module
   * Open the ModuleManager.java file
     * StealMySheep/Island/src/main/java/group12/stealmysheep/Manager/ModuleManager.java
-  Insert the updates.xml path as the value for the String attribute; updateXML
+  * Insert the updates.xml path as the value for the String attribute; updateXML
