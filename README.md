@@ -5,7 +5,7 @@ Controls:
 
 
 Enable load/unload of modules
-* Navigate to the update.xml file
+* Navigate to the updates.xml file
   * StealMySheep/netbeans_site/updates.xml
   * Copy the updates.xml absolute file path
   
